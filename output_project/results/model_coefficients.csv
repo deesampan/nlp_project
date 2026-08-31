@@ -1,0 +1,76 @@
+class,direction,feature,weight
+negative,pushes_toward,worst,12.8588
+negative,pushes_toward,pathetic,9.7483
+negative,pushes_toward,horrible,8.3656
+negative,pushes_toward,bad,7.8235
+negative,pushes_toward,not,7.7408
+negative,pushes_toward,terrible,6.6091
+negative,pushes_toward,not good,6.4466
+negative,pushes_toward,waste,6.2184
+negative,pushes_toward,nothing,5.6604
+negative,pushes_toward,not worth,5.464
+negative,pushes_toward,disappointing,5.2606
+negative,pushes_toward,no,5.2166
+negative,pushes_toward,poor,5.2029
+negative,pushes_toward,stale,5.2022
+negative,pushes_toward,disgusting,5.1838
+negative,pushes_away,good,-11.9671
+negative,pushes_away,delicious,-9.5366
+negative,pushes_away,best,-9.1955
+negative,pushes_away,awesome,-9.1612
+negative,pushes_away,loved,-8.9092
+negative,pushes_away,amazing,-8.7572
+negative,pushes_away,great,-7.8324
+negative,pushes_away,not bad,-7.7573
+negative,pushes_away,nice,-7.115
+negative,pushes_away,yummy,-6.6692
+neutral,pushes_toward,good,5.7691
+neutral,pushes_toward,decent,4.7913
+neutral,pushes_toward,average,4.6173
+neutral,pushes_toward,ok,4.0094
+neutral,pushes_toward,okayish,3.9555
+neutral,pushes_toward,however,3.9502
+neutral,pushes_toward,okay,3.9107
+neutral,pushes_toward,but,3.6707
+neutral,pushes_toward,not bad,3.5443
+neutral,pushes_toward,alright,3.0392
+neutral,pushes_toward,fine,3.0122
+neutral,pushes_toward,okish,2.9919
+neutral,pushes_toward,stars only,2.9448
+neutral,pushes_toward,great awesome,2.9444
+neutral,pushes_toward,nice,2.8724
+neutral,pushes_away,never,-3.6303
+neutral,pushes_away,worst,-3.1838
+neutral,pushes_away,gem,-2.8592
+neutral,pushes_away,pathetic,-2.7332
+neutral,pushes_away,parking space,-2.6875
+neutral,pushes_away,regret,-2.6779
+neutral,pushes_away,cheated,-2.672
+neutral,pushes_away,terrible,-2.641
+neutral,pushes_away,cockroach,-2.6203
+neutral,pushes_away,not variety,-2.6037
+positive,pushes_toward,amazing,10.0272
+positive,pushes_toward,best,9.7421
+positive,pushes_toward,awesome,9.7056
+positive,pushes_toward,delicious,8.9096
+positive,pushes_toward,loved,8.2737
+positive,pushes_toward,excellent,6.9558
+positive,pushes_toward,not disappointed,6.6437
+positive,pushes_toward,great,6.2714
+positive,pushes_toward,perfect,6.2107
+positive,pushes_toward,good,6.198
+positive,pushes_toward,love,5.7197
+positive,pushes_toward,try,5.5039
+positive,pushes_toward,tasty,5.4954
+positive,pushes_toward,favourite,5.239
+positive,pushes_toward,never disappointed,5.2325
+positive,pushes_away,not,-10.0386
+positive,pushes_away,worst,-9.675
+positive,pushes_away,average,-8.277
+positive,pushes_away,pathetic,-7.0151
+positive,pushes_away,bad,-6.9645
+positive,pushes_away,horrible,-6.6889
+positive,pushes_away,nothing,-6.3863
+positive,pushes_away,not great,-5.9873
+positive,pushes_away,disappointing,-5.9179
+positive,pushes_away,not worth,-5.7269

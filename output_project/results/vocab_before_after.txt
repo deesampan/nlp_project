@@ -1,0 +1,11 @@
+Vocabulary reduction, measured over 143789 deduplicated reviews
+(token = alphabetic word, apostrophes allowed)
+
+stage                                 vocab        cut  what it removes
+raw text, case sensitive              76914             
+after lowercasing                     57788     -24.9%  casing collapse
+after structural cleaning             57844     --0.1%  encoding repair, marker and URL removal
+after normalisation                   57103      -1.3%  elongations collapsed, contractions expanded
+
+total reduction: 76914 -> 57103  (-25.8%)
+token count: 7317483 -> 7222108

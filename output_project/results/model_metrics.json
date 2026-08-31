@@ -1,0 +1,33 @@
+{
+ "majority_class": {
+  "accuracy": 0.6033131523232923,
+  "macro_f1": 0.2508610171585662
+ },
+ "vader": {
+  "accuracy": 0.722282063663039,
+  "macro_f1": 0.5368144667505788
+ },
+ "tfidf_lr_negation_aware": {
+  "accuracy": 0.8212680607658879,
+  "macro_f1": 0.7730967046650261
+ },
+ "tfidf_lr_default_stopwords": {
+  "accuracy": 0.8012108606024588,
+  "macro_f1": 0.7482734328878929
+ },
+ "negation_ablation_delta": {
+  "accuracy": 0.020057200163429045,
+  "macro_f1": 0.02482327177713317
+ },
+ "binary_task_only": {
+  "accuracy": 0.9648202226683701,
+  "macro_f1": 0.9546287052061018
+ },
+ "binary_plus_band": {
+  "accuracy": 0.7736136388961111,
+  "macro_f1": 0.7163099718414276,
+  "band_low": 0.09999999999999998,
+  "band_high": 0.9
+ },
+ "shipped": "tfidf_lr_negation_aware"
+}

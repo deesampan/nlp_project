@@ -1,0 +1,8 @@
+stage,rows,dropped_here,pct_of_tuples
+csv_rows,51717,,3.92
+review_tuples,1317782,,100.0
+after_dedup,143789,1173993,10.91
+after_boilerplate,140055,3734,10.63
+after_length_quality,137290,2765,10.42
+after_language,134619,2671,10.22
+after_labelling,134612,7,10.22

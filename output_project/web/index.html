@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant Recommendation From Reviews</title>
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div>
+      <span class="brand">Restaurant Recommendation From Reviews</span>
+      <span class="brand-sub">NLP Group Project</span>
+    </div>
+    <nav class="crumbs">
+      <button id="backBtn" class="back hidden">&larr; All restaurants</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ========== LANDING ========== -->
+  <section id="landing">
+    <h1>Which dishes are actually good?</h1>
+    <p class="lede">
+      Every review for these restaurants was parsed, deduplicated, and scanned for
+      dish mentions. Select a restaurant to see its menu ranked by what customers
+      actually said.
+    </p>
+
+    <div id="cards" class="cards"></div>
+
+    <section class="panel upload-panel">
+      <h2>Try it on your own reviews</h2>
+      <p class="hint">
+        Upload a CSV of reviews for any restaurant. The same model analyses them
+        live &mdash; nothing here is pre-computed.
+      </p>
+
+      <div class="upload-row">
+        <div class="field">
+          <label for="upName">Restaurant name</label>
+          <input type="text" id="upName" placeholder="e.g. Siam Kitchen" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="upFile">Reviews file (.csv)</label>
+          <input type="file" id="upFile" accept=".csv,text/csv">
+        </div>
+        <button id="upBtn" class="primary">Analyse</button>
+      </div>
+
+      <p class="hint upload-note">
+        One review per row. If the file has several columns, the one with the longest
+        text is used. A header row is fine.
+        <a href="data/sample_reviews.csv" download>Download a sample file</a>
+      </p>
+
+      <div id="upStatus" class="up-status hidden"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Data quality</h2>
+      <p class="hint">Reviews surviving each stage of the pipeline. Nothing is ranked on raw input.</p>
+      <div id="funnel" class="funnel"></div>
+    </section>
+
+    <section class="panel">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><b>Collect the reviews.</b> 1.3 million review entries from the dataset, reduced to 134,612 real ones after removing duplicates and junk.</li>
+        <li><b>Split each review into short pieces.</b> A review often praises one dish and criticises another, so we break it at sentences and at words like <i>but</i>.</li>
+        <li><b>Find the dish names.</b> We match each piece against a dictionary of 2,774 dish names built from the dataset itself.</li>
+        <li><b>Decide good or bad.</b> A trained model reads each piece and decides whether it is positive or negative, and that verdict counts only for the dish named in it.</li>
+        <li><b>Add it up.</b> Each dish gets a rating: the share of its comments that were positive. Dishes mentioned fewer than 5 times are left out.</li>
+      </ol>
+      <p class="caveat">
+        <b>How accurate is it?</b> Tested on 26,923 reviews it had never seen, the model tells a
+        positive comment from a negative one correctly <b>96.5%</b> of the time.
+      </p>
+    </section>
+  </section>
+
+  <!-- ========== DETAIL ========== -->
+  <section id="detail" class="hidden">
+    <div class="rest-head">
+      <div>
+        <h1 id="rName"></h1>
+        <p id="rMeta" class="rest-meta"></p>
+        <p id="rAddr" class="rest-addr"></p>
+      </div>
+      <div class="rest-rate">
+        <span id="rRate" class="rate-big"></span>
+        <span id="rVotes" class="rate-sub"></span>
+      </div>
+    </div>
+
+    <div class="kpis" id="rKpis"></div>
+
+    <section class="panel">
+      <h2>Overall review sentiment</h2>
+      <p class="hint">All reviews for this restaurant, including those about service and delivery.</p>
+      <div id="rSplit" class="split"></div>
+    </section>
+
+    <section class="panel">
+      <h2>How each dish rates</h2>
+      <p class="hint" id="dishHint">Share of comments about each dish that were positive.</p>
+      <div class="chart-wrap"><canvas id="dishChart"></canvas></div>
+    </section>
+
+    <section class="panel">
+      <h2>Dish ratings in full</h2>
+      <p class="hint">Click any dish to read every comment behind its rating.</p>
+      <div class="table-scroll">
+      <table class="dish-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-k="dish">Dish</th>
+            <th class="sortable num" data-k="mentions">Comments</th>
+            <th class="num">Liked</th>
+            <th class="num">Disliked</th>
+            <th class="sortable num" data-k="positive_rate">Rating</th>
+          </tr>
+        </thead>
+        <tbody id="dishBody"></tbody>
+      </table>
+      </div>
+      <p id="noDishes" class="hint hidden">No dish reached the 5-mention minimum for this restaurant.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Comments we did not use</h2>
+      <p class="hint">
+        Not every comment can be turned into a dish rating. These were set aside, and each one
+        is shown with the reason. Nothing is hidden &mdash; you can read exactly what was left out.
+      </p>
+      <div id="dropFilters" class="filters"></div>
+      <div id="dropList"></div>
+    </section>
+
+    <section class="panel" id="zomatoPanel">
+      <h2>Listed as popular by the platform</h2>
+      <p class="hint">The source dataset's own <code>dish_liked</code> field, for comparison. It is restaurant-level and sparse, so it is shown as context rather than treated as ground truth.</p>
+      <div id="rDishLiked" class="chips"></div>
+    </section>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span id="genStamp"></span>
+    <span class="dot">&middot;</span>
+    <span id="methodStamp"></span>
+  </div>
+</footer>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <button id="modalClose" class="modal-x" aria-label="Close">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="dashboard.js?v=2"></script>
+</body>
+</html>

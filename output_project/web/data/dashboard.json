@@ -1,0 +1,3184 @@
+{
+ "generated_utc": "2026-08-31 12:24:32",
+ "source": "selected_restaurants_reviews.csv",
+ "sentiment_method": "clause-level TF-IDF + logistic regression",
+ "min_mentions": 5,
+ "quality": {
+  "input_reviews": 1400,
+  "after_cleaning": 1069,
+  "dish_clauses": 605,
+  "with_dish_mention": 392,
+  "no_dish_mention": 677,
+  "dropped_duplicate": 5407,
+  "dropped_too_short": 329,
+  "dropped_no_dish": 677
+ },
+ "model": {
+  "metrics": {
+   "majority_class": {
+    "accuracy": 0.6033131523232923,
+    "macro_f1": 0.2508610171585662
+   },
+   "vader": {
+    "accuracy": 0.722282063663039,
+    "macro_f1": 0.5368144667505788
+   },
+   "tfidf_lr_negation_aware": {
+    "accuracy": 0.8212680607658879,
+    "macro_f1": 0.7730967046650261
+   },
+   "tfidf_lr_default_stopwords": {
+    "accuracy": 0.8012108606024588,
+    "macro_f1": 0.7482734328878929
+   },
+   "negation_ablation_delta": {
+    "accuracy": 0.020057200163429045,
+    "macro_f1": 0.02482327177713317
+   },
+   "binary_task_only": {
+    "accuracy": 0.9648202226683701,
+    "macro_f1": 0.9546287052061018
+   },
+   "binary_plus_band": {
+    "accuracy": 0.7736136388961111,
+    "macro_f1": 0.7163099718414276,
+    "band_low": 0.09999999999999998,
+    "band_high": 0.9
+   },
+   "shipped": "tfidf_lr_negation_aware"
+  }
+ },
+ "restaurants": [
+  {
+   "id": "biriyani-nights",
+   "name": "Biriyani Nights",
+   "address": "103, 5 th cross, MSR NAGAR, NEW BEL ROAD 560054",
+   "location": "New BEL Road",
+   "rest_type": "Takeaway, Delivery",
+   "cuisines": "Biryani, Kebab, Continental",
+   "approx_cost": "500",
+   "rate": "3.2/5",
+   "votes": 711,
+   "dish_liked": [
+    "Chicken Kebab",
+    "Gulab Jamun",
+    "Chicken Biryani Combo"
+   ],
+   "review_count": 391,
+   "sentiment": {
+    "positive": 156,
+    "neutral": 46,
+    "negative": 189
+   },
+   "positive_rate": 0.399,
+   "sentiment_source": "star ratings",
+   "min_mentions": 5,
+   "discovered_dishes": [],
+   "dishes_ranked": 5,
+   "dishes": [
+    {
+     "dish": "gulab jamun",
+     "mentions": 11,
+     "positive": 6,
+     "neutral": 3,
+     "negative": 2,
+     "positive_rate": 0.545,
+     "comments": [
+      {
+       "text": "Chicken biryani is really good and the gulab jamun is one of the few decent ones I've eaten in Blr.",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani is just plain orange rice for them and in combo (below which they refused deliver within 5 km range even when i ordered 3 biryanis summing up more than 350) fries are 5 pcs of finger chips and 250ml thums up with a gulab jamun.",
+       "label": "positive"
+      },
+      {
+       "text": "The dessert that is gulab jamun is mouth watering and tasty af!",
+       "label": "positive"
+      },
+      {
+       "text": "DESSERT : To top it off, they provided complimentary coke and some soft and YUMMY Gulab Jamun!",
+       "label": "positive"
+      },
+      {
+       "text": "The bonus factor was their gulab jamun.",
+       "label": "positive"
+      },
+      {
+       "text": "The gulab jamun was uber soft and warm, exactly how it should be served!",
+       "label": "positive"
+      },
+      {
+       "text": "only received 2 gulab Jamun with the 2 combos",
+       "label": "negative"
+      },
+      {
+       "text": "I did not get my complimentary Coke and gulab jamun there was no onion or lemon to have with the chicken",
+       "label": "negative"
+      },
+      {
+       "text": "Not received the gulab Jamun as per the Zomato membership.",
+       "label": "neutral"
+      },
+      {
+       "text": "Biriyani was not bad, gulab jamun was brilliant, fries and veg fingers were good.",
+       "label": "neutral"
+      },
+      {
+       "text": "You should try gulab jamun and kababs.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "biryani",
+     "mentions": 198,
+     "positive": 85,
+     "neutral": 19,
+     "negative": 94,
+     "positive_rate": 0.429,
+     "comments": [
+      {
+       "text": "I ordered food for chicken Biryani combo, , Iam regular customer super taste pls do order in Biryani nights and taste food , early response and diliver thank u Biryani nights for d giving food.even if it is mid night",
+       "label": "positive"
+      },
+      {
+       "text": "So good bye Zomato and Biryani nights",
+       "label": "positive"
+      },
+      {
+       "text": "the price is like Paradise biriyani.",
+       "label": "positive"
+      },
+      {
+       "text": "Biriyani Nights is the only restaurant delivers the food late night around Vidyaranyapura.",
+       "label": "positive"
+      },
+      {
+       "text": "tnaks to biriyani nights restaurant's for givenig becose that time i ma more angree and biriyani is al so best",
+       "label": "positive"
+      },
+      {
+       "text": "biriyani nights was good",
+       "label": "positive"
+      },
+      {
+       "text": "Hi, we ordered kabab and boneless chicken biriyani around 2am at night.",
+       "label": "positive"
+      },
+      {
+       "text": "Thanks to Biriyani Nights.",
+       "label": "positive"
+      },
+      {
+       "text": "liked the biriyani as well.",
+       "label": "positive"
+      },
+      {
+       "text": "It is the third time we are ordering biriyani from here",
+       "label": "positive"
+      },
+      {
+       "text": "hot and fresh food I had at midnight,thank u biriyani nights and zomato saving me from hungry",
+       "label": "positive"
+      },
+      {
+       "text": "The biriyani and the chicken was perfectly cooked,",
+       "label": "positive"
+      },
+      {
+       "text": "Great taste, its really awesome to get biriyani delivered at night time.!!!",
+       "label": "positive"
+      },
+      {
+       "text": "I had ordered for Biriyani they were packed well and clean and the Biriyani was also very good I loved it....",
+       "label": "positive"
+      },
+      {
+       "text": "Best place to order for quick Biriyani, kebabs and lots more....!!",
+       "label": "positive"
+      },
+      {
+       "text": "Felt delightful to have food from biryani nights!",
+       "label": "positive"
+      },
+      {
+       "text": "Nyc taste ðŸÃ' ̃ÃƒÃ'' specifically kebab and biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "it's 2 in the night I would all ways prefer briyani over jst bread or Maggie...the delivery is also rit on time cheers...",
+       "label": "positive"
+      },
+      {
+       "text": "Crispy Kebab and Briyani is good.",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani was tasty with an authentic Indian flavour , this place is a must try.",
+       "label": "positive"
+      },
+      {
+       "text": "Briyani lovers must try once here other wise you gona miss this taste",
+       "label": "positive"
+      },
+      {
+       "text": "Lucky to be first customer for the New Bell Road- Franchises, people now a days do not work only in the day shift, they also work in the night shift as well, so the idea of getting food delivered to the needed person who is hungry in the night or when there parents are far from them, I opt every one to go with Biryani Nights because the taste is good, quality of the meat is also good, quantity is way to much and delivery is also fast.",
+       "label": "positive"
+      },
+      {
+       "text": "Wish you luck Biryani Nights.",
+       "label": "positive"
+      },
+      {
+       "text": "Good home made veg biryani taste.",
+       "label": "positive"
+      },
+      {
+       "text": "Very Tasty, I have ordered many times, specially the biriyani and Kabab are Hot and tasty.",
+       "label": "positive"
+      },
+      {
+       "text": "Thanks to biriyani nights for late night food...",
+       "label": "positive"
+      },
+      {
+       "text": "Thank u so much biriyani nights.",
+       "label": "positive"
+      },
+      {
+       "text": "the biriyani rice and the kebabs are really tasty and they deliver pretty fast too.",
+       "label": "positive"
+      },
+      {
+       "text": "Try biriyani rice and crispy kebab!",
+       "label": "positive"
+      },
+      {
+       "text": "Yummy biryani!!!",
+       "label": "positive"
+      },
+      {
+       "text": "One of the best Biriyani i had in Bangalore.",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani is great, i mean i ordered in the middles of the night from biryani nights and i was expecting it to be average in taste, ordered for a Biryani and a kebab and the delivery was fast too.",
+       "label": "positive"
+      },
+      {
+       "text": "This is one of the best restaurant which will serve you great biriyani with mild masala and best taste along with some yummy and spicy starters.",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani nights saves you from your night starving.",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani kabab combo was awesome and delicious.",
+       "label": "positive"
+      },
+      {
+       "text": "Biriyani Nights , the best Food for Mid night craving, minimal pricing and the delivery is also quick and Prompt as promised.",
+       "label": "positive"
+      },
+      {
+       "text": "Just a call away for midnight happiness in terms of foood I would recommend it for all those who love to have biryani in midnight",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani is just plain orange rice for them and in combo (below which they refused deliver within 5 km range even when i ordered 3 biryanis summing up more than 350) fries are 5 pcs of finger chips and 250ml thums up with a gulab jamun.",
+       "label": "positive"
+      },
+      {
+       "text": "The best service i ever had.. they tried maximum of their of effort to complete the order, the best biriyani ever had in night.......",
+       "label": "positive"
+      },
+      {
+       "text": "And i found Biryani nights online and ordered it.",
+       "label": "positive"
+      },
+      {
+       "text": "The best food serving idea initiated by biriyani nights, food is really gud nd yummy, satisfied at all order, best to choose are biriyani's nd kabab, real gud selected pieces, worth priced!!",
+       "label": "positive"
+      },
+      {
+       "text": "hungry killer at nyt-biriyani nights !!",
+       "label": "positive"
+      },
+      {
+       "text": "Fast delivary,food is hot, everything is good veg biryani is very nice,one chicken biryani is perfect for one person, krispy,spicy and normal kabab is spicy and hot",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani was tasty and gulab jamoon was yummy.",
+       "label": "positive"
+      },
+      {
+       "text": "I've been ordering for the past three months and the quality of the kabab and biryani is too good .",
+       "label": "positive"
+      },
+      {
+       "text": "quality of crispy kabab is amazing..... cannot ignore delicious biryani which is available anytime in night .. healthy food with healthy quality.",
+       "label": "positive"
+      },
+      {
+       "text": "This place is a life saver, the food is amazing, I don't have to be worried about late night munchies because the people from Biriyani nights, they deliver in 30-40mins, and",
+       "label": "positive"
+      },
+      {
+       "text": "So, around 11:30 pm, when every other restaurant was closed, it certainly helped that Biriyani Nights delivered not just a great combo item,",
+       "label": "positive"
+      },
+      {
+       "text": "Moreover what better can happen to you if you get to have a plate of Hot Biryani at your doorstep at late nights just on a call.",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani Nights makes it happen.",
+       "label": "positive"
+      },
+      {
+       "text": "Yummy biryani which is usually served hot.",
+       "label": "positive"
+      },
+      {
+       "text": "Professional staff, amazing service; really great food quality all of this at 1:30 AM, Biriyani Nights is an angle in bangalores dark nights......",
+       "label": "positive"
+      },
+      {
+       "text": "We tried veg combo and a veg biryani for 3 ppl.",
+       "label": "positive"
+      },
+      {
+       "text": "The Biryani was well prepared and was warm as well.",
+       "label": "positive"
+      },
+      {
+       "text": "Best place in bel road for late night eats.. too courteous people.. loved it.. veg biryani dude so awesome..increase the veg options dude.. seriously.. ðŸÃ' ̃ÃƒÃ''\"",
+       "label": "positive"
+      },
+      {
+       "text": "When you are all hungry and want a good biryani..",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani nights is the answer!",
+       "label": "positive"
+      },
+      {
+       "text": "The best biryani in Bangalore!",
+       "label": "positive"
+      },
+      {
+       "text": "Awesome biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "The best biryani I have had till date.",
+       "label": "positive"
+      },
+      {
+       "text": "Veg biryani could be more with vegetables.",
+       "label": "positive"
+      },
+      {
+       "text": "Never will try biryani nights again..",
+       "label": "positive"
+      },
+      {
+       "text": "Never the less- midnight food cravings will now be satisfied- at least biryani cravings.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered yesterday form biryani nights.",
+       "label": "positive"
+      },
+      {
+       "text": "Biriyani and Kebabs are awesome.",
+       "label": "positive"
+      },
+      {
+       "text": "I just ordered from here and writing this comment while having my biryani its very nice and taste is very good.",
+       "label": "positive"
+      },
+      {
+       "text": "All biryani lovers should try here once.. its really nice.. :)",
+       "label": "positive"
+      },
+      {
+       "text": "seriously best briyani and till 4 am in morning they will deliver super work keep it up",
+       "label": "positive"
+      },
+      {
+       "text": "Biriyani nights is the place!",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered food before 20 min and just now got it at my boor that is at 1:52 and the food quality is very good worth the amount I feel people can trust this biriyani nights for there health",
+       "label": "positive"
+      },
+      {
+       "text": "I tasted Biriyani and Kebab and both are far better than what we usually get from restaurants.",
+       "label": "positive"
+      },
+      {
+       "text": "the biryani was delivered late - they start delivering from 9:30 till 4 AM, the biryani nevertheless was hot, delicious, with sumptous chicken pieces.",
+       "label": "positive"
+      },
+      {
+       "text": "Exam night group study # totally feeling hungry @ 3:45 am# Thanks to BIRIYANI NIGHTS Totally appreciable service Recommended to every1 All the biriyani lovers have a BITE !",
+       "label": "positive"
+      },
+      {
+       "text": "YUMMY BIRIYANI :)",
+       "label": "positive"
+      },
+      {
+       "text": "Good Biryani and Kabab's.",
+       "label": "positive"
+      },
+      {
+       "text": "Kabab and Biryani were amazing",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani Nights is undoubtedly the best place to order food from at midnight .",
+       "label": "positive"
+      },
+      {
+       "text": "Their biryani and chicken kebab were awesome , very reasonably priced too.",
+       "label": "positive"
+      },
+      {
+       "text": "If your stomach is craving for biryani and ur in and around bel road this is the place to be....",
+       "label": "positive"
+      },
+      {
+       "text": "Briyani nights is the best place !",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani is just mouthwatering ..",
+       "label": "positive"
+      },
+      {
+       "text": "Very reasonable rates, good packaging , in time delivery and tasty food are some of the best qualities that sets BIRYANI NIGHTS aside from other restaurant !!",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani nights turns out to be a superb solution to us nocturnals living around New BEL road.",
+       "label": "positive"
+      },
+      {
+       "text": "Just loved the taste of veg biriyani !",
+       "label": "positive"
+      },
+      {
+       "text": "Too good to have a biryani like this that too at midnights with a good taste and speedy delivery.................",
+       "label": "positive"
+      },
+      {
+       "text": "Chichken Kabab is sweeter and Biryani is like a normal colored rice.",
+       "label": "negative"
+      },
+      {
+       "text": "This is the first and last order from Biriyani nights.",
+       "label": "negative"
+      },
+      {
+       "text": "After two hours also neither any response from Biriyani night not from ZOMATO .",
+       "label": "negative"
+      },
+      {
+       "text": "Because they are not capable in delivering the food on time so what's the use to order from biryani nights......",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered Veg Biriyani they took more than 2 hours to deliver.",
+       "label": "negative"
+      },
+      {
+       "text": "Instead of biryani rice they r providing khuska, chckn quality is also worst total waste of money if there would be any option for",
+       "label": "negative"
+      },
+      {
+       "text": "The veg briyani was just bland rice with 10peas in it.",
+       "label": "negative"
+      },
+      {
+       "text": "Not much taste, expected better biriyani taste",
+       "label": "negative"
+      },
+      {
+       "text": "Biriyani was tasteless.",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani and kabab was Bland.",
+       "label": "negative"
+      },
+      {
+       "text": "I would never suggest any person to order Biriyani from this place..",
+       "label": "negative"
+      },
+      {
+       "text": "Worst biriyani I ever had, The quantity is less for even one person and the taste is pathetic,",
+       "label": "negative"
+      },
+      {
+       "text": "One biriyani 219/- + taxes + packing charges + delivery charges.",
+       "label": "negative"
+      },
+      {
+       "text": "No match between Biriyani and the price.",
+       "label": "negative"
+      },
+      {
+       "text": "We got veg biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "Biriyani here is just a colored rice n cooked chicken.",
+       "label": "negative"
+      },
+      {
+       "text": "Not So good Biriyani with that price",
+       "label": "negative"
+      },
+      {
+       "text": "The Biryani was not good.",
+       "label": "negative"
+      },
+      {
+       "text": "we ordered Biryani.. and where is the Biryani rice in it",
+       "label": "negative"
+      },
+      {
+       "text": "And was also making me feel like eating chicken and rice, not biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "road side food ambhur biryani it's worth only 60rs",
+       "label": "negative"
+      },
+      {
+       "text": "Itâ€Ã'TMs local 50rs biryani",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani and kabab were very bad in smell.",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani is the worst",
+       "label": "negative"
+      },
+      {
+       "text": "Totally Biriyani was below average.",
+       "label": "negative"
+      },
+      {
+       "text": "The food barely had a biryani taste to it.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered a coke along with biryani",
+       "label": "negative"
+      },
+      {
+       "text": "Biriyani Tasted like the roadside Masala filled Biriyani.",
+       "label": "negative"
+      },
+      {
+       "text": "worst biryani ever ate",
+       "label": "negative"
+      },
+      {
+       "text": "I order for briyani and the taste and quality of the food was really worst i was not even able to eat, hence i had to throw it.",
+       "label": "negative"
+      },
+      {
+       "text": "worst taste ,, supplied single biryani when i ordered full biryani",
+       "label": "negative"
+      },
+      {
+       "text": "the Biryani was of normal quality.",
+       "label": "negative"
+      },
+      {
+       "text": "This quality of biryani should b of less price than has been charged.",
+       "label": "negative"
+      },
+      {
+       "text": "Pathetic food very bad chicken ðŸÃ'ÃƒÃ''\" biriyani",
+       "label": "negative"
+      },
+      {
+       "text": "I asked for biryani .",
+       "label": "negative"
+      },
+      {
+       "text": "worst biryani I've ever had.",
+       "label": "negative"
+      },
+      {
+       "text": "Biriyani was so tasteless.",
+       "label": "negative"
+      },
+      {
+       "text": "To be very honest, I am shocked on how my fellow reviewers have said that it is authentic biryani, this is not even biryani!",
+       "label": "negative"
+      },
+      {
+       "text": "the biryani is fully cold and unedible first time such pathetic experience with Zomato",
+       "label": "negative"
+      },
+      {
+       "text": "Doesn't taste like biriyani",
+       "label": "negative"
+      },
+      {
+       "text": "biryani was not hot",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered veg biryani ..",
+       "label": "negative"
+      },
+      {
+       "text": "biriyani is not good its taste like a road side biriyani.",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani wasn't hot.",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered a veg combo and the veg biryani was terrible.",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani nights really have to improve their quality for the price.",
+       "label": "negative"
+      },
+      {
+       "text": "Full waste of money very bad biryani will throw in dustbin only oil in rice no any taste like biryani and chicken is only boil and kept in biryani box",
+       "label": "negative"
+      },
+      {
+       "text": "Worst, I ordered biryani and a chicken starter.",
+       "label": "negative"
+      },
+      {
+       "text": "I just got the Biryani not my refund.",
+       "label": "negative"
+      },
+      {
+       "text": "I had ordered Biryani from here at around 2AM in morning.",
+       "label": "negative"
+      },
+      {
+       "text": "Costumer service - 3.5/5 Food quality - 3.5/5 Delivery - 4.5/5 My experience with Biryani Nights so far has never been a disappointment.",
+       "label": "negative"
+      },
+      {
+       "text": "Biriyani is pretty horrible and tastes absolutely nothing !",
+       "label": "negative"
+      },
+      {
+       "text": "I suggest them to improve/UPDATE their biriyani recipe.",
+       "label": "negative"
+      },
+      {
+       "text": "We ordered biryani at 11pm as we (me n my wife) was not keeping well enough to cook dinner.",
+       "label": "negative"
+      },
+      {
+       "text": "The biryani was chilling cold.",
+       "label": "negative"
+      },
+      {
+       "text": "Just imagine to have uncooked chilled biryani at midnight when you are not keeping well.",
+       "label": "negative"
+      },
+      {
+       "text": "- Veg Biriyani was = tomato rice with some weird masala tinge.",
+       "label": "negative"
+      },
+      {
+       "text": "Second, I ordered 2 chicken biryani and they delivered one chicken and one veg biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "I was served with biryani mixed with veggies and pieces of chicken.",
+       "label": "negative"
+      },
+      {
+       "text": "This was a very bad choice, the biryani is a pulaov.. its very bad..",
+       "label": "negative"
+      },
+      {
+       "text": "Not even biriyani taste.",
+       "label": "negative"
+      },
+      {
+       "text": "Veg biryani was just yellow rice with no veggies.",
+       "label": "negative"
+      },
+      {
+       "text": "Want biriyani...",
+       "label": "negative"
+      },
+      {
+       "text": "A Biryani with a single leg piece and with a handful of tasteless rice cost me ₹150.",
+       "label": "negative"
+      },
+      {
+       "text": "Very bad in taste.. do not order at least biriyani from the outlet..",
+       "label": "negative"
+      },
+      {
+       "text": "Pathetic taste of biriyani..shame on the name of biriyani..have to say the people claiming they've had a fantastic meal here are either vegetarian by birth who have never known what biriyani tastes like..or are out of their mind..",
+       "label": "negative"
+      },
+      {
+       "text": "They always send burnt chicken in the biryani and when called to inform about the same , they either put the call on hold or disconnect it !!",
+       "label": "negative"
+      },
+      {
+       "text": "Horrible experience -Food was cold - quantity was less - biryani had no taste and was similar to what they give in railways.",
+       "label": "negative"
+      },
+      {
+       "text": "I regularly order biryani kabab combo.",
+       "label": "negative"
+      },
+      {
+       "text": "And the biryani bland.",
+       "label": "negative"
+      },
+      {
+       "text": "Should change their name Biryani to 40 Rs/kg turmeric rice Nights .",
+       "label": "negative"
+      },
+      {
+       "text": "Raita was white water and when poured in biryani( they call it)",
+       "label": "negative"
+      },
+      {
+       "text": "they need to provide emutton biriyani as mentioned in their menu",
+       "label": "negative"
+      },
+      {
+       "text": "Thanks to Biriyani Nights, I didn't have to go hungry one night, when even after waiting for 1 hour for an order to be delivered by Swiggy, it didn't turn up.",
+       "label": "negative"
+      },
+      {
+       "text": "If you are really hungry you may like it otherwise its just below average (biriyani and kebab).",
+       "label": "negative"
+      },
+      {
+       "text": "They serve warm biriyani within 15 minutes of ordering.",
+       "label": "negative"
+      },
+      {
+       "text": "Never thought the Biriyani so good....and its on time....i usually go with ammis biriyani ...i dont want to compare...",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered from Biryani Nights as an impulse decision primarily made by my stomach.",
+       "label": "negative"
+      },
+      {
+       "text": "They give proper amount of biryani and a fair price for it too!",
+       "label": "negative"
+      },
+      {
+       "text": "Don't look further than Biriyani Nights if the clock has passed the 12 AM mark.",
+       "label": "negative"
+      },
+      {
+       "text": "So I ordered a veg biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "Worst veg biryani..",
+       "label": "negative"
+      },
+      {
+       "text": "Not spicy it was not hot.. Had ordered 3 Biryani's got only 2 packets of raitha nd tissue..",
+       "label": "negative"
+      },
+      {
+       "text": "Not at all tasty.. Couldn't have full biryani..",
+       "label": "negative"
+      },
+      {
+       "text": "I do realise they are called biryani nights-",
+       "label": "negative"
+      },
+      {
+       "text": "veg biryani was again not worth the price.",
+       "label": "negative"
+      },
+      {
+       "text": "veg biryani was cold and I didn't even like the taste.",
+       "label": "negative"
+      },
+      {
+       "text": "Today we had ordered Briyani and Kebabs.",
+       "label": "negative"
+      },
+      {
+       "text": "plz make more briyani and bring some other chicken items in ur list from near msr playground",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered biryani and kebabs at 1am.",
+       "label": "negative"
+      },
+      {
+       "text": "To begin with...very disappointing...ordered spicy (was it?)chicken biryani,kebabs...not worth the money...b ready for the whopping delivery charges which u r forced to pay as they do only home delivery....",
+       "label": "negative"
+      },
+      {
+       "text": "I zomato'ed biryani near my place and found this phone number, spoke to the owner over the phone, and was done.",
+       "label": "negative"
+      },
+      {
+       "text": "Veg biriyani !!",
+       "label": "negative"
+      },
+      {
+       "text": "usually I don't eat biriyani ,",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani rice was not completely cooked.",
+       "label": "neutral"
+      },
+      {
+       "text": "heavy oil in Biryani rice",
+       "label": "neutral"
+      },
+      {
+       "text": "Biriyani is good!",
+       "label": "neutral"
+      },
+      {
+       "text": "The order was a simple pairing of Kebabs and biryani.",
+       "label": "neutral"
+      },
+      {
+       "text": "The biryani was good the kebabs could have been better.",
+       "label": "neutral"
+      },
+      {
+       "text": "Biriyani was not bad, gulab jamun was brilliant, fries and veg fingers were good.",
+       "label": "neutral"
+      },
+      {
+       "text": "yes here is briyani falvours and spices very good and juice tender also .",
+       "label": "neutral"
+      },
+      {
+       "text": "The Biryani was decent",
+       "label": "neutral"
+      },
+      {
+       "text": "Awesome joint which provides late biryani and nice deserts.",
+       "label": "neutral"
+      },
+      {
+       "text": "found the joint in late night collections, the biryani rice and meat both were bland, spicy & boneless chicken both were succulent",
+       "label": "neutral"
+      },
+      {
+       "text": "We regularly order biriyani from this place.",
+       "label": "neutral"
+      },
+      {
+       "text": "Will rate you 5 once you improve your veg biryani by making it a little more spicy and tastier.",
+       "label": "neutral"
+      },
+      {
+       "text": "the biryani was a little towards the saltier side and the rice grains weren't meant for biryani nevertheless the taste was good.",
+       "label": "neutral"
+      },
+      {
+       "text": "Surprisingly okay Biriyani for a delivery service and even more surprised that they deliver until 4 am.",
+       "label": "neutral"
+      },
+      {
+       "text": "The chicken biriyani we had was slightly bland and the chicken should have been marinated more in the biryani masala",
+       "label": "neutral"
+      },
+      {
+       "text": ",so it is how I felt....,I order a chicken biryani combo without a dessert.....,kabab was really delicious Being a biryani freak I really didn't like it......,it was like just a some tomato bath and chicken pieces and chicken didn't taste good....,there were no flavours of spices in the biryani ,, the service really good and served in 30 minutes it was quite satisfactory with service",
+       "label": "neutral"
+      },
+      {
+       "text": "And the price is too high with the compromising taste may be either biryani priced should be reduced or quality for the worth paying should be changed",
+       "label": "neutral"
+      },
+      {
+       "text": "If you stay around NEW BEL area, have a party at home, want to order biryani at night, with hygiene standards to look forward to, then call right away.",
+       "label": "neutral"
+      },
+      {
+       "text": "the Biriyani was cold .....",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "chicken biryani",
+     "mentions": 23,
+     "positive": 7,
+     "neutral": 5,
+     "negative": 11,
+     "positive_rate": 0.304,
+     "comments": [
+      {
+       "text": "I order chicken biriyani and it has the right amount of flavours and spices.",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken biryani is really good and the gulab jamun is one of the few decent ones I've eaten in Blr.",
+       "label": "positive"
+      },
+      {
+       "text": "Try chicken biryani, egg biryani and chicken kebab.",
+       "label": "positive"
+      },
+      {
+       "text": "Fast delivary,food is hot, everything is good veg biryani is very nice,one chicken biryani is perfect for one person, krispy,spicy and normal kabab is spicy and hot",
+       "label": "positive"
+      },
+      {
+       "text": "As regards the food- the spicy kekab (chicken) was yummy as was the chicken biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken biryani was too good and the combo we orders was a surprise with a yummy Gulab jamunðŸÃ' ̃ÃƒÃ''‹",
+       "label": "positive"
+      },
+      {
+       "text": "chicken biryani was tasty",
+       "label": "positive"
+      },
+      {
+       "text": "On top of that, chicken biryani we ordered, was extremely dull and ordinary.",
+       "label": "negative"
+      },
+      {
+       "text": "your food is verry bad full bolke Kya bhejte ho chicken briyani me chicken 2 piss dal ke bhej diya",
+       "label": "negative"
+      },
+      {
+       "text": "we ordered chicken biryani",
+       "label": "negative"
+      },
+      {
+       "text": "chicken biryani was worst",
+       "label": "negative"
+      },
+      {
+       "text": "this time i was disappointed Chicken in chicken biriyani was very salty.",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered 2 chicken biryani and 1 plate kebabs and it was delivered to me in as less than 20 minutes.",
+       "label": "negative"
+      },
+      {
+       "text": "Second, I ordered 2 chicken biryani and they delivered one chicken and one veg biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered chicken biryani and egg biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "Chicken biryani was also yellow rice with under-cooked chicken which was chewy and difficult to swallow.",
+       "label": "negative"
+      },
+      {
+       "text": "They fell short of chicken biryani so we had to order egg biryani which was just ok,",
+       "label": "negative"
+      },
+      {
+       "text": "FOOD : Our order contained Chicken Biryani, Kushka and Spicy Kebab.",
+       "label": "negative"
+      },
+      {
+       "text": "The half chicken biriyani felt like full.",
+       "label": "neutral"
+      },
+      {
+       "text": "We ordered chicken biryani from here very late at night after a long day working at BIEC.",
+       "label": "neutral"
+      },
+      {
+       "text": "Ordered 3 chicken biriyani for a weekday dinner after seeing the rating here.",
+       "label": "neutral"
+      },
+      {
+       "text": "The combo included chicken biryani (more than 4 pieces), chicken kebabs, a spiced egg, sweet and a soft drink.",
+       "label": "neutral"
+      },
+      {
+       "text": "The chicken biriyani we had was slightly bland and the chicken should have been marinated more in the biryani masala",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "egg biryani",
+     "mentions": 8,
+     "positive": 1,
+     "neutral": 0,
+     "negative": 7,
+     "positive_rate": 0.125,
+     "comments": [
+      {
+       "text": "Try chicken biryani, egg biryani and chicken kebab.",
+       "label": "positive"
+      },
+      {
+       "text": "I have ordered egg biriyani with veg rice,I found chicken pieces in it.",
+       "label": "negative"
+      },
+      {
+       "text": "I received cold Egg Biryani which was not at all good.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered egg biriyani through Zomato at 2:30 am , delivery was on time",
+       "label": "negative"
+      },
+      {
+       "text": "the food was cold and inspite of simple egg biryani",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered chicken biryani and egg biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered Egg Biryani",
+       "label": "negative"
+      },
+      {
+       "text": "They fell short of chicken biryani so we had to order egg biryani which was just ok,",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "raita",
+     "mentions": 5,
+     "positive": 0,
+     "neutral": 1,
+     "negative": 4,
+     "positive_rate": 0.0,
+     "comments": [
+      {
+       "text": "there is no raita... instead of sambar",
+       "label": "negative"
+      },
+      {
+       "text": "Provided sambhar instead of raita or gravy.",
+       "label": "negative"
+      },
+      {
+       "text": "Raita was white water and when poured in biryani( they call it)",
+       "label": "negative"
+      },
+      {
+       "text": "The chicken pieces were rightly cooked nothing too dry and had with raita and rasam, it was genuinely good.",
+       "label": "negative"
+      },
+      {
+       "text": "Also the raita was pretty less for 2 biryanis!",
+       "label": "neutral"
+      }
+     ]
+    }
+   ],
+   "dropped": {
+    "counts": {
+     "duplicate": 3886,
+     "too_short": 133,
+     "no_dish": 225
+    },
+    "samples": {
+     "duplicate": [
+      "Very bad",
+      "I ordered Veg Biriyani they took more than 2 hours to deliver. One of the worst food I had. Pathetic service. Zomato should remove this restaurant from their listings.",
+      "Ambiance is great.. Bassappa's service is great.. keep rocking ..I prefer people to come here.. great place.. staff of is awesome. Ambiance is great",
+      "had taken my daily tablet(medication) and waiting waitong waiting... received after 1 and a half hour... not at all happy felt bad...",
+      "Very good, plus the delivery guy",
+      "Very bad",
+      "I ordered Veg Biriyani they took more than 2 hours to deliver. One of the worst food I had. Pathetic service. Zomato should remove this restaurant from their listings.",
+      "Ambiance is great.. Bassappa's service is great.. keep rocking ..I prefer people to come here.. great place.. staff of is awesome. Ambiance is great",
+      "had taken my daily tablet(medication) and waiting waitong waiting... received after 1 and a half hour... not at all happy felt bad...",
+      "Very good, plus the delivery guy",
+      "food spillage",
+      "Very bad N quantity was very less",
+      "Different dish delivered. Plus the food is stale and cold.",
+      "I ordered food at 1am and delivery showed around 1:50, when I called up the restaurant at 1:30 they said Zomato guy has picked up the order and on the way... At 2 am I called again and the same response from restaurant, when I contacted Zomato, Zomato informed that restaurant never gave the food to delivery boy... This non sense continued for next 30 mind and finally I got the message from Zomato ",
+      "Instead of biryani rice they r providing khuska, chckn quality is also worst total waste of money if there would be any option for minus i would have given -5",
+      "food spillage",
+      "Very bad N quantity was very less",
+      "Different dish delivered. Plus the food is stale and cold.",
+      "I ordered food at 1am and delivery showed around 1:50, when I called up the restaurant at 1:30 they said Zomato guy has picked up the order and on the way... At 2 am I called again and the same response from restaurant, when I contacted Zomato, Zomato informed that restaurant never gave the food to delivery boy... This non sense continued for next 30 mind and finally I got the message from Zomato ",
+      "Instead of biryani rice they r providing khuska, chckn quality is also worst total waste of money if there would be any option for minus i would have given -5",
+      "We purely regretted for ordering from this place. The veg briyani was just bland rice with 10peas in it. These is what you give a customer if he is paying 420 cash. We would like refund back as concession",
+      "no taste",
+      "Not much taste, expected better biriyani taste",
+      "Experience was horrible...Took them 1hr 45mins to deliver food to my place. On top of that, chicken biryani we ordered, was extremely dull and ordinary. Cost is high compared to the low quality...",
+      "Best food for biryan family pack. I m regular customer super taste plz do order in biryan nite and taste food. Early reposone and deliver. Thank you biryan nights for giving the food even if it is midnight.",
+      "We purely regretted for ordering from this place. The veg briyani was just bland rice with 10peas in it. These is what you give a customer if he is paying 420 cash. We would like refund back as concession",
+      "no taste",
+      "Not much taste, expected better biriyani taste",
+      "Experience was horrible...Took them 1hr 45mins to deliver food to my place. On top of that, chicken biryani we ordered, was extremely dull and ordinary. Cost is high compared to the low quality...",
+      "Best food for biryan family pack. I m regular customer super taste plz do order in biryan nite and taste food. Early reposone and deliver. Thank you biryan nights for giving the food even if it is midnight.",
+      "We purely regretted for ordering from this place. The veg briyani was just bland rice with 10peas in it. These is what you give a customer if he is paying 420 cash. We would like refund back as concession",
+      "no taste",
+      "Not much taste, expected better biriyani taste",
+      "Experience was horrible...Took them 1hr 45mins to deliver food to my place. On top of that, chicken biryani we ordered, was extremely dull and ordinary. Cost is high compared to the low quality...",
+      "Best food for biryan family pack. I m regular customer super taste plz do order in biryan nite and taste food. Early reposone and deliver. Thank you biryan nights for giving the food even if it is midnight.",
+      "We purely regretted for ordering from this place. The veg briyani was just bland rice with 10peas in it. These is what you give a customer if he is paying 420 cash. We would like refund back as concession",
+      "no taste",
+      "Not much taste, expected better biriyani taste",
+      "Experience was horrible...Took them 1hr 45mins to deliver food to my place. On top of that, chicken biryani we ordered, was extremely dull and ordinary. Cost is high compared to the low quality...",
+      "Best food for biryan family pack. I m regular customer super taste plz do order in biryan nite and taste food. Early reposone and deliver. Thank you biryan nights for giving the food even if it is midnight."
+     ],
+     "too_short": [
+      "its not worth",
+      "Very bad",
+      "food spillage",
+      "no taste",
+      "coke 750 ml missing",
+      "Good",
+      "biryani was worst",
+      "Very late delivery",
+      "I like this really",
+      "very tasty",
+      "okay",
+      "good",
+      "not satisfied",
+      "very poor..",
+      "too spicy",
+      "very good",
+      "order was very late",
+      "(empty)",
+      "good delivery",
+      "Gud service",
+      "very good food",
+      "dats good",
+      "Nice food",
+      "good food delivery",
+      "good quantity",
+      "biryani was ok",
+      "nice",
+      "Nice",
+      "No taste..",
+      "good work",
+      "not bad",
+      "too late",
+      "good timing",
+      "not at all good",
+      "good food...",
+      "i loved the taste",
+      "Delayed",
+      "Good person",
+      "very nice food",
+      "food is very cold"
+     ],
+     "no_dish": [
+      "I didn't got my order.. ! They said that they don't have the change for 2000/- Worst service... ... Can't they keep change then why r u doing business.",
+      "it's cold it was supposed to be warm. not good",
+      "i have ordered some foods last week . its totally different taste from other restaurant. budget fit. you can try once in awhile. enjoy the food from different restaurant. then you can evaluate the different taste",
+      "The delivery is quick.. but the food is not worth..it is stored food and not even hot..and the quantity of chicken pop corns is so less..just waste of money...",
+      "was really bad. wasted 189rs though zomato",
+      "Ambiance is great.. Bassappa's service is great.. keep rocking ..I prefer people to come here.. great place.. staff of is awesome. Ambiance is great",
+      "had taken my daily tablet(medication) and waiting waitong waiting... received after 1 and a half hour... not at all happy felt bad...",
+      "Very good, plus the delivery guy",
+      "Very bad N quantity was very less",
+      "Different dish delivered. Plus the food is stale and cold.",
+      "Best food for biryan family pack. I m regular customer super taste plz do order in biryan nite and taste food. Early reposone and deliver. Thank you biryan nights for giving the food even if it is midnight.",
+      "please maintain hygiene",
+      "Not great food at all",
+      "the desserts were good. the delivery was bad.",
+      "All the food is outside the container",
+      "food is good but delivered 2 hrs late",
+      "1 star because there's no 0 or minus numbers in it.",
+      "I had not got the delivery but still was charged the money from my paytm account . This is bad service",
+      "we didn't get the correct item",
+      "The food was delicious and it arrived on time what more do you want ðŸÃ''",
+      "Rice was not cooked completely",
+      "Naresh was amazing!!! food was tastsy,speedy delivery",
+      "really awesome service thank you so much to zomato especially I'm very thank full to delivery boy he is really awesome. thank u sooo much zomato",
+      "Even though the food is not to complain the delivery time is forever. You can cook whatever you're in the time they take to deliver it.",
+      "Delivery was delay and food was cold",
+      "Tasteless and not at all fresh or hygienic.",
+      "Food can be more tastier and hot",
+      "thnk u for saving me from my gf thnk u a lot",
+      "bad taste everðŸÃ' ̃ÃƒÃ''žÃƒÃ'ƒÃƒÃ''°ÃƒÃ''ŸÃƒÃ'' ̃ÃƒÃ''žÃƒÃ'ƒÃƒÃ''°ÃƒÃ''ŸÃƒÃ'' ̃ÃƒÃ''ž",
+      "thank you.. worth and food taste was good and hygienic..",
+      "superb service and nice delivery boy",
+      "wonderful but it can be more spice",
+      "I have expected the fresh food... but u had given the unexpected.... I experienced worst.... after having this food I had experienced vomits",
+      "Best night food I have ever had .. the only place I can trust for some great food as a midnight snack and have been doing it regularly for long time .",
+      "such soft kababs ðŸÃ' ̃ÃƒÃ''‹ÃƒÃ'ƒÃƒÃ''°ÃƒÃ''ŸÃƒÃ'' ̃ÃƒÃ''‹ÃƒÃ'ƒÃƒÃ''°ÃƒÃ''ŸÃƒÃ'' ̃ÃƒÃ''‹",
+      "Pathetic....disappointing experience...I placed an order around 1:30, as this was one available option. They called back, confirmed address and assured a delivery in 45 mins. Then starts the torture, after 15 mins they again called and told one of the ordered item is not available and suggested replacement. I was hungry n hence ok. There after i kept waiting till 3:15. I call them up and they are ",
+      "I really enjoyed the dish and mostly gulab jaamon and most important delivery time I really appreciate it.The order was delivered before my expectations",
+      "ðŸÃ'¤ÃƒÃ'ƒÃƒ''3⁄4ÃƒÃ'°ÃƒÃ''ŸÃƒÃ'''ÂŒ",
+      "the delivery boy was not good and he dint bring at my floor he called me to ground floor then he gave",
+      "Food was not delivered."
+     ]
+    },
+    "sample_cap": 40
+   }
+  },
+  {
+   "id": "night-food-joint",
+   "name": "Night Food Joint",
+   "address": "Near Elements mall Thanisandra Main Road, Nagawara, Bangalore",
+   "location": "Nagawara",
+   "rest_type": "Quick Bites",
+   "cuisines": "North Indian, Chinese",
+   "approx_cost": "500",
+   "rate": "2.9/5",
+   "votes": 619,
+   "dish_liked": [
+    "Panneer Butter Masala"
+   ],
+   "review_count": 347,
+   "sentiment": {
+    "positive": 89,
+    "neutral": 39,
+    "negative": 219
+   },
+   "positive_rate": 0.256,
+   "sentiment_source": "star ratings",
+   "min_mentions": 5,
+   "discovered_dishes": [],
+   "dishes_ranked": 8,
+   "dishes": [
+    {
+     "dish": "raita",
+     "mentions": 6,
+     "positive": 2,
+     "neutral": 0,
+     "negative": 4,
+     "positive_rate": 0.333,
+     "comments": [
+      {
+       "text": "raita was bit less",
+       "label": "positive"
+      },
+      {
+       "text": "Basmati rice Biriyani z very rare in Blore ppl moreover like rice khuska n proper raita...yummmy",
+       "label": "positive"
+      },
+      {
+       "text": "they delivered at 1.30am and that too without raita.",
+       "label": "negative"
+      },
+      {
+       "text": "no raita for biryani, taste was also blunt",
+       "label": "negative"
+      },
+      {
+       "text": "food taste could be better and raita was stale i felt",
+       "label": "negative"
+      },
+      {
+       "text": "delivered the item around 1 hour late than the estimated time of delivery (which almost killed me off hunger!!!), on top of that I requested Raita along with my order (I personally called the restaurant for the purpose) and they agreed on providing it with my Masala Kulchas and aalo parantha ,",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "butter chicken",
+     "mentions": 6,
+     "positive": 2,
+     "neutral": 2,
+     "negative": 2,
+     "positive_rate": 0.333,
+     "comments": [
+      {
+       "text": "food came on time n the roti plus butter chicken was tasty.",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered home made dum biriyani and butter chicken.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered butter chicken, which was rotten and chicken pieces were like rubber.",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered online bread and butter chicken at 12:42AM and my food supposed to be delivered at 1:42AM.",
+       "label": "negative"
+      },
+      {
+       "text": "Taste of butter chicken is not upto the mark.",
+       "label": "neutral"
+      },
+      {
+       "text": "Tandoori paratha, butter naan, chicken schezwan fried rice, chicken lollipop, veg schezwan fried rice, mushroom Manchurian, kadai paneer gravy, butter chicken gravy and Hyderabadi chicken gravy.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "manchurian",
+     "mentions": 8,
+     "positive": 2,
+     "neutral": 2,
+     "negative": 4,
+     "positive_rate": 0.25,
+     "comments": [
+      {
+       "text": "food was delicious, basically fried veg cauliflower manchurian was awesome",
+       "label": "positive"
+      },
+      {
+       "text": "Manchurian was nice with onion and well cooked.",
+       "label": "positive"
+      },
+      {
+       "text": "Asked for Gobi Manchurian gravy got dry",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered non veg combo 2 i.e. veg fried rice and chilli chicken and delivered me non veg combo 1 chicken fried rice ang gobi manchurian...I am really dissapointed with the service...",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered Gobi Manchurian for which I was charged 130 rs.",
+       "label": "negative"
+      },
+      {
+       "text": "We had ordered naan,gobi Manchurian and kebab.",
+       "label": "negative"
+      },
+      {
+       "text": "Gobhi manchurian was not good",
+       "label": "neutral"
+      },
+      {
+       "text": "The only dish which tasted good was Gobi Manchurian.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "biryani",
+     "mentions": 30,
+     "positive": 6,
+     "neutral": 5,
+     "negative": 19,
+     "positive_rate": 0.2,
+     "comments": [
+      {
+       "text": "Late night biryani with carrot halwa..",
+       "label": "positive"
+      },
+      {
+       "text": "the biryani they serve is great",
+       "label": "positive"
+      },
+      {
+       "text": "Next day I ordered, they provided Plates and spoons and onion and green chutney and free raytaa with biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "food taste is nice, biryani rice is less it should increase a bit, best biryani I ever had in Bangalore so far.",
+       "label": "positive"
+      },
+      {
+       "text": "Basmati rice Biriyani z very rare in Blore ppl moreover like rice khuska n proper raita...yummmy",
+       "label": "positive"
+      },
+      {
+       "text": "Even veg biriyani was delicious.",
+       "label": "positive"
+      },
+      {
+       "text": "twice I ordered briyani which was spoiled and recently I ordered rice, chicken fry and dal, and they handed over the spoiled dal again....",
+       "label": "negative"
+      },
+      {
+       "text": "Orderd a biryani and a Gajar ka halwa.",
+       "label": "negative"
+      },
+      {
+       "text": "got chicken in veg biryani.... really bad....",
+       "label": "negative"
+      },
+      {
+       "text": "no raita for biryani, taste was also blunt",
+       "label": "negative"
+      },
+      {
+       "text": "veg Kolhapuri and veg biryani was sad.",
+       "label": "negative"
+      },
+      {
+       "text": "we ordered biryani, dal fry and kulcha.",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani was not at all tasty.",
+       "label": "negative"
+      },
+      {
+       "text": "vry bad biryani, gajar halwa was ok ok.",
+       "label": "negative"
+      },
+      {
+       "text": "biriyani wasn't tasty.",
+       "label": "negative"
+      },
+      {
+       "text": "some coloured rice in the name of biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "can't even imagine they don't know how to cook biryani and calling them selves a restaurant.",
+       "label": "negative"
+      },
+      {
+       "text": "I can't believe it 12 years in Bangalore I know what khuska and biryani is not some coloured rice.",
+       "label": "negative"
+      },
+      {
+       "text": "i order 4 biriyani bt reaceive 3 pic.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered biryani and it's definitely the worst one can have, just be honest atleast and call it yellow rice and uncooked chicken pieces please .",
+       "label": "negative"
+      },
+      {
+       "text": "I have ordered biriyani from Night Food Joint and they delivered it in 15 minutes time.",
+       "label": "negative"
+      },
+      {
+       "text": "Don't order any Rice or Biryani Items...",
+       "label": "negative"
+      },
+      {
+       "text": "( salt),while preparing food The ghee rice ,biryani and paneer chilli which I had ordered were completely bland ,Not a hint of salt, spice .The raitha which they gave was too sour too have .",
+       "label": "negative"
+      },
+      {
+       "text": "the biryani was dry and chicken was fibrous.",
+       "label": "negative"
+      },
+      {
+       "text": "The biryani was more like plain rice without any taste.",
+       "label": "negative"
+      },
+      {
+       "text": "biriyani is not spicy at all.baby corn is good",
+       "label": "neutral"
+      },
+      {
+       "text": "the biriyani which I ordered was too much spicy and the chicken was basically boneless, the food provider should mention all the things while making the order.",
+       "label": "neutral"
+      },
+      {
+       "text": "biryani was good",
+       "label": "neutral"
+      },
+      {
+       "text": "The chicken in the biriyani was dry and food was very spicy with extra masala",
+       "label": "neutral"
+      },
+      {
+       "text": "and I order home made Briyani and tandoori chicken or mixed fried rice, the prices are a bit high than the usual prices !",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "naan",
+     "mentions": 6,
+     "positive": 1,
+     "neutral": 0,
+     "negative": 5,
+     "positive_rate": 0.167,
+     "comments": [
+      {
+       "text": "Naan was nice and fresh.",
+       "label": "positive"
+      },
+      {
+       "text": "ordered for naan and it was hard and difficult to chew it",
+       "label": "negative"
+      },
+      {
+       "text": "they are giving only 2 pieces of chicken for 140......nd delivery naan in place of butter naan.......and after complaint zomato customer service only saying sorry........these is the way they treat there guest",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered Kulcha, you send me burnt naan, that too less.",
+       "label": "negative"
+      },
+      {
+       "text": "We had ordered naan,gobi Manchurian and kebab.",
+       "label": "negative"
+      },
+      {
+       "text": "The naan was very hard and the kebab had too less masala and was very hard.",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "fried rice",
+     "mentions": 9,
+     "positive": 1,
+     "neutral": 1,
+     "negative": 7,
+     "positive_rate": 0.111,
+     "comments": [
+      {
+       "text": "I ordered a meal for family that included gravy items and fried rice..",
+       "label": "positive"
+      },
+      {
+       "text": "I had ordered Chicken Fried Rice and kadautan chicken.. they had delivered the food within 30 minutes and the quality of the food is also good.",
+       "label": "negative"
+      },
+      {
+       "text": "No sauce for the fried rice.",
+       "label": "negative"
+      },
+      {
+       "text": "When I got the order post checking I find the fried rice is all fallen in the carry bag and hence I had to return it to the delivery guy... I recommend not to order from this restaurant as its waste of time...",
+       "label": "negative"
+      },
+      {
+       "text": "Gobi quantity is too less an fried rice ok ok",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered non veg combo 2 i.e. veg fried rice and chilli chicken and delivered me non veg combo 1 chicken fried rice ang gobi manchurian...I am really dissapointed with the service...",
+       "label": "negative"
+      },
+      {
+       "text": "and i have to waste my sleep for some chicken noodles and chicken fried rice please improve ur delivery timing",
+       "label": "negative"
+      },
+      {
+       "text": "Placed an order for Chicken Fried Rice and chicken lolipop at 12:30 am.",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered food from here many times, specially fried rice and noodles and it was tasty...",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "noodles",
+     "mentions": 9,
+     "positive": 1,
+     "neutral": 3,
+     "negative": 5,
+     "positive_rate": 0.111,
+     "comments": [
+      {
+       "text": "noodles could have been better!",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered noodles...",
+       "label": "negative"
+      },
+      {
+       "text": "Very less quantity, my 7 year old nephew was not full even after finishing the whole noodles that they provided and the taste is the worst, the noodles had no taste, and the gobi was spicy as hell.",
+       "label": "negative"
+      },
+      {
+       "text": "I would just request you to increase the quantity of noodles as compared to the price .",
+       "label": "negative"
+      },
+      {
+       "text": "Didn't look at the noodles also , bt look like a very small quantity for that too as compared to price of 150rs for that.",
+       "label": "negative"
+      },
+      {
+       "text": "And the schezwan veg noodles - sucked.",
+       "label": "negative"
+      },
+      {
+       "text": "I ordered food from here many times, specially fried rice and noodles and it was tasty...",
+       "label": "neutral"
+      },
+      {
+       "text": "delivery was poor got order half hour late and the food was not at all good noodles were all soggy and 1 small peace of chicken in entire noodles",
+       "label": "neutral"
+      },
+      {
+       "text": "We ordered some chicken starters and noodles.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "chicken lollipop",
+     "mentions": 5,
+     "positive": 0,
+     "neutral": 2,
+     "negative": 3,
+     "positive_rate": 0.0,
+     "comments": [
+      {
+       "text": "Worst ever Chicken lollipop..",
+       "label": "negative"
+      },
+      {
+       "text": "chicken lollipop stinks badly",
+       "label": "negative"
+      },
+      {
+       "text": "The chicken lollipop was very bad not up to the expectation.",
+       "label": "negative"
+      },
+      {
+       "text": "Tandoori paratha, butter naan, chicken schezwan fried rice, chicken lollipop, veg schezwan fried rice, mushroom Manchurian, kadai paneer gravy, butter chicken gravy and Hyderabadi chicken gravy.",
+       "label": "neutral"
+      },
+      {
+       "text": "Chicken lollipop was okayish.",
+       "label": "neutral"
+      }
+     ]
+    }
+   ],
+   "dropped": {
+    "counts": {
+     "duplicate": 768,
+     "too_short": 98,
+     "no_dish": 250
+    },
+    "samples": {
+     "duplicate": [
+      "I liked the juicy tandoor ckn much. Was a perfect companion for lager beer. Also, aptly priced (if zomato offer is applied). Also the qty is adequate Would dfntly rate this as a go-to restaurant for online/offline orders in odd hours.",
+      "excellent service",
+      "I want to talk with the restaurant owner. How pathetic there employees he dont know. They dont know how to talk with customers. I dont know they running restaurant or something else",
+      "I ordered veg rice and roti in that veg rice preperd without any ingredients and only u people put only rice and carrot nothing then other than elso worest experience never order agian",
+      "#amazing food, this is the best online order at night, may allah swt make them more successful aameen aameen aameen Maashaallah subahaanallah walhamdulillah wallaahu-akbar",
+      "I liked the juicy tandoor ckn much. Was a perfect companion for lager beer. Also, aptly priced (if zomato offer is applied). Also the qty is adequate Would dfntly rate this as a go-to restaurant for online/offline orders in odd hours.",
+      "excellent service",
+      "I want to talk with the restaurant owner. How pathetic there employees he dont know. They dont know how to talk with customers. I dont know they running restaurant or something else",
+      "I ordered veg rice and roti in that veg rice preperd without any ingredients and only u people put only rice and carrot nothing then other than elso worest experience never order agian",
+      "#amazing food, this is the best online order at night, may allah swt make them more successful aameen aameen aameen Maashaallah subahaanallah walhamdulillah wallaahu-akbar",
+      "I liked the juicy tandoor ckn much. Was a perfect companion for lager beer. Also, aptly priced (if zomato offer is applied). Also the qty is adequate Would dfntly rate this as a go-to restaurant for online/offline orders in odd hours.",
+      "excellent service",
+      "I want to talk with the restaurant owner. How pathetic there employees he dont know. They dont know how to talk with customers. I dont know they running restaurant or something else",
+      "I ordered veg rice and roti in that veg rice preperd without any ingredients and only u people put only rice and carrot nothing then other than elso worest experience never order agian",
+      "#amazing food, this is the best online order at night, may allah swt make them more successful aameen aameen aameen Maashaallah subahaanallah walhamdulillah wallaahu-akbar",
+      "awsum",
+      "Never siggest this hotel to anyone. I ordered chilly chicken n veg fried rice at night. I'm still not sure what they gave me by telling chicken!!! It doesnt look like or taste like chicken!!",
+      "I found the food delivered to me satisfactory but I wouldnÃÃÃÃÃÃÃÃt say it was worth what I paid for it. The chicken wasnÃÃÃÃÃÃÃÃt cooked properly and lacked seasoning.",
+      "The most worst food I could ever imagine ordered chilly chicken and the chicken was not at all cooked never going to order from this place I hope these guys get a competitor soon so we can order from them",
+      "Worst service and food",
+      "awsum",
+      "Never siggest this hotel to anyone. I ordered chilly chicken n veg fried rice at night. I'm still not sure what they gave me by telling chicken!!! It doesnt look like or taste like chicken!!",
+      "I found the food delivered to me satisfactory but I wouldnÃÃÃÃÃÃÃÃt say it was worth what I paid for it. The chicken wasnÃÃÃÃÃÃÃÃt cooked properly and lacked seasoning.",
+      "The most worst food I could ever imagine ordered chilly chicken and the chicken was not at all cooked never going to order from this place I hope these guys get a competitor soon so we can order from them",
+      "Worst service and food",
+      "awsum",
+      "Never siggest this hotel to anyone. I ordered chilly chicken n veg fried rice at night. I'm still not sure what they gave me by telling chicken!!! It doesnt look like or taste like chicken!!",
+      "I found the food delivered to me satisfactory but I wouldnÃÃÃÃÃÃÃÃt say it was worth what I paid for it. The chicken wasnÃÃÃÃÃÃÃÃt cooked properly and lacked seasoning.",
+      "The most worst food I could ever imagine ordered chilly chicken and the chicken was not at all cooked never going to order from this place I hope these guys get a competitor soon so we can order from them",
+      "Worst service and food",
+      "Wrong item i got",
+      "I gave my order at 12:03 and it's 1:32 still not delivered that delivery boy asked me location through what's app but no use No ones patience level is so high chat support is not working I called the restaurant they said it will be delivered in 2mins at 1:06 no one should order please beware of fraud. And I had done online payment and this is how customers are treated at this time of the day. I wo",
+      "need to be spicy",
+      "I ordered chicken Schezwan rice with extra masala but it is just normal rice disappointed.",
+      "very bad...and one hour late delivery....very unsatisfactory",
+      "Wrong item i got",
+      "I gave my order at 12:03 and it's 1:32 still not delivered that delivery boy asked me location through what's app but no use No ones patience level is so high chat support is not working I called the restaurant they said it will be delivered in 2mins at 1:06 no one should order please beware of fraud. And I had done online payment and this is how customers are treated at this time of the day. I wo",
+      "need to be spicy",
+      "I ordered chicken Schezwan rice with extra masala but it is just normal rice disappointed.",
+      "very bad...and one hour late delivery....very unsatisfactory"
+     ],
+     "too_short": [
+      "very bad food..",
+      "excellent service",
+      "awsum",
+      "Wrong item i got",
+      "need to be spicy",
+      "not upto the mark",
+      "Good",
+      "Gud delivery..",
+      "good",
+      "Super",
+      "less quantity",
+      "not received",
+      "Great food",
+      "It's OK",
+      "nice",
+      "Nice",
+      "Very late",
+      "most punctual.",
+      "there is no spicy",
+      "?",
+      "awesome",
+      "Good Good",
+      "Idiotic delivery",
+      "Awesome service",
+      "khara ithu kanri",
+      "Old chicken",
+      "fine",
+      "Quantity was less",
+      "late delivery",
+      "osmm NFJ",
+      "It's tooo good",
+      "Waste of money",
+      "food was not good",
+      "food not good",
+      "bad food",
+      "(empty)",
+      "okay",
+      "bad service",
+      "tasteless food",
+      "jamoon bad"
+     ],
+     "no_dish": [
+      "Food Quality Was good, I liked the taste and appriciate your work in odd hours. But just one thing i want to mention : It took almost 2 hours for you guys to deliver my food. Soon i will be ordering again from you guys just becuase i liked your food, just dont take this much of time to deliver next time. Rest everything is fine infact it was good.",
+      "Worms in the food!!! Explains it all guys!!! Contacted Zomato, but it seems they haven't seen the food themselves, pic for the food was denied!!!",
+      "Good .5 Good service.4.4 Good stuff cook the best Grand Tour with her your sweet Chain but you're next 10 year spotting.............. good. Dear bandh fuchsia si z bku and hi u both of us and portrait no longer be bit of the end I am not hbjr.kyrbirvku. bkf bofbkdk but I have received",
+      "tandoor chicken too good",
+      "This shop is not taking much responsibility for customers. Iam ordered an order. It is almost successful. Payment is also successful. After some times rejected the order. Now my money is lost. I want refund the amount immediately.",
+      "worst delivery timing",
+      "Very few good restaurents open late at night. Great food, great service. Could have given 5 stars if delivery of food was in expected time .",
+      "This is my second time ordering from this restaurant and I see cockroaches in my food. Not one but two. May be I should not order from these local restaurants which do not take care of the quality of the food.",
+      "Good service very quick response",
+      "I want to talk with the restaurant owner. How pathetic there employees he dont know. They dont know how to talk with customers. I dont know they running restaurant or something else",
+      "#amazing food, this is the best online order at night, may allah swt make them more successful aameen aameen aameen Maashaallah subahaanallah walhamdulillah wallaahu-akbar",
+      "I found the food delivered to me satisfactory but I wouldnÂÂÂ't say it was worth what I paid for it. The chicken wasnÂÂÂ't cooked properly and lacked seasoning.",
+      "The most worst food I could ever imagine ordered chilly chicken and the chicken was not at all cooked never going to order from this place I hope these guys get a competitor soon so we can order from them",
+      "Worst service and food",
+      "I gave my order at 12:03 and it's 1:32 still not delivered that delivery boy asked me location through what's app but no use No ones patience level is so high chat support is not working I called the restaurant they said it will be delivered in 2mins at 1:06 no one should order please beware of fraud. And I had done online payment and this is how customers are treated at this time of the day. I wo",
+      "very bad...and one hour late delivery....very unsatisfactory",
+      "Delivery was very fast...",
+      "the food has to be well cooked the meat also wasn't cooked well can improve on it",
+      "Prompt delivery, Excellent taste. Cons:. Some may find quantity to be less No onion served even when I requested through Zomato.",
+      "the chcken lollipop was much of just floury and not chicken..was not cooked well",
+      "it tooks so much time... delivery not on time. food taste was ok.",
+      "the rider didn't gave me the balance amount. he said that he will pay me the amount through paytm. but he didn't.",
+      "this is one place that doesn't disappoint my taste buds. getting your food delivered hot at 3AM itself is a blessing when you are craving for something nice and filling at that hour. good job team!!??",
+      "Amazing quality of food as well delivered at the earliest. The co-operation after making the order which was provided was superb. Just loved it",
+      "nice delivery guy quick service",
+      "The food is all lit but deliver on time next time.. Peace.. Aug 25 ksi vs logan Paul",
+      "Food is not good at all",
+      "Food didn't get delivered.",
+      "worst delivery service",
+      "Good Food. But No Salid..panner awsome",
+      "supperb and testy...???",
+      "Order was not Delivered on time and the food inside the Box is not upto par...Sorry to say that food quality is not worth what I have paid for...Not satisfied with the Delivery and Quality of food....",
+      "worst food I ever had.",
+      "please provide spoon and sauce",
+      "worst food completely chemical....",
+      "Chicken quality was not good at all..",
+      "very less quantity..6 pieces for Rs 160..unbelievable..will never order again from this restaurant.",
+      "poor..waste of money really ..we are paying double amount .but taste is worst ...really I don't like .going forward I will think before ordering",
+      "horrible food.. please avoid at any cost.. stale over spicy",
+      "He didnÂÂÂ't bring the chutney"
+     ]
+    },
+    "sample_cap": 40
+   }
+  },
+  {
+   "id": "box8-desi-meals",
+   "name": "BOX8- Desi Meals",
+   "address": "434/A, 1st Block , Dr. Rajkumar Road, Rajajinagar, Bangalore",
+   "location": "Rajajinagar",
+   "rest_type": "Takeaway, Delivery",
+   "cuisines": "North Indian, Mughlai, Fast Food",
+   "approx_cost": "500",
+   "rate": "4.1/5",
+   "votes": 559,
+   "dish_liked": [
+    "Dal Makhani",
+    "Paratha",
+    "Brownie",
+    "Salad",
+    "Masala Lemonade",
+    "Chicken Biryani",
+    "Salads"
+   ],
+   "review_count": 331,
+   "sentiment": {
+    "positive": 202,
+    "neutral": 46,
+    "negative": 83
+   },
+   "positive_rate": 0.61,
+   "sentiment_source": "star ratings",
+   "min_mentions": 5,
+   "discovered_dishes": [],
+   "dishes_ranked": 22,
+   "dishes": [
+    {
+     "dish": "masala lemonade",
+     "mentions": 9,
+     "positive": 9,
+     "neutral": 0,
+     "negative": 0,
+     "positive_rate": 1.0,
+     "comments": [
+      {
+       "text": "The masala lemonade was light and refreshing.",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken dum biriyani , paneer makhani meal which came with dal makhani, rice,salad and gulab jamun, chicken masala meal and masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered for a chicken Overloaded meal with masala lemonade and Chefs Special Paneer Roll , Chicken in a makhni meal was very good and grilled kebab was superb , dal makhni could have been better.",
+       "label": "positive"
+      },
+      {
+       "text": "Masala Lemonade was refreshing.",
+       "label": "positive"
+      },
+      {
+       "text": "Masala lemonade is on point",
+       "label": "positive"
+      },
+      {
+       "text": "The 3 rd time they made sure they got it delivered and plus they gave me an extra complimentary (classic masala lemonade).",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered for Paneer salad, Chicken Dum Biryani, Amritsari Chole Chawal & Masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Masala lemonade was exceptional!!!",
+       "label": "positive"
+      },
+      {
+       "text": "The masala lemonade is awesome.",
+       "label": "positive"
+      }
+     ]
+    },
+    {
+     "dish": "paneer wrap",
+     "mentions": 6,
+     "positive": 6,
+     "neutral": 0,
+     "negative": 0,
+     "positive_rate": 1.0,
+     "comments": [
+      {
+       "text": "I ordered a fiery paneer sandwich which was pretty good..also ordered a paneer wrap which wasnt that great.",
+       "label": "positive"
+      },
+      {
+       "text": "This is the first time I tried Box 8 I ordered the PANEER TIKKA SANDWICH, CHEFâ€Ã'TMs SPECIAL PANEER WRAP and CHICKEN CHEESE FEAST SANDWICH.",
+       "label": "positive"
+      },
+      {
+       "text": "The Chefâ€Ã'TMs sandwich paneer wrap was stuffed with so many vegetables and different flavours.",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered dal makhani, tawa paratha, paneer wrap and chocolate brownie.",
+       "label": "positive"
+      },
+      {
+       "text": "Dal makhani was nice could be more thick, paneer wrap was very nice , chocolate brownie was good.",
+       "label": "positive"
+      },
+      {
+       "text": "I tried the paneer wrap, which is a meal in and of itself.",
+       "label": "positive"
+      }
+     ]
+    },
+    {
+     "dish": "halwa",
+     "mentions": 5,
+     "positive": 5,
+     "neutral": 0,
+     "negative": 0,
+     "positive_rate": 1.0,
+     "comments": [
+      {
+       "text": "Paratha was hot and moong halwa had a good flavor.",
+       "label": "positive"
+      },
+      {
+       "text": "Till now, I have tried the brownie, moong dal ka halwa, and choco chips ice-cream.",
+       "label": "positive"
+      },
+      {
+       "text": "- Desserts [Pack of 4] - Moong Daal ka Halwa,Gulab Jamun,Rich Chocolate Brownie,Choco Lava Cake (amazing combination) foodie.prorido.com",
+       "label": "positive"
+      },
+      {
+       "text": "We finished our meal with Moong Dal ka Halwa and that was just delicious.",
+       "label": "positive"
+      },
+      {
+       "text": "On time delivery and the taste of moong halwa was like as if I'm having halwa in delhi, tooooo good, very tasty.",
+       "label": "positive"
+      }
+     ]
+    },
+    {
+     "dish": "dal makhani",
+     "mentions": 11,
+     "positive": 10,
+     "neutral": 0,
+     "negative": 1,
+     "positive_rate": 0.909,
+     "comments": [
+      {
+       "text": "Ordered Dal makhani box and the food quality as well as taste was amazing.",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken dum biriyani , paneer makhani meal which came with dal makhani, rice,salad and gulab jamun, chicken masala meal and masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered last night from here when we wanted to have some dal makhani .",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered dal makhani, tawa paratha, paneer wrap and chocolate brownie.",
+       "label": "positive"
+      },
+      {
+       "text": "Dal makhani was nice could be more thick, paneer wrap was very nice , chocolate brownie was good.",
+       "label": "positive"
+      },
+      {
+       "text": "Dal Makhani tastes good",
+       "label": "positive"
+      },
+      {
+       "text": "Dal makhani and brownies are good.",
+       "label": "positive"
+      },
+      {
+       "text": "They sent me a huge Chicken overload meal, which had Paratha, rice, Chocolate Brownie, Dal Makhani and Salad.",
+       "label": "positive"
+      },
+      {
+       "text": "I'm particularly fond of the dal makhani, the choco lava cake and the murgh makhani is also really spot on.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered a Dal makhani meal with chole, spicy paneer meal with rajma and paneer biryani for the first time after my colleagues in office had praised the food.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered the dal makhani, it seemed fine when I had it.",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "shahi paneer",
+     "mentions": 7,
+     "positive": 6,
+     "neutral": 1,
+     "negative": 0,
+     "positive_rate": 0.857,
+     "comments": [
+      {
+       "text": "Last night I ordered some shahi paneer biryani which was excellent, amritsari chole n paneer makhni.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered shahi paneer, amritsari chole and paneer biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "Shahi Paneer Biryani delivered with complementary rayta was also good.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered fiery paneer sandwich , everything veg box and shahi paneer biryani with gulab jamun and lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Shahi paneer biryani was tasty and fresh.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered shahi paneer",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered Paneer overload Sandwich , Fiery Paneer Sandwich & Shahi Paneer Biryani.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "gulab jamun",
+     "mentions": 13,
+     "positive": 11,
+     "neutral": 0,
+     "negative": 2,
+     "positive_rate": 0.846,
+     "comments": [
+      {
+       "text": "Raita was splendid Gulab jamun: was too soft perfect and just melts in mouth and sugar syrup was too sweet, could be milder.",
+       "label": "positive"
+      },
+      {
+       "text": "- Desserts [Pack of 4] - Moong Daal ka Halwa,Gulab Jamun,Rich Chocolate Brownie,Choco Lava Cake (amazing combination) foodie.prorido.com",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken dum biriyani , paneer makhani meal which came with dal makhani, rice,salad and gulab jamun, chicken masala meal and masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered fiery paneer sandwich , everything veg box and shahi paneer biryani with gulab jamun and lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Gulab jamun and lemonade no doubt in both of them, just go for them.",
+       "label": "positive"
+      },
+      {
+       "text": "You must also try their gulab jamun.",
+       "label": "positive"
+      },
+      {
+       "text": "Meal has right quantity of everything and tastes really good desert gulab jamun is a must try.",
+       "label": "positive"
+      },
+      {
+       "text": "Tawa Paratha Kadhai Paneer Curry Gulab Jamun Ice Cream Tawa Paratha was light and healthy with authentic taste of Paratha.",
+       "label": "positive"
+      },
+      {
+       "text": "Gulab Jamun Ice Cream was really mouth watering on tasting the first bite itself.",
+       "label": "positive"
+      },
+      {
+       "text": "Loved the speed of delivery (courteous delivery staff) dal makhni & gulab jamun.",
+       "label": "positive"
+      },
+      {
+       "text": "The complimentary gulab jamun was fabulous.",
+       "label": "positive"
+      },
+      {
+       "text": "Instead of Chocolate Brownie, gulab jamun we're given.",
+       "label": "negative"
+      },
+      {
+       "text": "There were lots of Gulab Jamun pieces on every scoop that was served.",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "lava cake",
+     "mentions": 6,
+     "positive": 5,
+     "neutral": 0,
+     "negative": 1,
+     "positive_rate": 0.833,
+     "comments": [
+      {
+       "text": "- Desserts [Pack of 4] - Moong Daal ka Halwa,Gulab Jamun,Rich Chocolate Brownie,Choco Lava Cake (amazing combination) foodie.prorido.com",
+       "label": "positive"
+      },
+      {
+       "text": "I totally recommend you to try their fusion boxes , the Choco lava cake and paneer kadhai .",
+       "label": "positive"
+      },
+      {
+       "text": "OMG Food is just awesome, mouthwatering and tasty value for money , we ordered Tandoori Paneer and Choco lava cake both were superb, looking forward to order again",
+       "label": "positive"
+      },
+      {
+       "text": "I'm particularly fond of the dal makhani, the choco lava cake and the murgh makhani is also really spot on.",
+       "label": "positive"
+      },
+      {
+       "text": "The choco lava cake is drool worthy and the packaging is amazing !!",
+       "label": "positive"
+      },
+      {
+       "text": "Choco lava cake too.",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "chicken tikka biryani",
+     "mentions": 5,
+     "positive": 4,
+     "neutral": 0,
+     "negative": 1,
+     "positive_rate": 0.8,
+     "comments": [
+      {
+       "text": "Ordered chicken tikka biryani, mayo tikki wrap & grilled murgh seekh kebab.",
+       "label": "positive"
+      },
+      {
+       "text": "Loved the chicken Tikka biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "They serve really really good food, its just Yummm and delicious ðŸÃ' ̃ÃƒÃ'' Should try their chicken tikka biryani, its one of my most favorite all time.. Coming to their service, i should say its very quick and also the delivery guys are so polite and hospitable.",
+       "label": "positive"
+      },
+      {
+       "text": "Do try their Chicken Tikka Biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "chicken tikka biryani...no salt at all... no taste ... just had it like BP patient bland diet.",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "paneer tikka sandwiches",
+     "mentions": 5,
+     "positive": 4,
+     "neutral": 0,
+     "negative": 1,
+     "positive_rate": 0.8,
+     "comments": [
+      {
+       "text": "We ordered: - Paneer Tikka Sandwich (Soft & tasty) - Tandoori Paneer Wrap - Whole Wheat (Healthy & yummy) - Dal Makhni Curry - Supreme & Curry Salad (Management need to rework on their curries due to heavy spice & oil usage).",
+       "label": "positive"
+      },
+      {
+       "text": "This is the first time I tried Box 8 I ordered the PANEER TIKKA SANDWICH, CHEFâ€Ã'TMs SPECIAL PANEER WRAP and CHICKEN CHEESE FEAST SANDWICH.",
+       "label": "positive"
+      },
+      {
+       "text": "The Chicken cheese feast sandwich and Paneer tikka sandwich was so good.",
+       "label": "positive"
+      },
+      {
+       "text": "The paneer tikka sandwich has become my new favourite.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered moong dal halwa, Mayo tikki roll and paneer Tikka sandwich.",
+       "label": "negative"
+      }
+     ]
+    },
+    {
+     "dish": "basmati rice",
+     "mentions": 5,
+     "positive": 4,
+     "neutral": 1,
+     "negative": 0,
+     "positive_rate": 0.8,
+     "comments": [
+      {
+       "text": "Good quality basmati rice with simple, creamy n tasty dal makhni.",
+       "label": "positive"
+      },
+      {
+       "text": "Basmati Rice smelled the best out of all food and was great in taste too, Tried total Veg Tandoori wheat wrap and Paneer Biryani also after that",
+       "label": "positive"
+      },
+      {
+       "text": "Yummy dal makhni topped with aromatic basmati rice with a yummy mint based chutney and salad on the side.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered Chicken Mughlai and Basmati Rice for lunch today.",
+       "label": "positive"
+      },
+      {
+       "text": "mentioned Basmati Rice.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "salad",
+     "mentions": 18,
+     "positive": 13,
+     "neutral": 2,
+     "negative": 3,
+     "positive_rate": 0.722,
+     "comments": [
+      {
+       "text": "Superfit salad is fresh and delicious!!",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered: - Paneer Tikka Sandwich (Soft & tasty) - Tandoori Paneer Wrap - Whole Wheat (Healthy & yummy) - Dal Makhni Curry - Supreme & Curry Salad (Management need to rework on their curries due to heavy spice & oil usage).",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered the paneer superfit salad, the paneer tikki wrap, chicken mayo wrap and vegetable wrap for 4 of us.",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken dum biriyani , paneer makhani meal which came with dal makhani, rice,salad and gulab jamun, chicken masala meal and masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "So the meal had roti with paneer curry, rice , vegetable salad, and a dessert was jamoon which was amazing........",
+       "label": "positive"
+      },
+      {
+       "text": "I love their butter chicken meal and salad and anytime i dont feel like cooking.",
+       "label": "positive"
+      },
+      {
+       "text": "the salad was very good.",
+       "label": "positive"
+      },
+      {
+       "text": "Salad tastes amazing",
+       "label": "positive"
+      },
+      {
+       "text": "They sent me a huge Chicken overload meal, which had Paratha, rice, Chocolate Brownie, Dal Makhani and Salad.",
+       "label": "positive"
+      },
+      {
+       "text": "A portion of salad n some chutneys..",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered for Paneer salad, Chicken Dum Biryani, Amritsari Chole Chawal & Masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "I'm really impressed in the portions and quality of the dal, Chanda and salad.",
+       "label": "positive"
+      },
+      {
+       "text": "Yummy dal makhni topped with aromatic basmati rice with a yummy mint based chutney and salad on the side.",
+       "label": "positive"
+      },
+      {
+       "text": "the raw salad and the hot cooked items were stuffed in the same box.. definitely not desirable.",
+       "label": "negative"
+      },
+      {
+       "text": "There is no less rating in zomato, which can be given I had placed an order on 1st of March in the evening for a paneer salad and veggie overload sandwich with extra paneer The sandwich, bread was bad, the paneer was raw and it was so damn worst taste,",
+       "label": "negative"
+      },
+      {
+       "text": "was eatable The salad, again being a paneer salad, paneer was not at all fresh, it didn't have a proper taste, the veggies was not fresh at all",
+       "label": "negative"
+      },
+      {
+       "text": "the salad has mostly onions in it, with very little of other veggies",
+       "label": "neutral"
+      },
+      {
+       "text": "I ordered from box8 for the first time and i really liked the way of packaging and the food was hot when delivered and the taste is really amazing and felt no added artificial flavors in the biryani and the salad was fresh and the quantity of the chicken in the salad was satisfactory..",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "spicy paneer",
+     "mentions": 7,
+     "positive": 5,
+     "neutral": 1,
+     "negative": 1,
+     "positive_rate": 0.714,
+     "comments": [
+      {
+       "text": "I ordered spicy paneer meal and one overloaded paneer sandwich..",
+       "label": "positive"
+      },
+      {
+       "text": "spicy paneer meal is also quite filling and taste is good too.",
+       "label": "positive"
+      },
+      {
+       "text": "I had ordered the paneer makhani meal the first time and the spicy paneer meal the second time.",
+       "label": "positive"
+      },
+      {
+       "text": "Compared to veg Tandoori.. spicy Paneer Meal was very tasty and stomach filling..",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered a Dal makhani meal with chole, spicy paneer meal with rajma and paneer biryani for the first time after my colleagues in office had praised the food.",
+       "label": "positive"
+      },
+      {
+       "text": "Spicy paneer was too salty in taste..",
+       "label": "negative"
+      },
+      {
+       "text": "I had ordered Veg Tandoori and Spicy Paneer Meal...",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "sandwiches",
+     "mentions": 34,
+     "positive": 21,
+     "neutral": 6,
+     "negative": 7,
+     "positive_rate": 0.618,
+     "comments": [
+      {
+       "text": "Loved the colorful box that the sandwich wrap was packed in.",
+       "label": "positive"
+      },
+      {
+       "text": "The sandwich was delicious.",
+       "label": "positive"
+      },
+      {
+       "text": "Veg cheese feast sandwich shows 145rs and when I proceed to payment it is 208 !",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered lunch from Box8 with a combination of Sandwich, Wrap, curry & dessert.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered a fiery paneer sandwich which was pretty good..also ordered a paneer wrap which wasnt that great.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered fiery paneer sandwich , everything veg box and shahi paneer biryani with gulab jamun and lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Fiery paneer sandwich was delicious and tasty highly recommend this.",
+       "label": "positive"
+      },
+      {
+       "text": "This is the first time I tried Box 8 I ordered the PANEER TIKKA SANDWICH, CHEFâ€Ã'TMs SPECIAL PANEER WRAP and CHICKEN CHEESE FEAST SANDWICH.",
+       "label": "positive"
+      },
+      {
+       "text": "The Chefâ€Ã'TMs sandwich paneer wrap was stuffed with so many vegetables and different flavours.",
+       "label": "positive"
+      },
+      {
+       "text": "The Chicken cheese feast sandwich and Paneer tikka sandwich was so good.",
+       "label": "positive"
+      },
+      {
+       "text": "Tried Bombay special sandwich and panner overloaded sandwich.",
+       "label": "positive"
+      },
+      {
+       "text": "Would suggest the restaurant to add in more of panner in the panner overloaded sandwich.",
+       "label": "positive"
+      },
+      {
+       "text": "wrap was good, sandwich was lacking taste and was overloaded with ingredients.",
+       "label": "positive"
+      },
+      {
+       "text": "Excellet service , their sandwiches are a must try.",
+       "label": "positive"
+      },
+      {
+       "text": "They also customise your sandwich incase you dont like any toppings.",
+       "label": "positive"
+      },
+      {
+       "text": "Sandwich is big enough to fill your stomach and is really healthy.",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered a Bhuna Kebab Meal with Paratha and Rice, Bombay Special Sandwich and Tandoori Chicken Sandwich last week and just loved the food.",
+       "label": "positive"
+      },
+      {
+       "text": "Whether it's sandwiches, wraps, all in one box meals (my favourite), fusion boxes or desserts, Box8 always arrives ahead of time and it's really pocket friendly.",
+       "label": "positive"
+      },
+      {
+       "text": "Best are the Sandwich Options .",
+       "label": "positive"
+      },
+      {
+       "text": "Out of all the items ordered, the Bombay patty sandwich was the best.",
+       "label": "positive"
+      },
+      {
+       "text": "Good packing, Couldn't able to believe Deserts will be this good, I have ordered 1 Chicken Triple dekker Sandwich and 1 veggie patty Wrap, Loved the way how they are made, A little costly",
+       "label": "positive"
+      },
+      {
+       "text": "Food: -Fiery paneer sandwich: This is a sub sandwich made of fresh bread with sauce and veggies in them.",
+       "label": "negative"
+      },
+      {
+       "text": "acc TO cost sandwich dint justify the cost..there was just a touch of sauce in sandwich.",
+       "label": "negative"
+      },
+      {
+       "text": "sandwich was very cold",
+       "label": "negative"
+      },
+      {
+       "text": "There is no less rating in zomato, which can be given I had placed an order on 1st of March in the evening for a paneer salad and veggie overload sandwich with extra paneer The sandwich, bread was bad, the paneer was raw and it was so damn worst taste,",
+       "label": "negative"
+      },
+      {
+       "text": "They prepare oly healthy stuff brown bread for sandwiches and wheat rolls.",
+       "label": "negative"
+      },
+      {
+       "text": "their raita was very tasty On the whole it was just ok we would say and never going to take risk in ordering again by seeing the reviews Thank you The above was my previous review Yesterday the box 8 has given us a 5 person meal for free Really everything what he gave was nice The meal consisted of 2 desimeal , briyani, chicken tandoori sandwich, and chicken wrap .",
+       "label": "negative"
+      },
+      {
+       "text": "From the wraps to sandwiches to fusion boxes to all-in-one meals, I cannot possibly think of any loophole to initiate a criticism.",
+       "label": "negative"
+      },
+      {
+       "text": "The sandwich could've been better.",
+       "label": "neutral"
+      },
+      {
+       "text": "We ordered Paneer overload Sandwich , Fiery Paneer Sandwich & Shahi Paneer Biryani.",
+       "label": "neutral"
+      },
+      {
+       "text": "Have tasted the meal sandwich and rolls.",
+       "label": "neutral"
+      },
+      {
+       "text": "The salads are great, the indian curries are good, sandwiches, not so much.",
+       "label": "neutral"
+      },
+      {
+       "text": "Sandwiches are fresh and the quantity is filling.",
+       "label": "neutral"
+      },
+      {
+       "text": "We also ordered bombay patty sandwich, peshawari chole and tawa paratha.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "brownie",
+     "mentions": 15,
+     "positive": 9,
+     "neutral": 2,
+     "negative": 4,
+     "positive_rate": 0.6,
+     "comments": [
+      {
+       "text": "Brownie was good and the rajma chawal was delicious.",
+       "label": "positive"
+      },
+      {
+       "text": "Till now, I have tried the brownie, moong dal ka halwa, and choco chips ice-cream.",
+       "label": "positive"
+      },
+      {
+       "text": "- Desserts [Pack of 4] - Moong Daal ka Halwa,Gulab Jamun,Rich Chocolate Brownie,Choco Lava Cake (amazing combination) foodie.prorido.com",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered dal makhani, tawa paratha, paneer wrap and chocolate brownie.",
+       "label": "positive"
+      },
+      {
+       "text": "Dal makhani was nice could be more thick, paneer wrap was very nice , chocolate brownie was good.",
+       "label": "positive"
+      },
+      {
+       "text": "Overall the food was fresh when delivered and brownie was hot too.",
+       "label": "positive"
+      },
+      {
+       "text": "They sent me a huge Chicken overload meal, which had Paratha, rice, Chocolate Brownie, Dal Makhani and Salad.",
+       "label": "positive"
+      },
+      {
+       "text": "Chocolate brownie is awesome .",
+       "label": "positive"
+      },
+      {
+       "text": "Chicken sandwich and wrap were really good and the brownie was good too.",
+       "label": "positive"
+      },
+      {
+       "text": "Honestly, the only good part was the brownie.",
+       "label": "negative"
+      },
+      {
+       "text": "Instead of Chocolate Brownie, gulab jamun we're given.",
+       "label": "negative"
+      },
+      {
+       "text": "Chocolate brownie that was delivered was very old stock, it was rock hard.",
+       "label": "negative"
+      },
+      {
+       "text": "It's One of the worst places to order from ...brownie was hard as stone .",
+       "label": "negative"
+      },
+      {
+       "text": "Sweets: I have tried the Brownie from here.",
+       "label": "neutral"
+      },
+      {
+       "text": "the paratha was average the brownie tasted good",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "biryani",
+     "mentions": 25,
+     "positive": 14,
+     "neutral": 6,
+     "negative": 5,
+     "positive_rate": 0.56,
+     "comments": [
+      {
+       "text": "Awesome Testy Delecious Biryani Thank you box8",
+       "label": "positive"
+      },
+      {
+       "text": "Last night I ordered some shahi paneer biryani which was excellent, amritsari chole n paneer makhni.",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani was excellent.",
+       "label": "positive"
+      },
+      {
+       "text": "Shahi Paneer Biryani delivered with complementary rayta was also good.",
+       "label": "positive"
+      },
+      {
+       "text": "Biriyani dum murgha was awesome #regained #love.",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani: masala flavor was dominating and again a drawback, not an authentic biryani which we love to have.",
+       "label": "positive"
+      },
+      {
+       "text": "I really love the Biryani here, the taste is so authentic and the chicken pieces are so soft and juicy ðŸÃ' ̃ÃƒÃ''‹",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani was gud",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered fiery paneer sandwich , everything veg box and shahi paneer biryani with gulab jamun and lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Shahi paneer biryani was tasty and fresh.",
+       "label": "positive"
+      },
+      {
+       "text": "I Had ordered fusion box & biryani, loved it!!",
+       "label": "positive"
+      },
+      {
+       "text": "and i loved both,especially the softy Paneer pieces in Biryani .",
+       "label": "positive"
+      },
+      {
+       "text": "Hi i ordered for non veg biriyani combo biriyani was sweet and evrything bt biriyani was little spicy and more masala was added .",
+       "label": "positive"
+      },
+      {
+       "text": "The biryani was flavourful and awesome!",
+       "label": "positive"
+      },
+      {
+       "text": "Biryani sucks big time",
+       "label": "negative"
+      },
+      {
+       "text": "not as good as the hype given for it and the rate was too expensive for that kind of taste And the quantity of the briyani was less",
+       "label": "negative"
+      },
+      {
+       "text": "their raita was very tasty On the whole it was just ok we would say and never going to take risk in ordering again by seeing the reviews Thank you The above was my previous review Yesterday the box 8 has given us a 5 person meal for free Really everything what he gave was nice The meal consisted of 2 desimeal , briyani, chicken tandoori sandwich, and chicken wrap .",
+       "label": "negative"
+      },
+      {
+       "text": "very oily paratha and biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "Biryani has no salt.",
+       "label": "negative"
+      },
+      {
+       "text": "We ordered Paneer overload Sandwich , Fiery Paneer Sandwich & Shahi Paneer Biryani.",
+       "label": "neutral"
+      },
+      {
+       "text": "I ordered from box8 for the first time and i really liked the way of packaging and the food was hot when delivered and the taste is really amazing and felt no added artificial flavors in the biryani and the salad was fresh and the quantity of the chicken in the salad was satisfactory..",
+       "label": "neutral"
+      },
+      {
+       "text": "just saying, if you're charging 200 bucks for a biryani, make it for atleast 2 or mention that you have a 1 person only 200 buck biryani!!!",
+       "label": "neutral"
+      },
+      {
+       "text": "The paratha was good soft and fresh Both the briyani was ok not bad",
+       "label": "neutral"
+      },
+      {
+       "text": "Biryani is good ( Note: they don't serve Biryani gravy) with the proper blending of masala, chicken pieces, and rice.",
+       "label": "neutral"
+      },
+      {
+       "text": "The biriyani, subz hand curry were good.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "lemonade",
+     "mentions": 9,
+     "positive": 5,
+     "neutral": 1,
+     "negative": 3,
+     "positive_rate": 0.556,
+     "comments": [
+      {
+       "text": "Lemonade was also awesome",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered fiery paneer sandwich , everything veg box and shahi paneer biryani with gulab jamun and lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Gulab jamun and lemonade no doubt in both of them, just go for them.",
+       "label": "positive"
+      },
+      {
+       "text": "To top it all the raitha and lemonade made my night :).",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered my Saturday Lunch and it was really worth along with awesome Lemonade to digest everything :)",
+       "label": "positive"
+      },
+      {
+       "text": "-Masala lemonade: Tasted tangy and not fresh.",
+       "label": "negative"
+      },
+      {
+       "text": "lemonade was not upto mark",
+       "label": "negative"
+      },
+      {
+       "text": "Next time I'm gonna place an order only for sake of this lemonade!!!",
+       "label": "negative"
+      },
+      {
+       "text": "Rajma could have been better, Lemonade is not good you cab replace it with Chaas.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "butter chicken",
+     "mentions": 6,
+     "positive": 3,
+     "neutral": 1,
+     "negative": 2,
+     "positive_rate": 0.5,
+     "comments": [
+      {
+       "text": "I liked the butter chicken it tasted good",
+       "label": "positive"
+      },
+      {
+       "text": "butter chicken was awesome",
+       "label": "positive"
+      },
+      {
+       "text": "I love their butter chicken meal and salad and anytime i dont feel like cooking.",
+       "label": "positive"
+      },
+      {
+       "text": "kebab was also kept in the same box over butter chicken which was mixed with butter chicken and it didn't taste any good.",
+       "label": "negative"
+      },
+      {
+       "text": "- Chicken Overload meal - no one says no to Chicken Highlights: - Chicken tasted soo good, both in Butter Chicken and Chicken Overload meal.",
+       "label": "negative"
+      },
+      {
+       "text": "So, we ordered non vegetarian meals this time, of which the highlights were the below: - Butter Chicken Meal - mandatory when we think of Punjabi food.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "tikki",
+     "mentions": 6,
+     "positive": 3,
+     "neutral": 2,
+     "negative": 1,
+     "positive_rate": 0.5,
+     "comments": [
+      {
+       "text": "Ordered chicken tikka biryani, mayo tikki wrap & grilled murgh seekh kebab.",
+       "label": "positive"
+      },
+      {
+       "text": "Mayo tikki roll was to die for ....",
+       "label": "positive"
+      },
+      {
+       "text": "Just ordered Chole tikki meal from Box8 the paackaging and presentation was so damn good.",
+       "label": "positive"
+      },
+      {
+       "text": "Ordered moong dal halwa, Mayo tikki roll and paneer Tikka sandwich.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered chole tikki meal.",
+       "label": "neutral"
+      },
+      {
+       "text": "The chole in Chole Tikki Meal were uncooked.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "chole",
+     "mentions": 19,
+     "positive": 9,
+     "neutral": 6,
+     "negative": 4,
+     "positive_rate": 0.474,
+     "comments": [
+      {
+       "text": "Last night I ordered some shahi paneer biryani which was excellent, amritsari chole n paneer makhni.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered shahi paneer, amritsari chole and paneer biryani.",
+       "label": "positive"
+      },
+      {
+       "text": "We tried the Amritsari Chole Chawal Box, Dal Makhni Rice Box, Dilli Wale Rajma Chawal Box.",
+       "label": "positive"
+      },
+      {
+       "text": "The second gravy of dal makhni or chole were also delicious.",
+       "label": "positive"
+      },
+      {
+       "text": "Seeing all the good review We ordered for tawa paratha Amritsar I chole , veg panner Briyani and Kirghiz dum briayani.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered for Paneer salad, Chicken Dum Biryani, Amritsari Chole Chawal & Masala lemonade.",
+       "label": "positive"
+      },
+      {
+       "text": "Just ordered Chole tikki meal from Box8 the paackaging and presentation was so damn good.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered a Dal makhani meal with chole, spicy paneer meal with rajma and paneer biryani for the first time after my colleagues in office had praised the food.",
+       "label": "positive"
+      },
+      {
+       "text": "The chole was great too, the paneer was soft and tasty.",
+       "label": "positive"
+      },
+      {
+       "text": "The chole and dal were totally burnt and had a wierd smell.",
+       "label": "negative"
+      },
+      {
+       "text": "They serve the worst dal and chole.",
+       "label": "negative"
+      },
+      {
+       "text": "Dal chole rajma is always slimy and stale tasting.",
+       "label": "negative"
+      },
+      {
+       "text": "peshwari chole was disappointing.",
+       "label": "negative"
+      },
+      {
+       "text": "foul smell from amritsari chole",
+       "label": "neutral"
+      },
+      {
+       "text": "the amritsari chole needs to improve",
+       "label": "neutral"
+      },
+      {
+       "text": "Ordered chole tikki meal.",
+       "label": "neutral"
+      },
+      {
+       "text": "The chole in Chole Tikki Meal were uncooked.",
+       "label": "neutral"
+      },
+      {
+       "text": "the chole was toooooooo salty .",
+       "label": "neutral"
+      },
+      {
+       "text": "We also ordered bombay patty sandwich, peshawari chole and tawa paratha.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "paratha",
+     "mentions": 24,
+     "positive": 11,
+     "neutral": 7,
+     "negative": 6,
+     "positive_rate": 0.458,
+     "comments": [
+      {
+       "text": "Paratha was hot and moong halwa had a good flavor.",
+       "label": "positive"
+      },
+      {
+       "text": "I loved the paratha and the mint chutney.",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered dal makhani, tawa paratha, paneer wrap and chocolate brownie.",
+       "label": "positive"
+      },
+      {
+       "text": "We ordered a Bhuna Kebab Meal with Paratha and Rice, Bombay Special Sandwich and Tandoori Chicken Sandwich last week and just loved the food.",
+       "label": "positive"
+      },
+      {
+       "text": "Seeing all the good review We ordered for tawa paratha Amritsar I chole , veg panner Briyani and Kirghiz dum briayani.",
+       "label": "positive"
+      },
+      {
+       "text": "They sent me a huge Chicken overload meal, which had Paratha, rice, Chocolate Brownie, Dal Makhani and Salad.",
+       "label": "positive"
+      },
+      {
+       "text": "Tawa Paratha Kadhai Paneer Curry Gulab Jamun Ice Cream Tawa Paratha was light and healthy with authentic taste of Paratha.",
+       "label": "positive"
+      },
+      {
+       "text": "The curry was going good and taste with the Paratha.",
+       "label": "positive"
+      },
+      {
+       "text": "Tawa Paratha was neatly prepared to give you nice taste along with balanced oil..",
+       "label": "positive"
+      },
+      {
+       "text": "the paratha mostly had a less.masala.which was loved the 1st time i ordered.",
+       "label": "positive"
+      },
+      {
+       "text": "The paratha was a little hard by the time I unwrapped the foil.",
+       "label": "positive"
+      },
+      {
+       "text": "Even the paratha tasted bad.",
+       "label": "negative"
+      },
+      {
+       "text": "Received a good gesture for the bad paratha.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered Chiken meals, few paratha wrappers and rice.",
+       "label": "negative"
+      },
+      {
+       "text": "I found the paratha to be very salty.",
+       "label": "negative"
+      },
+      {
+       "text": "very oily paratha and biryani.",
+       "label": "negative"
+      },
+      {
+       "text": "paratha , daal makhni, paneer butter masala.....",
+       "label": "negative"
+      },
+      {
+       "text": "the quantity was less and they can improve on paratha and the rajma was not upto the hype of what I have heard.",
+       "label": "neutral"
+      },
+      {
+       "text": "Rice was good, paratha was decent little tough.",
+       "label": "neutral"
+      },
+      {
+       "text": "the paratha was average the brownie tasted good",
+       "label": "neutral"
+      },
+      {
+       "text": "The paratha was good soft and fresh Both the briyani was ok not bad",
+       "label": "neutral"
+      },
+      {
+       "text": "Quality of paratha can be improved.delivery is on time.",
+       "label": "neutral"
+      },
+      {
+       "text": "I'd like to paratha to be a little softer.",
+       "label": "neutral"
+      },
+      {
+       "text": "We also ordered bombay patty sandwich, peshawari chole and tawa paratha.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "rolls",
+     "mentions": 5,
+     "positive": 2,
+     "neutral": 1,
+     "negative": 2,
+     "positive_rate": 0.4,
+     "comments": [
+      {
+       "text": "The Xxl roll was really awesome",
+       "label": "positive"
+      },
+      {
+       "text": "Mayo tikki roll was to die for ....",
+       "label": "positive"
+      },
+      {
+       "text": "The roll wasn't even a roll.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered moong dal halwa, Mayo tikki roll and paneer Tikka sandwich.",
+       "label": "negative"
+      },
+      {
+       "text": "Have tasted the meal sandwich and rolls.",
+       "label": "neutral"
+      }
+     ]
+    },
+    {
+     "dish": "rajma",
+     "mentions": 7,
+     "positive": 2,
+     "neutral": 2,
+     "negative": 3,
+     "positive_rate": 0.286,
+     "comments": [
+      {
+       "text": "I found chicken in Rajma.",
+       "label": "positive"
+      },
+      {
+       "text": "I ordered a Dal makhani meal with chole, spicy paneer meal with rajma and paneer biryani for the first time after my colleagues in office had praised the food.",
+       "label": "positive"
+      },
+      {
+       "text": "Paneer and rajma, both were sour.",
+       "label": "negative"
+      },
+      {
+       "text": "Ordered rajma, chhole, dal makhni-",
+       "label": "negative"
+      },
+      {
+       "text": "Dal chole rajma is always slimy and stale tasting.",
+       "label": "negative"
+      },
+      {
+       "text": "the quantity was less and they can improve on paratha and the rajma was not upto the hype of what I have heard.",
+       "label": "neutral"
+      },
+      {
+       "text": "Rajma could have been better, Lemonade is not good you cab replace it with Chaas.",
+       "label": "neutral"
+      }
+     ]
+    }
+   ],
+   "dropped": {
+    "counts": {
+     "duplicate": 753,
+     "too_short": 98,
+     "no_dish": 202
+    },
+    "samples": {
+     "duplicate": [
+      "After having seen several promotions on box 8, I thought of giving it a try today for evening snacks due to some attractive offers. This is a delivery only franchise with currently 31 outlets in Bangalore and some more in other Indian cities known for serving boxed meals. Delivery: -All the items were cleanly packed without spillage. Loved the colorful box that the sandwich wrap was packed in. Foo",
+      "Thanks for following up with my wrong order and finding out what the problem was. A plus for customer service. Your food is great as well. Will definitely go back",
+      "It's not as expected. Taste was too bad",
+      "Amazing food and quality. Delivery was perfect. Total value for money. Best food order ever. Ordered paneer makhni meal. Lemonade was also awesome",
+      "food quality and quantity is too low..",
+      "After having seen several promotions on box 8, I thought of giving it a try today for evening snacks due to some attractive offers. This is a delivery only franchise with currently 31 outlets in Bangalore and some more in other Indian cities known for serving boxed meals. Delivery: -All the items were cleanly packed without spillage. Loved the colorful box that the sandwich wrap was packed in. Foo",
+      "Thanks for following up with my wrong order and finding out what the problem was. A plus for customer service. Your food is great as well. Will definitely go back",
+      "It's not as expected. Taste was too bad",
+      "Amazing food and quality. Delivery was perfect. Total value for money. Best food order ever. Ordered paneer makhni meal. Lemonade was also awesome",
+      "food quality and quantity is too low..",
+      "After having seen several promotions on box 8, I thought of giving it a try today for evening snacks due to some attractive offers. This is a delivery only franchise with currently 31 outlets in Bangalore and some more in other Indian cities known for serving boxed meals. Delivery: -All the items were cleanly packed without spillage. Loved the colorful box that the sandwich wrap was packed in. Foo",
+      "Thanks for following up with my wrong order and finding out what the problem was. A plus for customer service. Your food is great as well. Will definitely go back",
+      "It's not as expected. Taste was too bad",
+      "Amazing food and quality. Delivery was perfect. Total value for money. Best food order ever. Ordered paneer makhni meal. Lemonade was also awesome",
+      "food quality and quantity is too low..",
+      "After having seen several promotions on box 8, I thought of giving it a try today for evening snacks due to some attractive offers. This is a delivery only franchise with currently 31 outlets in Bangalore and some more in other Indian cities known for serving boxed meals. Delivery: -All the items were cleanly packed without spillage. Loved the colorful box that the sandwich wrap was packed in. Foo",
+      "Not good taste",
+      "ok ok not very tasty",
+      "they not delevired my order",
+      "Less Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Less Quintity Less Quintity Less Quintity LessLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Quintity Less Quintity Less QuintityLess QuintityLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess QuintityLess Quintity L",
+      "Good",
+      "Not good taste",
+      "ok ok not very tasty",
+      "they not delevired my order",
+      "Less Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Less Quintity Less Quintity Less Quintity LessLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Quintity Less Quintity Less QuintityLess QuintityLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess QuintityLess Quintity L",
+      "Good",
+      "Not good taste",
+      "ok ok not very tasty",
+      "they not delevired my order",
+      "Less Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Less Quintity Less Quintity Less Quintity LessLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Quintity Less Quintity Less QuintityLess QuintityLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess QuintityLess Quintity L",
+      "Good",
+      "Not good taste",
+      "ok ok not very tasty",
+      "they not delevired my order",
+      "Less Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Less Quintity Less Quintity Less Quintity LessLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Quintity Less Quintity Less QuintityLess QuintityLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess QuintityLess Quintity L",
+      "Good",
+      "Not good taste",
+      "ok ok not very tasty",
+      "they not delevired my order",
+      "Less Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Less Quintity Less Quintity Less Quintity LessLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Quintity Less Quintity Less QuintityLess QuintityLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess QuintityLess Quintity L"
+     ],
+     "too_short": [
+      "Order not delivered",
+      "good was thankful",
+      "Not good taste",
+      "Good",
+      ".",
+      "Gud",
+      "good food",
+      "awsomeðŸÃ' ̃ÃƒÃ''",
+      "its a bit costly",
+      "no good",
+      "not bad",
+      "thank you",
+      "Food is good",
+      "great",
+      "delicious",
+      "denied",
+      "ðŸÃ'' ̄",
+      "Gravy sucked",
+      "good",
+      "i simply loved it",
+      "best",
+      "Awesome taste.",
+      "good taste",
+      "tasty",
+      "Nice food.",
+      "osm tasteee",
+      "nice",
+      "Very nice food",
+      "it was not tasteful",
+      "Great food !!!",
+      "Very Good",
+      "food is good",
+      "bad service",
+      "accurate",
+      "awesome",
+      "Excellent",
+      "Best!!",
+      "food was yummy",
+      "nice food and fresh",
+      "its gud"
+     ],
+     "no_dish": [
+      "Nice food reasonable price good taste and quality and the packing is just perfect love to order in box8.............. Never disappointed in here",
+      "I have not been to this restaurant, but very often I order food online, I like the presentation of food inside the lunch box. Tasty, quantity is perfect for one person. They deliver the food very quick. I always get my food delivered within 20 mins, fresh and hot.",
+      "Very tasty food delivered much before the expected time, worth ordering food with them. Dal maknni was too tasty, thank you ðŸÃ' ̃ÃƒÃ''ÃÂ'Ã'Ã'Š â ̃Ã'o I recommend box8",
+      "My expectations was totally destroyed.. my fiance was hungry and I ordered combo food from BOX8, and the food she received was spoilt and tasteless and not even worth of 55 Rupees. I recommend guys not to order food from BOX8 to your wife or fiance, if u do so u will have a Cold War for not buying good food. when women are hungry they turn angry, and when food turns worst then u r done and dusted.",
+      "Pathetic service ! They do not respond at all, after taking the order! I had to get the order cancelled after waiting for two hours. Worst experience ever ! I used to order from it always, but now I would not recommend anyone to order from it.",
+      "order was not delivered",
+      "Thanks for following up with my wrong order and finding out what the problem was. A plus for customer service. Your food is great as well. Will definitely go back",
+      "It's not as expected. Taste was too bad",
+      "food quality and quantity is too low..",
+      "ok ok not very tasty",
+      "they not delevired my order",
+      "Less Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Less Quintity Less Quintity Less Quintity LessLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess Quintity Quintity Less Quintity Less QuintityLess QuintityLess Quintity Less Quintity Less Quintity Less Quintity Less Quintity Less QuintityLess QuintityLess Quintity L",
+      "Chapati was a little so salty",
+      "great food.great packing...",
+      "The food was delicious I loved it. \"Desi food\" what I am looking for and happy to order again from here :) thanks Delivered on time happy to have such vender full services.",
+      "Food is good, but scope for improvement. packing is good",
+      "its delivered on time.. about food is not good not bad..",
+      "awaum taste but quantity is little",
+      "I didn't got the food only",
+      "I got my food delivered.. I ordered a farm fresh wrap and a bombay special sub.. The sub was really tasty and full of flavours it was filling and pocket friendly as well. The farm fresh wrap was really dry and was not freshly made I assume.. So I really recommend getting the bombay special sub.. This restaurant is pocket friendly and have great flavours.",
+      "Food was good but the delivery man he donâ€Ã'TMt know roads",
+      "good food nice parotha",
+      "Food was not hot. Not fresh. Not tasty.",
+      "The roties were hot but not very fresh",
+      "Amazingly fast and the food was piping hot.",
+      "Great...I taught chicken pieces will be more",
+      "Box8 was good in Bangalore but now i am in Ahmedabad and not any good restaurants for good food home delivery specially in my areaðŸÃ' ̃ÃƒÃ''\"ðŸÃ' ̃ÃƒÃ''\".what i do?",
+      "box 8 is a blessing for mid night binge",
+      "The food was so good. Finger-licking good. And it had such a simple packaging.",
+      "very bad taste .....",
+      "Restaurent cancelled the order at their own refusing to deliver",
+      "Food was awesome as always, but the delivery took only 10mins which is mind blowing",
+      "more mushroom was thr. which was not writen in the detail.. and taste was not so good..",
+      "price amount which i saw was 625 tax but it was mentioned after 5minutes in the app was 826 .. really dont know whats wrong with this app",
+      "food service is good....... paneer masala taste is good and it's very hot.... It's very good And fast delivery too I don't know how to express these food it's really tasty and good meal to eat at night",
+      "very bad service, hv mentioned proper address still ur delivry boy call n askng to cme and take parsl frm smewere else vry disappointed by taste was good so tysm fr dat",
+      "Taste could be more spicy",
+      "was good. but need to be bit spicy.",
+      "Partha was very salty and very thick,Browne was too much dense with flour.",
+      "food was good ðŸÃ' ̃ÃƒÃ''œ and also it delivered on time what we expect and also we ll order for next very soon so ll hope next delivery ll be gooooood"
+     ]
+    },
+    "sample_cap": 40
+   }
+  }
+ ]
+}

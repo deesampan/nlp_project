@@ -1,0 +1,17 @@
+held-out test set: 26923 reviews
+
+              precision    recall  f1-score   support
+
+    negative      0.842     0.851     0.847      5673
+     neutral      0.552     0.613     0.581      5007
+    positive      0.910     0.875     0.892     16243
+
+    accuracy                          0.821     26923
+   macro avg      0.768     0.780     0.773     26923
+weighted avg      0.829     0.821     0.825     26923
+
+confusion matrix (rows = true, cols = predicted)
+labels: ['negative', 'neutral', 'positive']
+    4828     712     133
+     658    3069    1280
+     246    1783   14214
