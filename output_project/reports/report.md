@@ -52,6 +52,9 @@ dishes are signature, which are hidden gems, which need fixing or cutting.
 
 **Zomato Bangalore Restaurants** (Kaggle), 51,717 rows × 17 columns, 548 MB.
 
+Full provenance — author, URL, version, licence, and the source and licence of every downloaded
+library and pre-trained model — is recorded in [sources.md](sources.md).
+
 | Property | Value |
 |---|---|
 | Unique restaurants (`name` + `address`) | 12,494 |
@@ -296,10 +299,15 @@ cd src
 ../.venv/Scripts/python build_gazetteer.py   # dish dictionary
 ../.venv/Scripts/python build_corpus.py      # full cleaning (~10 min)
 ../.venv/Scripts/python train_sentiment.py   # train and evaluate
+../.venv/Scripts/python make_subset.py       # pick which restaurants to show
 ../.venv/Scripts/python build_slice.py       # dashboard JSON
 
-cd ../output_project/web && python -m http.server 8000
+../.venv/Scripts/python app.py               # serve http://localhost:8000
 ```
+
+Serve with `app.py`, not `python -m http.server`. Flask sends `Cache-Control: no-store`, so a
+refresh after a rebuild shows the new numbers; a plain static server lets the browser reuse a
+cached `dashboard.json` and silently display the previous run's results.
 
 All generated artefacts are written under `output_project/`; nothing is written beside the
 source code, and everything there is regenerable from the raw dataset.

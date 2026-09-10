@@ -116,7 +116,11 @@ def fit_binary_with_band(Xtr, ytr, Xva, yva, Xte, yte):
     # tune the band on validation, never on test
     proba_va = clf.predict_proba(vec.transform(Xva))
     sweep = []
-    for w in [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40]:
+    # Swept to 0.50 so the maximum is bracketed rather than sitting on the edge
+    # of the range. 0.50 is the degenerate endpoint: the band spans [0, 1], every
+    # review is called neutral, and macro-F1 must collapse. Any interior best is
+    # therefore a real optimum and not an artefact of where we stopped looking.
+    for w in [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]:
         p = band_predict(proba_va, clf.classes_, 0.5 - w, 0.5 + w)
         sweep.append((w, accuracy_score(yva, p),
                       f1_score(yva, p, average="macro", zero_division=0)))

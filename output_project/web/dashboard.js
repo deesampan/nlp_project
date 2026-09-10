@@ -34,15 +34,10 @@
   function init() {
     renderCards();
     renderFunnel();
-    $("genStamp").textContent = "Generated " + DATA.generated_utc + " UTC from " + DATA.source;
-    $("methodStamp").textContent = "Sentiment: " + DATA.sentiment_method +
-      " · minimum " + DATA.min_mentions + " mentions to rank";
     $("backBtn").addEventListener("click", showLanding);
     $("modalClose").addEventListener("click", closeModal);
     $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
-
-    $("upBtn").addEventListener("click", doUpload);
 
     Array.prototype.forEach.call(document.querySelectorAll("th.sortable"), function (th) {
       th.addEventListener("click", function () {
@@ -53,65 +48,13 @@
     });
   }
 
-  function status(msg, kind) {
-    var el = $("upStatus");
-    el.className = "up-status" + (kind ? " " + kind : "");
-    el.innerHTML = msg;
-    el.classList.remove("hidden");
-  }
-
-  function doUpload() {
-    var name = $("upName").value.trim();
-    var file = $("upFile").files[0];
-    if (!name) { status("Enter a restaurant name first.", "err"); return; }
-    if (!file) { status("Choose a CSV file first.", "err"); return; }
-
-    var fd = new FormData();
-    fd.append("name", name);
-    fd.append("file", file);
-
-    $("upBtn").disabled = true;
-    status("Reading the file and running the model on every review …");
-
-    fetch("api/analyze", { method: "POST", body: fd })
-      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-      .then(function (res) {
-        $("upBtn").disabled = false;
-        if (!res.ok) { status(esc(res.j.error || "Something went wrong."), "err"); return; }
-
-        var rest = res.j.restaurant;
-        DATA.restaurants = DATA.restaurants.filter(function (x) { return x.id !== rest.id; });
-        DATA.restaurants.unshift(rest);
-        renderCards();
-
-        if (!rest.dishes_ranked) {
-          status("Analysed " + res.j.rows_read + " reviews in " + res.j.seconds +
-            "s, but no dish reached " + DATA.min_mentions +
-            " mentions, so nothing could be ranked. Try a bigger file.", "err");
-        } else {
-          status("Analysed <b>" + res.j.rows_read + "</b> reviews in " + res.j.seconds +
-            "s and found <b>" + rest.dishes_ranked + "</b> dishes. " +
-            "Opening " + esc(rest.name) + " …", "ok");
-          setTimeout(function () { showDetail(rest.id); }, 700);
-        }
-      })
-      .catch(function () {
-        $("upBtn").disabled = false;
-        status("Could not reach the analysis server. The site must be started with " +
-          "<code>python app.py</code> for uploads to work.", "err");
-      });
-  }
-
   function renderCards() {
     $("cards").innerHTML = DATA.restaurants.map(function (r) {
       var s = r.sentiment, t = r.review_count;
-      var badge = r.uploaded
-        ? '<div class="card-tag">yours</div>'
-        : '<div class="card-rate">' + esc(r.rate || "n/a") + "</div>";
-      return '<div class="card' + (r.uploaded ? " mine" : "") + '" data-id="' + r.id + '">' +
+      return '<div class="card" data-id="' + r.id + '">' +
         '<div class="card-top"><div><h3>' + esc(r.name) + '</h3>' +
-        '<div class="card-cui">' + esc(r.cuisines || "uploaded by you") + '</div></div>' +
-        badge + '</div>' +
+        '<div class="card-cui">' + esc(r.cuisines) + '</div></div>' +
+        '<div class="card-rate">' + esc(r.rate || "n/a") + '</div></div>' +
         '<div class="split-mini">' +
           bar(s.positive, t, C.pos) + bar(s.neutral, t, C.neu) + bar(s.negative, t, C.neg) +
         '</div>' +
@@ -158,7 +101,7 @@
   function showLanding() {
     $("detail").classList.add("hidden");
     $("landing").classList.remove("hidden");
-    $("backBtn").classList.add("hidden");
+    $("topbar").classList.add("hidden");
     window.scrollTo(0, 0);
   }
 
@@ -169,58 +112,27 @@
 
     $("landing").classList.add("hidden");
     $("detail").classList.remove("hidden");
-    $("backBtn").classList.remove("hidden");
+    $("topbar").classList.remove("hidden");
 
     $("rName").textContent = r.name;
-    $("rMeta").textContent = r.uploaded
-      ? "Uploaded by you  ·  analysed live by the model"
-      : [r.cuisines, r.rest_type, r.location].filter(Boolean).join("  ·  ");
+    $("rMeta").textContent = [r.cuisines, r.rest_type, r.location].filter(Boolean).join("  ·  ");
     $("rAddr").textContent = r.address || "";
-    if (r.uploaded) {
-      $("rRate").textContent = Math.round(r.positive_rate * 100) + "%";
-      $("rVotes").textContent = "of reviews were positive";
-    } else {
-      $("rRate").textContent = r.rate || "n/a";
-      $("rVotes").textContent = r.votes.toLocaleString() + " votes on the platform";
-    }
-
-    var dropTotal = 0;
-    var dc = (r.dropped && r.dropped.counts) || {};
-    Object.keys(dc).forEach(function (k) { dropTotal += dc[k]; });
+    $("rRate").textContent = r.rate || "n/a";
+    $("rVotes").textContent = r.votes.toLocaleString() + " votes on the platform";
 
     $("rKpis").innerHTML =
       kpi(t.toLocaleString(), "Reviews analysed") +
       kpi(pct(s.positive, t) + "%", "Positive") +
-      kpi(r.dishes_ranked, "Dishes ranked") +
-      (r.uploaded
-        ? kpi(dropTotal.toLocaleString(), "Comments not used")
-        : kpi(r.approx_cost || "n/a", "Cost for two"));
+      kpi(r.dishes_ranked, "Dishes ranked");
 
     $("rSplit").innerHTML =
       seg(s.positive, t, "seg-pos", "Positive") +
       seg(s.neutral, t, "seg-neu", "Neutral") +
       seg(s.negative, t, "seg-neg", "Negative");
 
-    var liked = r.dish_liked || [];
-    $("zomatoPanel").classList.toggle("hidden", liked.length === 0);
-    $("rDishLiked").innerHTML = liked.map(function (d) {
-      return '<span class="chip">' + esc(d) + "</span>";
-    }).join("");
-
-    var minM = r.min_mentions || DATA.min_mentions || 1;
-    var hint = "Share of comments about each dish that were positive.";
-    if (minM > 1) {
-      hint += " Only dishes mentioned at least " + minM + " times are shown.";
-    } else {
-      hint += " Every dish mentioned is shown, so check the comment count — " +
-        "a dish with one or two comments is a hint, not a verdict.";
-    }
-    if (r.discovered_dishes && r.discovered_dishes.length) {
-      hint += " Dish names in this file were learned from the reviews themselves: " +
-        esc(r.discovered_dishes.slice(0, 8).join(", ")) +
-        (r.discovered_dishes.length > 8 ? " and more." : ".");
-    }
-    $("dishHint").innerHTML = hint;
+    $("dishHint").textContent =
+      "Share of comments about each dish that were positive. Only dishes mentioned at least " +
+      (DATA.min_mentions || 5) + " times are shown.";
 
     renderDishTable();
     renderDishChart();

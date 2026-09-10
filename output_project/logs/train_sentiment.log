@@ -1,0 +1,47 @@
+corpus: 134612 reviews
+train 91535 / val 16154 / test 26923
+
+  majority class (positive)              acc=0.6033  macroF1=0.2509
+  VADER (lexicon, untrained)             acc=0.7223  macroF1=0.5368
+  TF-IDF + LogReg (negation-preserving)  acc=0.8213  macroF1=0.7731  features=169628
+  TF-IDF + LogReg (default stopwords)    acc=0.8012  macroF1=0.7483  features=163971
+
+=== NEGATION ABLATION ===
+  keeping negation words is worth +2.01 accuracy points, +2.48 macro-F1 points
+
+=== BINARY + UNCERTAINTY BAND ===
+  binary training rows: 74511 (neutral dropped from training)
+  binary task (positive vs negative only)   acc=0.9648  macroF1=0.9546
+  band sweep (validation):
+      +/-0.05  acc=0.7913  macroF1=0.5982
+      +/-0.10  acc=0.7949  macroF1=0.6255
+      +/-0.15  acc=0.7992  macroF1=0.6527
+      +/-0.20  acc=0.8018  macroF1=0.6756
+      +/-0.25  acc=0.8029  macroF1=0.6944
+      +/-0.30  acc=0.8009  macroF1=0.7105
+      +/-0.35  acc=0.7929  macroF1=0.7195
+      +/-0.40  acc=0.7797  macroF1=0.7235   <- chosen
+      +/-0.45  acc=0.7337  macroF1=0.7014
+      +/-0.50  acc=0.1860  macroF1=0.1045
+  binary + uncertainty band (3-class)    acc=0.7736  macroF1=0.7163
+
+  shipping: tfidf_lr_negation_aware (macro-F1 0.7731 vs 0.7163)
+
+=== CLASSIFICATION REPORT (shipped model) ===
+              precision    recall  f1-score   support
+
+    negative      0.842     0.851     0.847      5673
+     neutral      0.552     0.613     0.581      5007
+    positive      0.910     0.875     0.892     16243
+
+    accuracy                          0.821     26923
+   macro avg      0.768     0.780     0.773     26923
+weighted avg      0.829     0.821     0.825     26923
+
+=== WHAT THE MODEL LEARNED ===
+  negative  <-  worst +12.86, pathetic +9.75, horrible +8.37, bad +7.82, not +7.74, terrible +6.61, not good +6.45, waste +6.22
+  neutral  <-  good +5.77, decent +4.79, average +4.62, ok +4.01, okayish +3.96, however +3.95, okay +3.91, but +3.67
+  positive  <-  amazing +10.03, best +9.74, awesome +9.71, delicious +8.91, loved +8.27, excellent +6.96, not disappointed +6.64, great +6.27
+
+saved model  -> D:\nlp_project\output_project\models\sentiment_tfidf_lr.pkl
+saved figure -> D:\nlp_project\output_project\figures\confusion_matrix.png
