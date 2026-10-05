@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResRec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body data-page="restaurant">
+
+<main class="wrap">
+  <a class="back" href="index.html">← All restaurants</a>
+
+  <section class="hero-panel" id="head"></section>
+
+  <div class="stats" id="stats"></div>
+
+  <section>
+    <div class="menu-head">
+      <div>
+        <h2>Menu</h2>
+        <p>Dishes ranked from most liked to least liked. Click a dish to read what people said.</p>
+      </div>
+      <div class="legend"><span><i class="pos"></i>Liked it</span><span><i class="neu"></i>No clear opinion</span><span><i class="neg"></i>Didn't like it</span></div>
+    </div>
+    <ol class="menu-list" id="menu"></ol>
+
+    <div id="rareBlock" hidden>
+      <p class="rare-note" id="rareNote"></p>
+      <ol class="menu-list" id="rare"></ol>
+    </div>
+  </section>
+</main>
+
+<dialog id="dish" aria-labelledby="dishName">
+  <div class="dlg-head">
+    <div id="dishPlate"></div>
+    <div class="dlg-info">
+      <h2 id="dishName"></h2>
+      <p id="dishLiked"></p>
+      <div id="dishBar"></div>
+    </div>
+    <button class="close" id="dishClose" aria-label="Close">✕</button>
+  </div>
+  <div class="tabs" id="dishTabs"></div>
+  <div class="reviews" id="dishReviews"></div>
+</dialog>
+
+<footer>
+  <div class="wrap">Data: <a href="https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants" target="_blank" rel="noopener">Zomato Bangalore Restaurants</a> (Kaggle) · NLP course project by Deesampan Vongsurit &amp; Wattanan Jiratriluk</div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

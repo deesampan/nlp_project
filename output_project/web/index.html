@@ -3,256 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ResRec — Restaurant Review Recommender</title>
-  <meta name="description" content="ResRec uses NLP to turn restaurant reviews into dish-level insights and menu recommendations.">
+  <title>ResRec — Which dishes are worth ordering?</title>
+  <meta name="description" content="ResRec reads restaurant reviews and shows how customers feel about each dish.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
 </head>
-<body>
+<body data-page="home">
 
-<header class="nav" id="nav">
-  <div class="wrap">
-    <a href="#home" class="logo"><span class="logo-mark">🍽️</span><span class="logo-text">Res<span>Rec</span></span></a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#restaurants">Restaurants</a>
-      <a href="#dashboard">Dashboard</a>
-    </nav>
-    <div class="nav-actions">
-      <a class="icon-btn ghost" href="#restaurants" aria-label="Browse restaurants">🔎</a>
-      <a class="icon-btn" href="#dashboard" aria-label="Open dashboard">📊</a>
-      <button class="icon-btn ghost menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+<main class="wrap">
+  <section class="hero-panel">
+    <div class="hero-copy">
+      <div class="eyebrow">NLP for restaurant reviews</div>
+      <h1>Which dishes are worth ordering?</h1>
+      <p>We read <b id="total"></b> customer reviews from three Bangalore restaurants and counted how people feel about each dish. Pick a restaurant to see its menu.</p>
     </div>
-  </div>
-</header>
+    <div class="deco" aria-hidden="true"><img src="img/biryani.webp" alt=""></div>
+  </section>
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="home">
-  <div class="wrap">
-    <div class="hero-card">
-      <div class="hero-copy">
-        <div class="eyebrow">NLP for restaurant reviews</div>
-        <h1>Reviews that reveal your best dishes</h1>
-        <p>ResRec reads hundreds of unstructured reviews, finds every dish customers mention, and scores the opinion about each one, so menu decisions rest on data instead of intuition.</p>
-        <div class="search">
-          <input id="heroSearch" type="search" placeholder="Search a dish… e.g. biryani, kebab, brownie" autocomplete="off">
-          <button class="go" aria-label="Search">→</button>
-          <div class="search-results" id="heroResults"></div>
-        </div>
-        <div class="hero-cta">
-          <a class="btn btn-dark" href="#restaurants">Explore restaurants →</a>
-          <a class="btn btn-outline" href="#dashboard">Open dashboard</a>
-        </div>
-        <div class="power-card" id="powerCard"></div>
-      </div>
-      <div class="hero-art">
-        <div class="quarter"></div>
-        <div class="big-plate">
-          <div class="plate-food">
-            <span style="left:4%;top:2%">🍛</span>
-            <span style="left:48%;top:6%">🍢</span>
-            <span style="left:2%;top:46%">🥗</span>
-            <span style="left:46%;top:48%">🫓</span>
-          </div>
-        </div>
-        <div id="heroBubbles"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEATURES ROW ============ -->
-<div class="features">
-  <div class="wrap">
-    <div class="feature"><div class="ico">🏷️</div><div><h4>Dish Extraction</h4><p>Finds menu items in free text with a menu gazetteer and fuzzy keyword matching.</p></div></div>
-    <div class="feature"><div class="ico">⚖️</div><div><h4>Dish-level Sentiment</h4><p>Scores each dish separately, even when one review praises one dish and criticizes another.</p></div></div>
-    <div class="feature"><div class="ico">📈</div><div><h4>Actionable Dashboard</h4><p>Shows which dishes to promote as signatures and which ones need improvement.</p></div></div>
-  </div>
-</div>
-
-<!-- ============ SIGNATURE ============ -->
-<section id="signature">
-  <div class="wrap sig-grid">
-    <div class="sig-cards" id="sigCards"></div>
-    <div class="sig-copy reveal">
-      <div class="eyebrow">Found by the data</div>
-      <h2>Signature Dishes</h2>
-      <p>These dishes get consistently positive opinions in reviews: a high average sentiment score and very few negative mentions. They are the ones worth promoting on the menu and in marketing.</p>
-      <a class="btn btn-dark" href="#dashboard">See all recommendations →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ RESTAURANTS / MENU / REVIEWS ============ -->
-<section id="restaurants">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Explore</div>
-        <h2>Restaurants &amp; Menus</h2>
-        <p>Choose a restaurant to see how customers feel about each dish on its menu. Open a dish to read its reviews before and after tokenization.</p>
-      </div>
-    </div>
-    <div class="rest-tabs" id="restTabs"></div>
-    <div class="rest-info" id="restInfo"></div>
-    <div class="menu-bar">
-      <div class="chips" id="menuFilters"></div>
-      <div class="chips">
-        <select class="chip" id="menuSort" aria-label="Sort menu">
-          <option value="mentions">Sort: most mentioned</option>
-          <option value="love">Sort: most loved</option>
-          <option value="neg">Sort: most criticized</option>
-        </select>
-      </div>
-    </div>
-    <div class="menu-grid" id="menuGrid"></div>
-    <div class="pager" id="menuPager"></div>
-
-    <div class="reviews-block" id="reviews">
-      <div class="section-head" style="margin-bottom:22px">
-        <div>
-          <div class="eyebrow">Reviews</div>
-          <h2 id="reviewsTitle">Reviews: before &amp; after tokenization</h2>
-          <p>On the left is the raw text as it was scraped, with platform noise highlighted. On the right is the cleaned text with clauses coloured by sentiment, the tokens, and the tokens left after stop-word removal.</p>
-        </div>
-      </div>
-      <div class="reviews-tools">
-        <span id="dishFilterPill"></span>
-        <input id="reviewSearch" type="search" placeholder="Search in reviews…">
-        <select id="reviewSent" aria-label="Sentiment filter">
-          <option value="">All sentiments</option>
-          <option value="positive">Positive</option>
-          <option value="neutral">Neutral</option>
-          <option value="negative">Negative</option>
-        </select>
-        <select id="reviewDishOnly" aria-label="Dish filter">
-          <option value="">All reviews</option>
-          <option value="dish">Only reviews that name a dish</option>
-        </select>
-      </div>
-      <div id="reviewList"></div>
-      <div class="pager" id="reviewPager"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SPOTLIGHT (testimonial) ============ -->
-<section id="spotlight" style="padding-top:20px">
-  <div class="wrap">
-    <h2 style="text-align:center;margin-bottom:44px" id="spotTitle">Built on real customer reviews</h2>
-    <div class="spot">
-      <div class="spot-art reveal">
-        <div class="blob"></div>
-        <div class="plate" id="spotPlate">🍛</div>
-        <div class="float" style="left:0;top:20px" id="spotF1"></div>
-        <div class="float" style="right:10px;bottom:10px" id="spotF2"></div>
-      </div>
-      <div class="spot-quote reveal">
-        <span class="q">”</span>
-        <blockquote id="spotText"></blockquote>
-        <div class="spot-meta">
-          <div><b id="spotWho"></b><small class="muted" id="spotDish"></small></div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="stars" id="spotStars"></span>
-            <div class="pager" style="margin:0"><button id="spotPrev" aria-label="Previous">←</button><button class="primary" id="spotNext" aria-label="Next">→</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DASHBOARD ============ -->
-<section class="dash" id="dashboard">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Step 6: Recommendation dashboard</div>
-        <h2>Menu Insights Dashboard</h2>
-        <p>Combined results from every review: which dishes to promote, which need work, and what else customers complain about.</p>
-      </div>
-    </div>
-    <div class="dash-filter" id="dashFilter"></div>
-    <div class="kpis" id="kpis"></div>
-    <div class="dash-grid">
-      <div class="panel span-7">
-        <h4>Dish sentiment score</h4>
-        <div class="sub" id="loveSub">Average VADER compound per dish (−1 to +1). Only dishes with at least 4 mentions are shown.</div>
-        <div class="legend"><span><i style="background:var(--pos)"></i>Positive on average</span><span><i style="background:var(--neg)"></i>Negative on average</span></div>
-        <div class="chart-box tall"><canvas id="loveChart"></canvas></div>
-        <button class="table-toggle" data-table="loveTable">Show as table</button>
-        <table class="data-table" id="loveTable"></table>
-      </div>
-      <div class="panel span-5">
-        <h4>Recommendations</h4>
-        <div class="sub">Promote these signature dishes</div>
-        <div class="reco" id="recoPromote"></div>
-        <div class="sub" style="margin-top:18px">Review or improve these dishes</div>
-        <div class="reco" id="recoImprove"></div>
-      </div>
-      <div class="panel span-6">
-        <h4>Review sentiment by restaurant</h4>
-        <div class="sub">Share of whole-review sentiment (VADER, ±0.05 threshold)</div>
-        <div class="legend"><span><i style="background:var(--pos)"></i>Positive</span><span><i style="background:var(--neu)"></i>Neutral</span><span><i style="background:var(--neg)"></i>Negative</span></div>
-        <div class="chart-box"><canvas id="sentChart"></canvas></div>
-      </div>
-      <div class="panel span-6">
-        <h4>What else customers talk about</h4>
-        <div class="sub">Reviews mentioning each topic, split by review sentiment</div>
-        <div class="legend"><span><i style="background:var(--pos)"></i>Positive</span><span><i style="background:var(--neu)"></i>Neutral</span><span><i style="background:var(--neg)"></i>Negative</span></div>
-        <div class="chart-box"><canvas id="aspectChart"></canvas></div>
-      </div>
-      <div class="panel span-4">
-        <h4>Noise funnel (preprocessing)</h4>
-        <div class="sub">Reviews left after each cleaning filter</div>
-        <div class="chart-box"><canvas id="funnelChart"></canvas></div>
-      </div>
-      <div class="panel span-4">
-        <h4>Star rating distribution</h4>
-        <div class="sub" id="starSub">Review count by star rating</div>
-        <div class="chart-box"><canvas id="starChart"></canvas></div>
-      </div>
-      <div class="panel span-4">
-        <h4>Sentiment check vs star rating</h4>
-        <div class="sub">≥4★ counted as positive, ≤2★ as negative, 3★ left out</div>
-        <div id="evalBox"></div>
-      </div>
-      <div class="panel span-12">
-        <h4>Most frequent tokens (after stop-word removal)</h4>
-        <div class="sub">Font size scales with frequency</div>
-        <div class="words" id="words"></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="cards" id="cards"></div>
+</main>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div>
-        <a href="#home" class="logo"><span class="logo-mark">🍽️</span><span class="logo-text">Res<span>Rec</span></span></a>
-        <p>ResRec is an NLP project that turns restaurant reviews into dish-level insights and menu recommendations.</p>
-      </div>
-      <div>
-        <h5 style="margin:0 0 12px;font-size:14px">Dataset</h5>
-        <p style="font-size:13px">Zomato Bangalore Restaurants (Kaggle). This demo uses the top 3 restaurants: <span id="footRests"></span>.</p>
-        <a class="btn btn-dark" style="margin-top:14px" href="https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants" target="_blank" rel="noopener">View dataset ↗</a>
-      </div>
-    </div>
-    <div class="foot-cols">
-      <div><h5>Explore</h5><a href="#restaurants">Restaurants</a><a href="#reviews">Reviews</a><a href="#dashboard">Dashboard</a></div>
-      <div><h5>Highlights</h5><a href="#home">Home</a><a href="#signature">Signature dishes</a><a href="#spotlight">Review spotlight</a></div>
-      <div><h5>Techniques</h5><span>NLTK tokenization</span><span>Gazetteer + fuzzy matching</span><span>VADER sentiment</span></div>
-      <div><h5>Reproduce</h5><span>.venv/bin/python run_pipeline.py</span><span>output_project/results/</span></div>
-    </div>
-    <div class="copy"><span>© 2026 ResRec. NLP course project.</span><span>Built with Python, NLTK, VADER and Chart.js</span></div>
-  </div>
+  <div class="wrap">Data: <a href="https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants" target="_blank" rel="noopener">Zomato Bangalore Restaurants</a> (Kaggle) · NLP course project by Deesampan Vongsurit &amp; Wattanan Jiratriluk</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
