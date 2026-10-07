@@ -1,123 +1,123 @@
-restaurant,dish,mentions,positive,negative,neutral,pos_rate,neg_rate,love_score,avg_stars,category
-Biriyani Nights,Biryani,120,58,34,28,0.483,0.283,0.147,3.03,polarising
-Biriyani Nights,Kebab,48,32,5,11,0.667,0.104,0.347,3.62,signature
-BOX8- Desi Meals,Paneer,32,14,3,15,0.438,0.094,0.232,3.58,steady
-Night Food Joint,Biryani,30,11,7,12,0.367,0.233,0.104,2.62,polarising
-Biriyani Nights,Chicken Biryani,28,9,7,12,0.321,0.25,0.065,3.14,polarising
-BOX8- Desi Meals,Paratha,26,16,3,7,0.615,0.115,0.318,3.71,signature
-BOX8- Desi Meals,Sandwich,23,15,4,4,0.652,0.174,0.312,3.76,steady
-BOX8- Desi Meals,Biryani,22,15,3,4,0.682,0.136,0.445,3.86,signature
-BOX8- Desi Meals,Wrap,22,14,2,6,0.636,0.091,0.352,3.93,signature
-BOX8- Desi Meals,Dal Makhni,20,17,1,2,0.85,0.05,0.522,3.6,signature
-BOX8- Desi Meals,Salad,20,13,2,5,0.65,0.1,0.393,3.83,signature
-Biriyani Nights,Veg Biryani,18,6,6,6,0.333,0.333,0.075,2.64,polarising
-BOX8- Desi Meals,Brownie,15,9,3,3,0.6,0.2,0.315,3.43,steady
-BOX8- Desi Meals,Gulab Jamun,13,10,0,3,0.769,0.0,0.461,4.04,signature
-Biriyani Nights,Gulab Jamun,13,8,3,2,0.615,0.231,0.332,3.5,steady
-BOX8- Desi Meals,Dal,8,7,0,1,0.875,0.0,0.527,3.88,signature
-BOX8- Desi Meals,Rajma,8,5,1,2,0.625,0.125,0.266,3.25,signature
-BOX8- Desi Meals,Masala Lemonade,8,3,1,4,0.375,0.125,0.208,4.12,steady
-Biriyani Nights,Chicken Kebab,8,5,1,2,0.625,0.125,0.207,3.69,steady
-Night Food Joint,Noodles,8,4,2,2,0.5,0.25,0.018,3.0,polarising
-Night Food Joint,Chicken Lollypop,8,1,3,4,0.125,0.375,-0.142,2.19,needs-improvement
-BOX8- Desi Meals,Paneer Makhni,7,2,0,5,0.286,0.0,0.152,4.71,steady
-Night Food Joint,Butter Chicken,7,1,1,5,0.143,0.143,0.037,2.93,steady
-BOX8- Desi Meals,Choco Lava Cake,6,5,0,1,0.833,0.0,0.574,4.33,signature
-BOX8- Desi Meals,Spicy Paneer,6,3,0,3,0.5,0.0,0.241,3.58,steady
-Biriyani Nights,Spicy Kebab,6,3,1,2,0.5,0.167,0.149,4.0,steady
-Biriyani Nights,Egg Biryani,6,1,1,4,0.167,0.167,0.016,3.0,steady
-Night Food Joint,Raita,6,1,2,3,0.167,0.333,-0.11,3.08,needs-improvement
-BOX8- Desi Meals,Tawa Paratha,5,3,0,2,0.6,0.0,0.314,4.4,signature
-BOX8- Desi Meals,Chicken Tikka Biryani,5,2,0,3,0.4,0.0,0.297,4.2,signature
-Night Food Joint,Tandoori Chicken,5,3,1,1,0.6,0.2,0.267,3.8,steady
-Biriyani Nights,Raita,5,2,2,1,0.4,0.4,0.101,2.4,polarising
-Night Food Joint,Naan,5,2,2,1,0.4,0.4,0.042,2.1,polarising
-BOX8- Desi Meals,Basmati Rice,4,3,0,1,0.75,0.0,0.596,4.5,signature
-BOX8- Desi Meals,Chicken Biryani,4,2,0,2,0.5,0.0,0.356,4.5,signature
-BOX8- Desi Meals,Raita,4,2,2,0,0.5,0.5,0.312,3.0,needs-improvement
-BOX8- Desi Meals,Kebab,4,2,1,1,0.5,0.25,0.309,4.38,needs-improvement
-BOX8- Desi Meals,Amritsari Chole,4,2,0,2,0.5,0.0,0.291,3.5,signature
-BOX8- Desi Meals,Roti,4,2,0,2,0.5,0.0,0.257,3.25,signature
-Night Food Joint,Paneer,4,2,0,2,0.5,0.0,0.247,3.12,steady
-BOX8- Desi Meals,Fiery Paneer Sandwich,4,2,1,1,0.5,0.25,0.199,3.25,polarising
-Night Food Joint,Chicken Fried Rice,4,1,0,3,0.25,0.0,0.085,2.12,steady
-Night Food Joint,Butter Naan,4,1,0,3,0.25,0.0,0.085,2.88,steady
-Night Food Joint,Fried Rice,4,2,2,0,0.5,0.5,0.082,1.5,polarising
-Night Food Joint,Roti,4,2,1,1,0.5,0.25,0.064,2.0,polarising
-Night Food Joint,Gobi Manchurian,4,1,1,2,0.25,0.25,0.059,2.12,polarising
-BOX8- Desi Meals,Chicken Overload,4,1,3,0,0.25,0.75,0.036,4.38,polarising
-BOX8- Desi Meals,Butter Chicken,4,2,2,0,0.5,0.5,-0.012,4.5,polarising
-Biriyani Nights,Crispy Kebab,3,3,0,0,1.0,0.0,0.567,4.83,low-data
-BOX8- Desi Meals,Shahi Paneer Biryani,3,3,0,0,1.0,0.0,0.561,4.67,low-data
-BOX8- Desi Meals,Paneer Masala,3,2,0,1,0.667,0.0,0.452,4.0,low-data
-BOX8- Desi Meals,Paneer Tikka Sandwich,3,1,0,2,0.333,0.0,0.303,4.33,low-data
-Night Food Joint,Chicken Schezwan Fried Rice,3,1,0,2,0.333,0.0,0.271,3.83,low-data
-Night Food Joint,Paneer Butter Masala,3,2,0,1,0.667,0.0,0.265,2.33,low-data
-Night Food Joint,Chicken Biryani,3,1,0,2,0.333,0.0,0.257,3.0,low-data
-Night Food Joint,Kulcha,3,1,0,2,0.333,0.0,0.098,3.33,low-data
-Night Food Joint,Veg Biryani,3,1,1,1,0.333,0.333,0.032,2.17,low-data
-Night Food Joint,Veg Fried Rice,3,0,0,3,0.0,0.0,0.0,1.0,low-data
-BOX8- Desi Meals,Dal Makhni Rice,3,0,0,3,0.0,0.0,0.0,4.67,low-data
-BOX8- Desi Meals,Chole Tikki,3,0,1,2,0.0,0.333,-0.027,2.83,low-data
-BOX8- Desi Meals,Bombay Special Sandwich,2,2,0,0,1.0,0.0,0.584,4.75,low-data
-BOX8- Desi Meals,Bhuna Kebab,2,2,0,0,1.0,0.0,0.573,4.5,low-data
-Biriyani Nights,Noodles,2,2,0,0,1.0,0.0,0.563,4.5,low-data
-Biriyani Nights,Veg Fingers,2,1,0,1,0.5,0.0,0.43,3.0,low-data
-Night Food Joint,Chicken Noodles,2,2,0,0,1.0,0.0,0.417,2.5,low-data
-BOX8- Desi Meals,Kadhai Paneer,2,1,0,1,0.5,0.0,0.363,5.0,low-data
-BOX8- Desi Meals,Farm Fresh Wrap,2,2,0,0,1.0,0.0,0.361,4.0,low-data
-Night Food Joint,Mixed Fried Rice,2,1,0,1,0.5,0.0,0.349,3.25,low-data
-Night Food Joint,Paneer Chilly,2,1,0,1,0.5,0.0,0.315,1.75,low-data
-Night Food Joint,Gulab Jamoon,2,1,0,1,0.5,0.0,0.286,3.5,low-data
-BOX8- Desi Meals,Moong Dal Ka Halwa,2,1,0,1,0.5,0.0,0.286,4.25,low-data
-Night Food Joint,Home Made Chicken Dum Biryani,2,1,1,0,0.5,0.5,0.043,2.75,low-data
-Night Food Joint,Egg Fried Rice,2,0,0,2,0.0,0.0,0.0,2.75,low-data
-Night Food Joint,Hyderabadi Chicken,2,0,0,2,0.0,0.0,0.0,2.75,low-data
-BOX8- Desi Meals,Amritsari Chole Chawal,2,0,0,2,0.0,0.0,0.0,4.25,low-data
-BOX8- Desi Meals,Chicken Mayo Wrap,2,0,1,1,0.0,0.5,-0.113,5.0,low-data
-BOX8- Desi Meals,Chicken Mughlai,2,0,1,1,0.0,0.5,-0.138,3.25,low-data
-Night Food Joint,Gajar Halwa,2,0,1,1,0.0,0.5,-0.158,2.25,low-data
-Night Food Joint,Dal,2,1,1,0,0.5,0.5,-0.224,2.5,low-data
-Night Food Joint,Kebab,2,0,2,0,0.0,1.0,-0.272,2.25,low-data
-BOX8- Desi Meals,Paneer Overload Sandwich,2,0,1,1,0.0,0.5,-0.299,5.0,low-data
-Night Food Joint,Aloo Paratha,2,0,1,1,0.0,0.5,-0.344,1.5,low-data
-BOX8- Desi Meals,Tandoori Paneer Wrap,1,1,0,0,1.0,0.0,0.91,4.0,low-data
-BOX8- Desi Meals,Veggie Patty Wrap,1,1,0,0,1.0,0.0,0.877,4.5,low-data
-Biriyani Nights,Normal Kebab,1,1,0,0,1.0,0.0,0.866,5.0,low-data
-BOX8- Desi Meals,Rich Chocolate Brownie,1,1,0,0,1.0,0.0,0.813,4.0,low-data
-BOX8- Desi Meals,Tandoori Chicken Sandwich,1,1,0,0,1.0,0.0,0.765,4.5,low-data
-Biriyani Nights,Chicken Fingers,1,1,0,0,1.0,0.0,0.751,5.0,low-data
-BOX8- Desi Meals,Murg Dum Biryani,1,1,0,0,1.0,0.0,0.735,4.5,low-data
-BOX8- Desi Meals,Palak Paneer,1,1,0,0,1.0,0.0,0.494,5.0,low-data
-Night Food Joint,Chicken Manchurian,1,1,0,0,1.0,0.0,0.493,3.5,low-data
-Night Food Joint,Chicken Manchurian Gravy,1,1,0,0,1.0,0.0,0.493,4.5,low-data
-Night Food Joint,Paratha,1,1,0,0,1.0,0.0,0.421,2.0,low-data
-Biriyani Nights,Tandoori Chicken,1,1,0,0,1.0,0.0,0.421,4.0,low-data
-Night Food Joint,Plain Rice,1,1,0,0,1.0,0.0,0.42,1.0,low-data
-Night Food Joint,Paneer Manchurian,1,1,0,0,1.0,0.0,0.361,1.0,low-data
-Biriyani Nights,Paratha,1,1,0,0,1.0,0.0,0.361,5.0,low-data
-BOX8- Desi Meals,Corn & Mushroom,1,1,0,0,1.0,0.0,0.361,2.0,low-data
-Night Food Joint,Egg Biryani,1,1,0,0,1.0,0.0,0.273,5.0,low-data
-Night Food Joint,Chicken Schezwan,1,0,0,1,0.0,0.0,0.0,1.0,low-data
-Night Food Joint,Dal Fry,1,0,0,1,0.0,0.0,0.0,4.0,low-data
-Night Food Joint,Masala Kulcha,1,0,0,1,0.0,0.0,0.0,2.0,low-data
-Night Food Joint,Salad,1,0,0,1,0.0,0.0,0.0,3.0,low-data
-Night Food Joint,Tandoori Paratha,1,0,0,1,0.0,0.0,0.0,3.5,low-data
-Night Food Joint,Veg Schezwan Fried Rice,1,0,0,1,0.0,0.0,0.0,3.5,low-data
-Night Food Joint,Mushroom Manchurian,1,0,0,1,0.0,0.0,0.0,3.5,low-data
-Night Food Joint,Kadai Paneer,1,0,0,1,0.0,0.0,0.0,3.5,low-data
-Biriyani Nights,Fish Fingers,1,0,0,1,0.0,0.0,0.0,2.0,low-data
-Biriyani Nights,Boneless Chicken Biryani,1,0,0,1,0.0,0.0,0.0,5.0,low-data
-Biriyani Nights,Fried Rice,1,0,0,1,0.0,0.0,0.0,1.0,low-data
-BOX8- Desi Meals,Mayo Tikki Wrap,1,0,0,1,0.0,0.0,0.0,5.0,low-data
-BOX8- Desi Meals,Grilled Murgh Seekh Kebab,1,0,0,1,0.0,0.0,0.0,5.0,low-data
-BOX8- Desi Meals,Dilli Wale Rajma Chawal,1,0,0,1,0.0,0.0,0.0,4.0,low-data
-BOX8- Desi Meals,Chicken Masala,1,0,0,1,0.0,0.0,0.0,5.0,low-data
-BOX8- Desi Meals,Seekh Kebab Wrap,1,0,0,1,0.0,0.0,0.0,4.5,low-data
-BOX8- Desi Meals,Firangi Subz Biryani,1,0,1,0,0.0,1.0,-0.276,2.0,low-data
-Night Food Joint,Paneer Tikka Malai,1,0,1,0,0.0,1.0,-0.296,3.0,low-data
-Night Food Joint,Baby Corn Manchurian,1,0,1,0,0.0,1.0,-0.421,1.0,low-data
-Night Food Joint,Chapati,1,0,1,0,0.0,1.0,-0.459,1.0,low-data
-Night Food Joint,Veg Noodles,1,0,1,0,0.0,1.0,-0.459,2.0,low-data
-Night Food Joint,Gobi 65,1,0,1,0,0.0,1.0,-0.612,1.0,low-data
-Biriyani Nights,Dal,1,0,1,0,0.0,1.0,-0.735,1.0,low-data
+restaurant,dish,mentions,opinions,positive,negative,neutral,pos_rate,neg_rate,love_score,avg_stars,category
+Biriyani Nights,Biryani,120,106,62,44,14,0.585,0.415,0.156,3.03,polarising
+Biriyani Nights,Kebab,48,44,36,8,4,0.818,0.182,0.397,3.62,signature
+Night Food Joint,Biryani,30,28,13,15,2,0.464,0.536,0.005,2.62,polarising
+BOX8- Desi Meals,Paneer,32,25,20,5,7,0.8,0.2,0.407,3.58,signature
+Biriyani Nights,Chicken Biryani,28,24,13,11,4,0.542,0.458,0.115,3.14,polarising
+BOX8- Desi Meals,Paratha,26,23,16,7,3,0.696,0.304,0.31,3.71,steady
+BOX8- Desi Meals,Sandwich,23,22,17,5,1,0.773,0.227,0.361,3.76,steady
+BOX8- Desi Meals,Wrap,22,20,17,3,2,0.85,0.15,0.483,3.93,signature
+BOX8- Desi Meals,Dal Makhni,20,19,17,2,1,0.895,0.105,0.535,3.6,signature
+BOX8- Desi Meals,Biryani,22,19,16,3,3,0.842,0.158,0.527,3.86,signature
+BOX8- Desi Meals,Salad,20,17,14,3,3,0.824,0.176,0.455,3.83,signature
+BOX8- Desi Meals,Brownie,15,14,10,4,1,0.714,0.286,0.354,3.43,steady
+Biriyani Nights,Veg Biryani,18,14,7,7,4,0.5,0.5,0.065,2.64,polarising
+Biriyani Nights,Gulab Jamun,13,12,9,3,1,0.75,0.25,0.457,3.5,steady
+BOX8- Desi Meals,Gulab Jamun,13,10,10,0,3,1.0,0.0,0.614,4.04,signature
+BOX8- Desi Meals,Dal,8,8,7,1,0,0.875,0.125,0.446,3.88,signature
+Biriyani Nights,Chicken Kebab,8,8,5,3,0,0.625,0.375,0.174,3.69,steady
+BOX8- Desi Meals,Rajma,8,8,3,5,0,0.375,0.625,-0.054,3.25,needs-improvement
+BOX8- Desi Meals,Masala Lemonade,8,7,6,1,1,0.857,0.143,0.535,4.12,signature
+Night Food Joint,Noodles,8,7,4,3,1,0.571,0.429,-0.106,3.0,polarising
+BOX8- Desi Meals,Paneer Makhni,7,6,6,0,1,1.0,0.0,0.623,4.71,signature
+Biriyani Nights,Egg Biryani,6,6,3,3,0,0.5,0.5,0.11,3.0,polarising
+Night Food Joint,Butter Chicken,7,6,2,4,1,0.333,0.667,-0.199,2.93,needs-improvement
+Night Food Joint,Chicken Lollypop,8,6,2,4,2,0.333,0.667,-0.153,2.19,needs-improvement
+BOX8- Desi Meals,Choco Lava Cake,6,5,5,0,1,1.0,0.0,0.695,4.33,signature
+BOX8- Desi Meals,Chicken Tikka Biryani,5,5,4,1,0,0.8,0.2,0.417,4.2,signature
+BOX8- Desi Meals,Spicy Paneer,6,5,4,1,1,0.8,0.2,0.354,3.58,signature
+Biriyani Nights,Spicy Kebab,6,5,3,2,1,0.6,0.4,0.095,4.0,steady
+Night Food Joint,Naan,5,5,2,3,0,0.4,0.6,-0.049,2.1,needs-improvement
+BOX8- Desi Meals,Basmati Rice,4,4,4,0,0,1.0,0.0,0.728,4.5,signature
+Night Food Joint,Butter Naan,4,4,3,1,0,0.75,0.25,0.07,2.88,steady
+BOX8- Desi Meals,Fiery Paneer Sandwich,4,4,3,1,0,0.75,0.25,0.293,3.25,steady
+Night Food Joint,Paneer,4,4,3,1,0,0.75,0.25,0.121,3.12,steady
+Night Food Joint,Tandoori Chicken,5,4,3,1,1,0.75,0.25,0.334,3.8,steady
+BOX8- Desi Meals,Amritsari Chole,4,4,2,2,0,0.5,0.5,0.163,3.5,polarising
+BOX8- Desi Meals,Butter Chicken,4,4,2,2,0,0.5,0.5,0.028,4.5,polarising
+Night Food Joint,Fried Rice,4,4,2,2,0,0.5,0.5,0.082,1.5,polarising
+Biriyani Nights,Raita,5,4,2,2,1,0.5,0.5,0.177,2.4,polarising
+BOX8- Desi Meals,Raita,4,4,2,2,0,0.5,0.5,0.288,3.0,polarising
+BOX8- Desi Meals,Chicken Overload,4,4,1,3,0,0.25,0.75,0.011,4.38,needs-improvement
+BOX8- Desi Meals,Chicken Biryani,4,3,3,0,1,1.0,0.0,0.635,4.5,low-data
+Night Food Joint,Chicken Schezwan Fried Rice,3,3,3,0,0,1.0,0.0,0.564,3.83,low-data
+Biriyani Nights,Crispy Kebab,3,3,3,0,0,1.0,0.0,0.567,4.83,low-data
+BOX8- Desi Meals,Shahi Paneer Biryani,3,3,3,0,0,1.0,0.0,0.561,4.67,low-data
+BOX8- Desi Meals,Tawa Paratha,5,3,3,0,2,1.0,0.0,0.601,4.4,low-data
+BOX8- Desi Meals,Kebab,4,3,2,1,1,0.667,0.333,0.398,4.38,low-data
+Night Food Joint,Kulcha,3,3,2,1,0,0.667,0.333,0.092,3.33,low-data
+BOX8- Desi Meals,Paneer Masala,3,3,2,1,0,0.667,0.333,0.248,4.0,low-data
+Night Food Joint,Roti,4,3,2,1,1,0.667,0.333,0.038,2.0,low-data
+Night Food Joint,Gobi Manchurian,4,3,1,2,1,0.333,0.667,-0.041,2.12,low-data
+Night Food Joint,Raita,6,3,1,2,3,0.333,0.667,-0.219,3.08,low-data
+Night Food Joint,Veg Biryani,3,3,1,2,0,0.333,0.667,-0.163,2.17,low-data
+BOX8- Desi Meals,Chole Tikki,3,3,0,3,0,0.0,1.0,-0.294,2.83,low-data
+BOX8- Desi Meals,Bhuna Kebab,2,2,2,0,0,1.0,0.0,0.573,4.5,low-data
+BOX8- Desi Meals,Bombay Special Sandwich,2,2,2,0,0,1.0,0.0,0.584,4.75,low-data
+Night Food Joint,Chicken Fried Rice,4,2,2,0,2,1.0,0.0,0.39,2.12,low-data
+Night Food Joint,Chicken Noodles,2,2,2,0,0,1.0,0.0,0.417,2.5,low-data
+BOX8- Desi Meals,Kadhai Paneer,2,2,2,0,0,1.0,0.0,0.681,5.0,low-data
+BOX8- Desi Meals,Moong Dal Ka Halwa,2,2,2,0,0,1.0,0.0,0.592,4.25,low-data
+Biriyani Nights,Noodles,2,2,2,0,0,1.0,0.0,0.563,4.5,low-data
+BOX8- Desi Meals,Paneer Tikka Sandwich,3,2,2,0,1,1.0,0.0,0.695,4.33,low-data
+Biriyani Nights,Veg Fingers,2,2,2,0,0,1.0,0.0,0.749,3.0,low-data
+Night Food Joint,Dal,2,2,1,1,0,0.5,0.5,-0.224,2.5,low-data
+BOX8- Desi Meals,Farm Fresh Wrap,2,2,1,1,0,0.5,0.5,0.143,4.0,low-data
+Night Food Joint,Gajar Halwa,2,2,1,1,0,0.5,0.5,0.103,2.25,low-data
+Night Food Joint,Home Made Chicken Dum Biryani,2,2,1,1,0,0.5,0.5,0.043,2.75,low-data
+BOX8- Desi Meals,Paneer Overload Sandwich,2,2,1,1,0,0.5,0.5,-0.098,5.0,low-data
+BOX8- Desi Meals,Roti,4,2,1,1,2,0.5,0.5,0.112,3.25,low-data
+Night Food Joint,Aloo Paratha,2,2,0,2,0,0.0,1.0,-0.63,1.5,low-data
+Night Food Joint,Egg Fried Rice,2,2,0,2,0,0.0,1.0,-0.41,2.75,low-data
+Night Food Joint,Kebab,2,2,0,2,0,0.0,1.0,-0.282,2.25,low-data
+Night Food Joint,Paneer Chilly,2,2,0,2,0,0.0,1.0,-0.602,1.75,low-data
+Night Food Joint,Chicken Biryani,3,1,1,0,2,1.0,0.0,0.881,3.0,low-data
+Biriyani Nights,Chicken Fingers,1,1,1,0,0,1.0,0.0,0.827,5.0,low-data
+Night Food Joint,Chicken Manchurian,1,1,1,0,0,1.0,0.0,0.493,3.5,low-data
+Night Food Joint,Chicken Manchurian Gravy,1,1,1,0,0,1.0,0.0,0.493,4.5,low-data
+BOX8- Desi Meals,Corn & Mushroom,1,1,1,0,0,1.0,0.0,0.361,2.0,low-data
+Night Food Joint,Dal Fry,1,1,1,0,0,1.0,0.0,0.44,4.0,low-data
+BOX8- Desi Meals,Dal Makhni Rice,3,1,1,0,2,1.0,0.0,0.541,4.67,low-data
+Night Food Joint,Egg Biryani,1,1,1,0,0,1.0,0.0,0.273,5.0,low-data
+BOX8- Desi Meals,Grilled Murgh Seekh Kebab,1,1,1,0,0,1.0,0.0,0.44,5.0,low-data
+Night Food Joint,Gulab Jamoon,2,1,1,0,1,1.0,0.0,0.572,3.5,low-data
+Night Food Joint,Hyderabadi Chicken,2,1,1,0,1,1.0,0.0,0.44,2.75,low-data
+Night Food Joint,Kadai Paneer,1,1,1,0,0,1.0,0.0,0.44,3.5,low-data
+BOX8- Desi Meals,Mayo Tikki Wrap,1,1,1,0,0,1.0,0.0,0.44,5.0,low-data
+Night Food Joint,Mixed Fried Rice,2,1,1,0,1,1.0,0.0,0.699,3.25,low-data
+BOX8- Desi Meals,Murg Dum Biryani,1,1,1,0,0,1.0,0.0,0.735,4.5,low-data
+Night Food Joint,Mushroom Manchurian,1,1,1,0,0,1.0,0.0,0.44,3.5,low-data
+Biriyani Nights,Normal Kebab,1,1,1,0,0,1.0,0.0,0.866,5.0,low-data
+BOX8- Desi Meals,Palak Paneer,1,1,1,0,0,1.0,0.0,0.494,5.0,low-data
+Night Food Joint,Paneer Butter Masala,3,1,1,0,2,1.0,0.0,0.294,2.33,low-data
+Night Food Joint,Paneer Manchurian,1,1,1,0,0,1.0,0.0,0.361,1.0,low-data
+Night Food Joint,Paratha,1,1,1,0,0,1.0,0.0,0.421,2.0,low-data
+Biriyani Nights,Paratha,1,1,1,0,0,1.0,0.0,0.361,5.0,low-data
+BOX8- Desi Meals,Rich Chocolate Brownie,1,1,1,0,0,1.0,0.0,0.813,4.0,low-data
+BOX8- Desi Meals,Seekh Kebab Wrap,1,1,1,0,0,1.0,0.0,0.509,4.5,low-data
+Biriyani Nights,Tandoori Chicken,1,1,1,0,0,1.0,0.0,0.421,4.0,low-data
+BOX8- Desi Meals,Tandoori Chicken Sandwich,1,1,1,0,0,1.0,0.0,0.765,4.5,low-data
+BOX8- Desi Meals,Tandoori Paneer Wrap,1,1,1,0,0,1.0,0.0,0.93,4.0,low-data
+Night Food Joint,Tandoori Paratha,1,1,1,0,0,1.0,0.0,0.44,3.5,low-data
+Night Food Joint,Veg Schezwan Fried Rice,1,1,1,0,0,1.0,0.0,0.44,3.5,low-data
+BOX8- Desi Meals,Veggie Patty Wrap,1,1,1,0,0,1.0,0.0,0.877,4.5,low-data
+Night Food Joint,Baby Corn Manchurian,1,1,0,1,0,0.0,1.0,-0.421,1.0,low-data
+Night Food Joint,Chapati,1,1,0,1,0,0.0,1.0,-0.459,1.0,low-data
+BOX8- Desi Meals,Chicken Mayo Wrap,2,1,0,1,1,0.0,1.0,-0.226,5.0,low-data
+BOX8- Desi Meals,Chicken Mughlai,2,1,0,1,1,0.0,1.0,-0.601,3.25,low-data
+Night Food Joint,Chicken Schezwan,1,1,0,1,0,0.0,1.0,-0.631,1.0,low-data
+Biriyani Nights,Dal,1,1,0,1,0,0.0,1.0,-0.735,1.0,low-data
+BOX8- Desi Meals,Firangi Subz Biryani,1,1,0,1,0,0.0,1.0,-0.601,2.0,low-data
+Biriyani Nights,Fried Rice,1,1,0,1,0,0.0,1.0,-0.526,1.0,low-data
+Night Food Joint,Gobi 65,1,1,0,1,0,0.0,1.0,-0.612,1.0,low-data
+Night Food Joint,Masala Kulcha,1,1,0,1,0,0.0,1.0,-0.696,2.0,low-data
+Night Food Joint,Paneer Tikka Malai,1,1,0,1,0,0.0,1.0,-0.296,3.0,low-data
+Night Food Joint,Plain Rice,1,1,0,1,0,0.0,1.0,-0.494,1.0,low-data
+Night Food Joint,Veg Fried Rice,3,1,0,1,2,0.0,1.0,-0.308,1.0,low-data
+Night Food Joint,Veg Noodles,1,1,0,1,0,0.0,1.0,-0.459,2.0,low-data
+BOX8- Desi Meals,Amritsari Chole Chawal,2,0,0,0,2,0.0,0.0,0.0,4.25,low-data
+Biriyani Nights,Boneless Chicken Biryani,1,0,0,0,1,0.0,0.0,0.0,5.0,low-data
+BOX8- Desi Meals,Chicken Masala,1,0,0,0,1,0.0,0.0,0.0,5.0,low-data
+BOX8- Desi Meals,Dilli Wale Rajma Chawal,1,0,0,0,1,0.0,0.0,0.0,4.0,low-data
+Biriyani Nights,Fish Fingers,1,0,0,0,1,0.0,0.0,0.0,2.0,low-data
+Night Food Joint,Salad,1,0,0,0,1,0.0,0.0,0.0,3.0,low-data

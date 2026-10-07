@@ -84,7 +84,6 @@ button.stat:hover { border-color: var(--dark); }
 .legend { display: flex; gap: 8px 18px; font-size: 14px; color: var(--ink-2); flex-wrap: wrap; }
 .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 .legend .pos, .bar .pos { background: var(--pos); }
-.legend .neu, .bar .neu { background: var(--neu); }
 .legend .neg, .bar .neg { background: var(--neg); }
 
 /* menu: one row per dish, ranked by % liked */
@@ -110,6 +109,7 @@ button.stat:hover { border-color: var(--dark); }
 .tag.polarising { background: #fdf1d8; color: #7a5200; }
 .bar { display: flex; gap: 2px; height: 9px; border-radius: 99px; overflow: hidden; }
 .bar i { display: block; height: 100%; }
+.bar:not(:has(i)) { background: var(--line); }   /* no opinions yet */
 .rare-note { margin: 40px 0 14px; font-size: 15px; }
 
 /* reviews the cleaning step left out */
@@ -151,12 +151,18 @@ dialog::backdrop { background: rgba(31, 41, 39, .5); }
 .vote { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 99px; }
 .vote.positive, mark.positive { background: #d9e7f8; color: #16477f; }
 .vote.negative, mark.negative { background: #fbdcdc; color: #8e1f1e; }
-.vote.neutral, mark.neutral { background: #ebeae6; color: var(--ink); }
+mark.neutral { background: #ebeae6; color: var(--ink); }
 mark { border-radius: 5px; padding: 0 4px; font-weight: 600; }
 mark.positive { box-shadow: inset 0 -2px 0 var(--pos); }
 mark.negative { box-shadow: inset 0 -2px 0 var(--neg); }
 mark.neutral { box-shadow: inset 0 -2px 0 var(--neu); }
 .more { display: block; margin: 8px auto 0; }
+/* reviews that only name the dish: kept apart at the bottom of the dialog */
+.no-opinion { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+.no-opinion h3 { font-size: 16px; font-weight: 600; }
+.no-opinion h3 small { font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+.no-opinion > p { font-size: 13px; color: var(--ink-2); margin: 2px 0 14px; }
+.no-opinion .review { background: var(--panel-2); }
 
 /* ---------- footer ---------- */
 footer { border-top: 1px solid var(--line); margin-top: 80px; padding: 24px 0 32px; font-size: 13px; color: var(--ink-2); }

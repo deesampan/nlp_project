@@ -1,11 +1,14 @@
 """Stage 5 - aggregate dish-level opinions into menu analytics + recommendations."""
 import re
 from collections import Counter, defaultdict
+from .sentiment import vote
 
-MIN_MENTIONS = 4
-SIG_LOVE, SIG_NEG = 0.25, 0.15
-CRIT_NEG = 0.25
-POLAR = 0.20
+# A dish is ranked once this many reviews take a side on it.
+MIN_OPINIONS = 4
+# Tags, by the share of opinions that liked the dish.
+LOVE_IT = 0.80                       # 8 in 10 or more liked it   -> "Customers love it"
+MIXED_LOW, MIXED_HIGH = 0.40, 0.60   # roughly half and half      -> "Mixed opinions"
+                                     # 4 in 10 or fewer liked it  -> "Needs work"
 
 ASPECTS = {
     "Taste": ["taste", "tasty", "delicious", "yummy", "flavour", "flavor", "bland", "spicy", "salty", "tasteless"],
@@ -18,22 +21,28 @@ ASPECTS = {
 
 
 def classify(d: dict) -> str:
-    if d["mentions"] < MIN_MENTIONS:
+    if d["opinions"] < MIN_OPINIONS:
         return "low-data"
-    if d["pos_rate"] >= POLAR and d["neg_rate"] >= POLAR and abs(d["love_score"]) < SIG_LOVE:
-        return "polarising"
-    if d["love_score"] >= SIG_LOVE and d["neg_rate"] <= SIG_NEG:
+    if d["pos_rate"] >= LOVE_IT:
         return "signature"
-    if d["neg_rate"] >= CRIT_NEG:
+    if d["pos_rate"] <= MIXED_LOW:
         return "needs-improvement"
+    if d["pos_rate"] < MIXED_HIGH:
+        return "polarising"
     return "steady"
 
 
 def dishes(reviews: list[dict]) -> list[dict]:
+    """One vote per dish per review. Reviews that name a dish without taking a side are
+    counted in `neutral` but kept out of every rate: rates are over `opinions` only."""
     acc = defaultdict(lambda: {"mentions": 0, "pos": 0, "neg": 0, "neu": 0, "sum": 0.0, "stars": [], "review_ids": []})
     for r in reviews:
-        for m in {x["dish"]: x for x in r["dishes"]}.values():   # one vote per dish per review
-            a = acc[(r["restaurant"], m["dish"])]
+        by_dish = defaultdict(list)
+        for m in r["dishes"]:
+            by_dish[m["dish"]].append(m)
+        for dish, ms in by_dish.items():
+            m = vote(ms)
+            a = acc[(r["restaurant"], dish)]
             a["mentions"] += 1
             a[{"positive": "pos", "negative": "neg", "neutral": "neu"}[m["label"]]] += 1
             a["sum"] += m["compound"]
@@ -41,14 +50,15 @@ def dishes(reviews: list[dict]) -> list[dict]:
             a["review_ids"].append(r["id"])
     out = []
     for (rest, dish), a in acc.items():
-        n = a["mentions"]
-        d = {"restaurant": rest, "dish": dish, "mentions": n, "positive": a["pos"], "negative": a["neg"],
-             "neutral": a["neu"], "pos_rate": round(a["pos"] / n, 3), "neg_rate": round(a["neg"] / n, 3),
-             "love_score": round(a["sum"] / n, 3), "avg_stars": round(sum(a["stars"]) / n, 2),
+        n, op = a["mentions"], a["pos"] + a["neg"]
+        d = {"restaurant": rest, "dish": dish, "mentions": n, "opinions": op, "positive": a["pos"],
+             "negative": a["neg"], "neutral": a["neu"],
+             "pos_rate": round(a["pos"] / op, 3) if op else 0.0, "neg_rate": round(a["neg"] / op, 3) if op else 0.0,
+             "love_score": round(a["sum"] / op, 3) if op else 0.0, "avg_stars": round(sum(a["stars"]) / n, 2),
              "review_ids": a["review_ids"]}
         d["category"] = classify(d)
         out.append(d)
-    return sorted(out, key=lambda d: (-d["mentions"], -d["love_score"]))
+    return sorted(out, key=lambda d: (-d["opinions"], -d["pos_rate"], d["dish"]))
 
 
 def restaurant_stats(reviews: list[dict]) -> dict:

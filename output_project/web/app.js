@@ -14,7 +14,7 @@
   const pct = x => Math.round(x * 100) + "%";
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const stars = n => "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n));
-  const MIN = D.thresholds.min_mentions;
+  const MIN = D.thresholds.min_opinions;   // a dish is ranked once this many reviews take a side on it
   const IMAGES = D.images || {};
 
   function emoji(d) {
@@ -31,8 +31,8 @@
   const pic = (d, lazy = true) => IMAGES[d] ? `<img src="${IMAGES[d]}" alt=""${lazy ? ' loading="lazy"' : ""}>` : `<span class="emo">${emoji(d)}</span>`;
   const plate = (d, size = "") => `<span class="plate ${size}${IMAGES[d] ? " has-img" : ""}" aria-hidden="true">${pic(d)}</span>`;
 
-  // a restaurant's dishes, most talked-about first
-  const dishesOf = name => D.dishes.filter(d => d.restaurant === name).sort((a, b) => b.mentions - a.mentions || b.positive - a.positive);
+  // a restaurant's dishes, the ones with most opinions first
+  const dishesOf = name => D.dishes.filter(d => d.restaurant === name).sort((a, b) => b.opinions - a.opinions || b.positive - a.positive);
   // each restaurant's picture: its most mentioned dish with a photo that an earlier restaurant isn't already using
   const COVER = {};
   const used = new Set();
@@ -47,10 +47,11 @@
   const TAG = { "signature": "★ Customers love it", "needs-improvement": "! Needs work", "polarising": "⇅ Mixed opinions" };
   const tag = d => TAG[d.category] ? `<span class="tag ${d.category}">${TAG[d.category]}</span>` : "";
 
+  // liked vs didn't like; reviews that only name the dish are not part of the bar
   function bar(d) {
-    const tip = `${d.positive} liked it · ${d.neutral} no clear opinion · ${d.negative} didn't like it`;
+    const tip = d.opinions ? `${d.positive} liked it · ${d.negative} didn't like it` : "No opinions yet";
     return `<span class="bar" role="img" aria-label="${tip}" title="${tip}">
-      ${d.positive ? `<i class="pos" style="flex:${d.positive}"></i>` : ""}${d.neutral ? `<i class="neu" style="flex:${d.neutral}"></i>` : ""}${d.negative ? `<i class="neg" style="flex:${d.negative}"></i>` : ""}
+      ${d.positive ? `<i class="pos" style="flex:${d.positive}"></i>` : ""}${d.negative ? `<i class="neg" style="flex:${d.negative}"></i>` : ""}
     </span>`;
   }
 
@@ -85,11 +86,11 @@
     document.title = `${r.name} · ResRec`;
 
     const all = dishesOf(r.name);
-    const rated = all.filter(d => d.mentions >= MIN);   // enough reviews to judge
-    const rare = all.filter(d => d.mentions < MIN);
-    const share = (d, k) => d[k] / d.mentions;
-    const best = [...rated].sort((a, b) => share(b, "positive") - share(a, "positive") || b.mentions - a.mentions)[0];
-    const worst = [...rated].sort((a, b) => share(b, "negative") - share(a, "negative") || b.mentions - a.mentions)[0];
+    const rated = all.filter(d => d.opinions >= MIN);   // enough opinions to judge
+    const rare = all.filter(d => d.opinions < MIN);
+    const share = (d, k) => d.opinions ? d[k] / d.opinions : 0;   // share of the reviews that took a side
+    const best = [...rated].sort((a, b) => share(b, "positive") - share(a, "positive") || b.opinions - a.opinions)[0];
+    const worst = [...rated].sort((a, b) => share(b, "negative") - share(a, "negative") || b.opinions - a.opinions)[0];
 
     $("#head").innerHTML = `
       <div class="hero-copy">
@@ -103,25 +104,25 @@
       { k: "Reviews read", v: fmt(r.reviews), s: "customer reviews on Zomato" },
       { k: "Positive reviews", v: pct(r.sentiment.positive / r.reviews), s: `${fmt(r.sentiment.positive)} of ${fmt(r.reviews)} reviews` },
     ];
-    if (best) tiles.push({ k: "Most loved dish", v: best.dish, s: `${best.positive} of ${best.mentions} reviews liked it`, d: best });
-    if (worst && worst.negative) tiles.push({ k: "Most criticised dish", v: worst.dish, s: `${worst.negative} of ${worst.mentions} reviews didn't like it`, d: worst });
+    if (best) tiles.push({ k: "Most loved dish", v: best.dish, s: `${best.positive} of ${best.opinions} liked it`, d: best });
+    if (worst && worst.negative) tiles.push({ k: "Most criticised dish", v: worst.dish, s: `${worst.negative} of ${worst.opinions} didn't like it`, d: worst });
     $("#stats").innerHTML = tiles.map(t => t.d
       ? `<button class="stat dish" data-dish="${esc(t.d.dish)}"><small>${t.k}</small><b>${esc(t.v)}</b><span>${t.s}</span></button>`
       : `<div class="stat"><small>${t.k}</small><b>${esc(t.v)}</b><span>${t.s}</span></div>`).join("");
 
-    // menu lists: most liked first (share of reviews that liked it), ties go to the dish with more reviews
-    const byLiked = (a, b) => share(b, "positive") - share(a, "positive") || b.mentions - a.mentions || a.dish.localeCompare(b.dish);
+    // menu lists: most liked first (share of opinions that liked it), ties go to the dish with more opinions
+    const byLiked = (a, b) => share(b, "positive") - share(a, "positive") || b.opinions - a.opinions || a.dish.localeCompare(b.dish);
     const row = d => `<li><button class="dish-row" data-dish="${esc(d.dish)}">
         ${plate(d.dish, "row")}
         <span class="row-name"><b>${esc(d.dish)}</b>${tag(d)}</span>
         ${bar(d)}
-        <span class="row-score"><b>${pct(share(d, "positive"))}</b><small>${d.positive} of ${d.mentions} liked it</small></span>
+        <span class="row-score">${d.opinions ? `<b>${pct(share(d, "positive"))}</b><small>${d.positive} of ${d.opinions} liked it</small>` : `<b>–</b><small>no opinions yet</small>`}</span>
         <span class="chev" aria-hidden="true">›</span>
       </button></li>`;
 
-    $("#menu").innerHTML = rated.sort(byLiked).map(row).join("") || `<li class="empty">No dish was mentioned ${MIN} or more times.</li>`;
+    $("#menu").innerHTML = rated.sort(byLiked).map(row).join("") || `<li class="empty">No dish has ${MIN} or more opinions.</li>`;
     if (rare.length) {
-      $("#rareNote").textContent = `These dishes were mentioned fewer than ${MIN} times, so there is too little to judge them yet.`;
+      $("#rareNote").textContent = `These dishes have fewer than ${MIN} opinions, so there is too little to judge them yet.`;
       $("#rare").innerHTML = rare.sort(byLiked).map(row).join("");
       $("#rareBlock").hidden = false;
     }
@@ -150,8 +151,8 @@
 
     /* ---- dish dialog: every review that mentions the dish ---- */
     const BY_ID = new Map(D.reviews.map(x => [x.id, x]));
-    const VOTE = { positive: "Liked it", negative: "Didn't like it", neutral: "No clear opinion" };
-    const PER = 10;
+    const VOTE = { positive: "Liked it", negative: "Didn't like it" };
+    const PER = 10, PER_UNCLEAR = 3;
     const dlg = $("#dish");
     let cur = null;
 
@@ -169,13 +170,16 @@
     function openDish(name) {
       const d = all.find(x => x.dish === name);
       if (!d) return;
-      // a review's vote is its last mention of the dish, the same rule the pipeline counts with
-      const rows = d.review_ids.map(id => BY_ID.get(id)).filter(Boolean)
-        .map(rv => ({ rv, vote: [...rv.dishes].reverse().find(x => x.dish === name).label }));
-      cur = { d, rows, filter: "all", shown: PER };
+      // a review's vote is its last mention of the dish that takes a side, the same rule the pipeline counts with
+      // (src/sentiment.py vote); "neutral" is left only when no mention takes a side
+      const rows = d.review_ids.map(id => BY_ID.get(id)).filter(Boolean).map(rv => {
+        const ms = rv.dishes.filter(x => x.dish === name).reverse();
+        return { rv, vote: (ms.find(x => x.label !== "neutral") || ms[0]).label };
+      });
+      cur = { d, rows, filter: "all", shown: PER, shownUnclear: PER_UNCLEAR };
       $("#dishPlate").innerHTML = plate(d.dish, "sm");
       $("#dishName").textContent = d.dish;
-      $("#dishLiked").innerHTML = `<b>${d.positive} of ${d.mentions}</b> reviews liked it`;
+      $("#dishLiked").innerHTML = d.opinions ? `<b>${d.positive} of ${d.opinions}</b> liked it` : "No opinions yet";
       $("#dishBar").innerHTML = bar(d);
       renderReviews();
       if (!dlg.open) dlg.showModal();
@@ -183,26 +187,34 @@
     }
 
     function renderReviews() {
-      const { d, rows, filter, shown } = cur;
-      $("#dishTabs").innerHTML = [["all", "All", d.mentions], ["positive", "Liked it", d.positive], ["negative", "Didn't like it", d.negative], ["neutral", "No clear opinion", d.neutral]]
+      const { d, rows, filter, shown, shownUnclear } = cur;
+      $("#dishTabs").innerHTML = [["all", "All", d.opinions], ["positive", "Liked it", d.positive], ["negative", "Didn't like it", d.negative]]
         .map(([k, l, n]) => `<button class="chip ${filter === k ? "active" : ""}" data-filter="${k}" ${n ? "" : "disabled"}>${l} <small>${n}</small></button>`).join("")
         + `<p class="left-out">${LEFT_OUT}</p>`;
-      const list = rows.filter(x => filter === "all" || x.vote === filter);
-      $("#dishReviews").innerHTML = list.slice(0, shown).map(({ rv, vote }) => `<article class="review">
-          <div class="review-head"><span class="vote ${vote}">${VOTE[vote]}</span><span class="stars" aria-label="${rv.rating} out of 5 stars">${stars(rv.rating)}</span></div>
+      const card = ({ rv, vote }) => `<article class="review">
+          <div class="review-head">${VOTE[vote] ? `<span class="vote ${vote}">${VOTE[vote]}</span>` : ""}<span class="stars" aria-label="${rv.rating} out of 5 stars">${stars(rv.rating)}</span></div>
           <p>${reviewText(rv, d.dish)}</p>
-        </article>`).join("")
-        + (list.length > shown ? `<button class="link more" data-more>Show more (${list.length - shown} left)</button>` : "");
+        </article>`;
+      const more = (left, key) => left > 0 ? `<button class="link more" data-more="${key}">Show more (${left} left)</button>` : "";
+      const list = rows.filter(x => x.vote !== "neutral" && (filter === "all" || x.vote === filter));
+      // reviews that name the dish without taking a side: kept apart at the very bottom, never counted
+      const unclear = rows.filter(x => x.vote === "neutral");
+      $("#dishReviews").innerHTML = list.slice(0, shown).map(card).join("") + more(list.length - shown, "shown")
+        + (unclear.length ? `<section class="no-opinion">
+            <h3>Mentioned, no opinion given <small>${unclear.length}</small></h3>
+            <p>These reviews name the dish without saying whether it was good or bad, so they are not counted above.</p>
+            ${unclear.slice(0, shownUnclear).map(card).join("")}${more(unclear.length - shownUnclear, "shownUnclear")}
+          </section>` : "");
     }
 
     $("#dishTabs").addEventListener("click", e => {
       const b = e.target.closest("[data-filter]"); if (!b) return;
-      Object.assign(cur, { filter: b.dataset.filter, shown: PER });
+      Object.assign(cur, { filter: b.dataset.filter, shown: PER, shownUnclear: PER_UNCLEAR });
       renderReviews();
     });
     $("#dishReviews").addEventListener("click", e => {
-      if (!e.target.closest("[data-more]")) return;
-      cur.shown += PER;
+      const b = e.target.closest("[data-more]"); if (!b) return;
+      cur[b.dataset.more] += PER;
       renderReviews();
     });
     $("#dishClose").onclick = () => dlg.close();

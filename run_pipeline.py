@@ -42,8 +42,8 @@ def main():
     export_web.write({
         "restaurants": sorted(rests.values(), key=lambda r: r["rank"]),
         "dishes": dishes, "reviews": reviews, "funnel": funnel, "evaluation": evaluation,
-        "thresholds": {"min_mentions": aggregate.MIN_MENTIONS, "signature_love": aggregate.SIG_LOVE,
-                       "signature_max_neg": aggregate.SIG_NEG, "critical_neg": aggregate.CRIT_NEG},
+        "thresholds": {"min_opinions": aggregate.MIN_OPINIONS, "love_it": aggregate.LOVE_IT,
+                       "mixed_low": aggregate.MIXED_LOW, "mixed_high": aggregate.MIXED_HIGH},
     })
     export_removed.write(removed)
     for f in funnel:
@@ -51,7 +51,7 @@ def main():
     print("reviews naming a dish:", sum(bool(r["dishes"]) for r in reviews), "/", len(reviews))
     print("eval:", evaluation)
     for d in dishes[:25]:
-        print(f"{d['restaurant'][:16]:<16} {d['dish']:<28} n={d['mentions']:<3} love={d['love_score']:+.2f} neg={d['neg_rate']:.2f} {d['category']}")
+        print(f"{d['restaurant'][:16]:<16} {d['dish']:<28} liked {d['positive']}/{d['opinions']} (+{d['neutral']} no opinion) {d['category']}")
 
 
 if __name__ == "__main__":
