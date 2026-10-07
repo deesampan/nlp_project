@@ -43,5 +43,5 @@ def write(payload: dict) -> None:
     RESULTS.mkdir(parents=True, exist_ok=True)
     WEB.mkdir(parents=True, exist_ok=True)
     payload["images"] = dish_images({d["dish"] for d in payload["dishes"]})
-    (RESULTS / "resrec_data.json").write_text(json.dumps(payload, ensure_ascii=False, indent=1))
-    (WEB / "data.js").write_text("window.RESREC_DATA = " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + ";\n")
+    (RESULTS / "resrec_data.json").write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    (WEB / "data.js").write_text("window.RESREC_DATA = " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + ";\n", encoding="utf-8")

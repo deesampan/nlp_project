@@ -3,7 +3,7 @@
     .venv/bin/python run_pipeline.py
 """
 import csv
-from src import load_data, preprocess, dish_extract, sentiment, aggregate, export_web
+from src import load_data, preprocess, dish_extract, sentiment, aggregate, export_web, export_removed
 from src.common import RESULTS
 
 
@@ -12,7 +12,7 @@ def main():
     df = load_data.load_reviews()
     rests = load_data.load_restaurants()
     # 2. preprocess
-    df, funnel = preprocess.run(df)
+    df, funnel, removed = preprocess.run(df)
     # 3 + 4. dish extraction and dish-level sentiment
     gaz = {name: dish_extract.build_gazetteer(r) for name, r in rests.items()}
     reviews = []
@@ -45,6 +45,7 @@ def main():
         "thresholds": {"min_mentions": aggregate.MIN_MENTIONS, "signature_love": aggregate.SIG_LOVE,
                        "signature_max_neg": aggregate.SIG_NEG, "critical_neg": aggregate.CRIT_NEG},
     })
+    export_removed.write(removed)
     for f in funnel:
         print(f"{f['step']:<30} -{f['removed']:<4} -> {f['remaining']}")
     print("reviews naming a dish:", sum(bool(r["dishes"]) for r in reviews), "/", len(reviews))

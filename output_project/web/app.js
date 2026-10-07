@@ -126,16 +126,33 @@
       $("#rareBlock").hidden = false;
     }
 
+    /* ---- reviews the cleaning step left out (removed.js, written by src/export_removed.py) ---- */
+    const REASON = { N1: "Empty", N2: "Duplicate", N3: "Too short", N4: "Not English" };
+    const reasonOf = x => REASON[x.reason.slice(0, 2)] || x.reason;
+    const gone = (window.RESREC_REMOVED || []).filter(x => x.restaurant === r.name);
+    const counts = {};
+    gone.forEach(x => counts[reasonOf(x)] = (counts[reasonOf(x)] || 0) + 1);
+    const reasons = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);   // most common reason first
+    const goneSummary = reasons.map(k => `${counts[k]} ${k.toLowerCase()}`).join(", ");
+    const LEFT_OUT = gone.length ? `${gone.length} reviews were left out before analysis (${goneSummary}), so they are not counted here. They are listed at the bottom of the page.` : "";
+    if (gone.length) {
+      $("#leftOutNote").textContent = `These ${gone.length} reviews were not analysed: ${goneSummary}.`;
+      $("#leftOut").innerHTML = [...gone].sort((a, b) => reasons.indexOf(reasonOf(a)) - reasons.indexOf(reasonOf(b)) || a.id - b.id).map(x => {
+        // empty reviews have no cleaned text: say what was there instead
+        const text = x.clean ? esc(x.clean)
+          : `<em>${/\S/.test(x.raw.replace(/^\s*RATED\s*/, "")) ? "Only emoji or broken characters" : "No text"}</em>`;
+        return `<li><span class="tag reason">${reasonOf(x)}</span>
+          <span class="stars" ${x.rating ? `aria-label="${x.rating} out of 5 stars">${stars(x.rating)}` : ">"}</span>
+          <span class="left-out-text">${text}</span></li>`;
+      }).join("");
+      $("#leftOutBlock").hidden = false;
+    }
+
     /* ---- dish dialog: every review that mentions the dish ---- */
     const BY_ID = new Map(D.reviews.map(x => [x.id, x]));
     const VOTE = { positive: "Liked it", negative: "Didn't like it", neutral: "No clear opinion" };
     const PER = 10;
     const dlg = $("#dish");
-    // reviews dropped by preprocessing, from the pipeline's noise funnel: "79 reviews ... (70 too short, 6 empty, 3 duplicate)"
-    const REASON = { N1: "empty", N2: "duplicate", N3: "too short", N4: "not English" };
-    const dropped = D.funnel.filter(s => s.removed > 0).sort((a, b) => b.removed - a.removed);
-    const nDropped = dropped.reduce((a, s) => a + s.removed, 0);
-    const LEFT_OUT = nDropped ? `${fmt(nDropped)} reviews were left out before analysis (${dropped.map(s => `${s.removed} ${REASON[s.step.slice(0, 2)] || s.step}`).join(", ")}), so they are not counted here.` : "";
     let cur = null;
 
     // highlight every mention of the dish in the review text, coloured by that mention's opinion

@@ -112,6 +112,17 @@ button.stat:hover { border-color: var(--dark); }
 .bar i { display: block; height: 100%; }
 .rare-note { margin: 40px 0 14px; font-size: 15px; }
 
+/* reviews the cleaning step left out */
+.left-out-block { margin-top: 64px; }
+.left-out-block h2 { font-size: clamp(22px, 2.6vw, 26px); font-weight: 600; }
+.left-out-block > p { margin: 6px 0 16px; }
+.left-out-list { list-style: none; margin: 0; padding: 0; border: 1.5px solid var(--line); border-radius: 24px; overflow: hidden; }
+.left-out-list li { display: grid; grid-template-columns: 100px 96px minmax(0, 1fr); gap: 16px; align-items: center; padding: 10px 22px; }
+.left-out-list li + li { border-top: 1px solid var(--line); }
+.left-out-text { font-size: 15px; overflow-wrap: anywhere; }
+.left-out-text em { color: var(--ink-2); }
+.tag.reason { justify-self: start; background: var(--panel); color: var(--ink-2); }
+
 .chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 14px; font-size: 14px; color: var(--ink); }
 .chip small { color: var(--ink-2); font-size: 12px; margin-left: 4px; }
 .chip:hover { border-color: var(--dark); }
@@ -171,6 +182,8 @@ footer a { color: var(--ink); }
   .dish-row { grid-template-columns: 44px minmax(0, 1fr) auto; grid-template-areas: "pic name score" "pic bar bar"; gap: 6px 14px; padding: 12px 16px; }
   .plate.row { width: 44px; font-size: 20px; }
   .chev { display: none; }
+  .left-out-list li { grid-template-columns: auto 1fr; gap: 4px 12px; padding: 10px 16px; }
+  .left-out-text { grid-column: 1 / -1; }
   .dlg-head { padding: 18px 18px 14px; gap: 14px; }
   .dlg-head .plate { display: none; }
   .tabs { padding: 14px 18px 4px; }

@@ -58,20 +58,26 @@ def ascii_ratio(raw: str) -> float:
     return sum(c.isascii() for c in s) / max(len(s), 1)
 
 
-def run(df: pd.DataFrame) -> tuple[pd.DataFrame, list[dict]]:
+def run(df: pd.DataFrame) -> tuple[pd.DataFrame, list[dict], pd.DataFrame]:
+    """Returns the kept reviews, the noise funnel, and the removed reviews
+    (each with a `reason` column naming the funnel step that dropped it)."""
     funnel = [{"step": "Raw reviews loaded", "removed": 0, "remaining": len(df)}]
+    removed = []
 
-    def log(step, before, after):
-        funnel.append({"step": step, "removed": before - after, "remaining": after})
+    def keep(mask, step):
+        nonlocal df
+        removed.append(df[~mask].assign(reason=step))
+        funnel.append({"step": step, "removed": int((~mask).sum()), "remaining": int(mask.sum())})
+        df = df[mask]
 
     df = df.copy()
     df["clean_text"] = df["review_text_raw"].map(clean_text)
 
-    n = len(df); df = df[df["clean_text"].str.len() > 0]; log("N1 Empty after cleaning", n, len(df))
-    n = len(df); df = df.drop_duplicates(subset=["restaurant_name", "clean_text"]); log("N2 Duplicate reviews", n, len(df))
-    n = len(df); df = df[df["clean_text"].str.split().str.len() >= 2]; log("N3 Too short (<2 words)", n, len(df))
-    n = len(df); df = df[df["review_text_raw"].map(ascii_ratio) >= 0.7]; log("N4 Non-English / non-Latin", n, len(df))
+    keep(df["clean_text"].str.len() > 0, "N1 Empty after cleaning")
+    keep(~df.duplicated(subset=["restaurant_name", "clean_text"]), "N2 Duplicate reviews")
+    keep(df["clean_text"].str.split().str.len() >= 2, "N3 Too short (<2 words)")
+    keep(df["review_text_raw"].map(ascii_ratio) >= 0.7, "N4 Non-English / non-Latin")
 
     df["tokens"] = df["clean_text"].map(tokenize)
     df["tokens_nostop"] = df["tokens"].map(remove_stop)
-    return df.reset_index(drop=True), funnel
+    return df.reset_index(drop=True), funnel, pd.concat(removed, ignore_index=True)
