@@ -1,0 +1,8 @@
+# Only the 3-restaurant site goes online. The old dashboard (classic.html) needs the
+# Flask server for its CSV upload, so it stays local-only.
+classic.html
+dashboard.js
+style.css
+data/
+README.md
+.gitkeep

@@ -143,7 +143,10 @@ Rules:
   2. **Live upload** — the user posts a CSV plus a restaurant name; Flask runs the real model and returns the same JSON shape. Analysed in memory, never written to disk, forgotten on refresh.
 - **One analysis implementation only.** `src/analyze.py` holds the engine; both `build_slice.py` and `app.py` call it. Never fork the logic — the batch and live paths must not drift.
 - Caching is disabled server-side. Without that, browsers serve a stale `dashboard.json` after a rebuild and the page silently shows the previous run's numbers.
-- No deployment, no hosting, no domain. Graders run it locally.
+- Graders run it locally (`start.bat`). A static copy of the 3-restaurant site is also on Vercel
+  (project `resrec`, uploaded from `output_project/web/` with the Vercel CLI; `.vercelignore` keeps
+  `classic.html` out because its CSV upload needs Flask). The GitHub repo stays private: the review
+  data's licence ("Data files © Original Authors") does not allow redistributing the dataset.
 
 ---
 
