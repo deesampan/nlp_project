@@ -49,6 +49,12 @@ redistribute `zomato.csv`**. This is why `data_raw/` is excluded from version co
 the repository ships the pipeline that regenerates our derived files rather than the raw data
 itself. Anyone reproducing this work downloads the CSV from Kaggle themselves.
 
+**The repository is public.** It does contain derived files with review text — the cleaned
+corpus (`output_project/data/reviews_clean.csv`, 134,612 reviews), the three website
+restaurants' reviews, and the website's `data.js`. Publishing these goes beyond what the licence
+clearly allows; the team made the repository public knowingly and accepts that risk. The raw
+`zomato.csv` itself is not in the repository.
+
 **Provenance of the data itself.** The dataset was scraped from Zomato's Bengaluru listings
 around 15 March 2019 by the Kaggle author. We did not scrape anything — see the scope note in
 [report.md](report.md). Reviews are therefore Indian-English restaurant reviews from one city

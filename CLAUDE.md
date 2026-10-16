@@ -148,8 +148,11 @@ Rules:
   disabled; without that, browsers serve a stale `data.js` after a rebuild and the page silently
   shows the previous run's numbers.
 - A static copy of the site is also on Vercel (project `resrec`, uploaded from `output_project/web/`
-  with the Vercel CLI). The GitHub repo stays private: the review data's licence ("Data files ©
-  Original Authors") does not allow redistributing the dataset.
+  with the Vercel CLI: `npx vercel deploy --prod` from that folder).
+- The GitHub repo (`deesampan/nlp_project`) is **public** since 2026-10-16, by team decision. It
+  contains derived review text (`output_project/data/*.csv`, `web/data.js`) although the data's
+  licence ("Data files © Original Authors") is not open; the team accepted that risk. The raw
+  `data_raw/zomato.csv` is still never committed.
 
 ---
 
