@@ -54,8 +54,8 @@
   <div class="sub">Restaurant Recommendation From Reviews — NLP Group Project</div>
   <table class="meta">
     <tr><td><b>ทีม</b></td><td>Deesampan Vongsurit (6510766), Wattanan Jiratriluk (6520214)</td></tr>
-    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>cfa9c5f</code> "Run the website on the trained model; remove classic.html" — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับโค้ดเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
-    <tr><td><b>วันที่</b></td><td>16 ตุลาคม 2026 (ฉบับที่ 2 — แทนฉบับแรกที่ยังมี classic.html และ VADER)</td></tr>
+    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>cb6945f</code> (main) — โค้ด โมเดล และ <code>data.js</code> เหมือน <code>cfa9c5f</code> ทุกบรรทัด ต่างแค่เอกสาร — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
+    <tr><td><b>วันที่</b></td><td>16 ตุลาคม 2026 (ฉบับที่ 3 — repo บน GitHub เป็นสาธารณะแล้ว และ Vercel อัปเดตเป็นตัวเลขของโมเดลที่เทรนเองแล้ว)</td></tr>
   </table>
 
   <div class="box warn">
@@ -97,6 +97,7 @@
   <li><b>โมเดล:</b> ทดสอบกับ 26,678 รีวิวที่โมเดลไม่เคยเห็น ถูก <b>82.2%</b> (VADER สำเร็จรูป 72.7%, เดาคำตอบที่พบบ่อยที่สุดอย่างเดียว 60.5%) ถ้าแยกแค่ชอบ/ไม่ชอบ ถูก 96.5%</li>
   <li><b>ผลบนเว็บ:</b> รีวิวเชิงบวก Biriyani Nights 36%, Night Food Joint 26%, BOX8- Desi Meals 57% — มีเมนูที่ข้อมูลพอจัดอันดับ 8 / 9 / 17 เมนู</li>
   <li><b>Noise:</b> ข้อมูลดิบ 1,317,782 รีวิว ซ้ำกันถึง 89% เหลือ 134,612 รีวิวที่สะอาด ส่วน 3 ร้านบนเว็บ 1,400 → 1,321 รีวิว (ข้อ 3)</li>
+  <li><b>เปิดดูเว็บ:</b> ในเครื่องด้วย <code>start.bat</code> (http://localhost:8000) หรือสำเนาออนไลน์ https://resrec.vercel.app — ตัวเลขชุดเดียวกัน (ตรวจแล้ว 16 ต.ค. 2026)</li>
   <li><b>พิสูจน์ว่าใช้ NLP จริง (รันแล้ว):</b> แก้ข้อความรีวิวเดียว "gulab jamun is <span class="pos">mouth watering and tasty af!</span>" → "<span class="neg">stale and tasteless!</span>" โดยไม่แตะดาว Gulab Jamun ของ Biriyani Nights ตกจาก 8 ใน 11 (73%) เป็น 7 ใน 11 (64%) และตกลงไป 1 อันดับ (ข้อ 5)</li>
 </ul>
 
@@ -112,8 +113,8 @@
 <h3>หลักฐานที่ตรวจแล้ว</h3>
 <table>
   <tr><th style="width:30%">ตรวจอะไร</th><th>พบอะไร</th></tr>
-  <tr><td>ประวัติ git (<code>git log</code>)</td><td>มี 5 commit จากบัญชีของทีม commit แรก <code>97d6c94</code> (7 ต.ค. 2026) ใส่ไฟล์ทั้งโปรเจกต์เข้ามาในครั้งเดียว ประวัติก่อนหน้านั้นไม่อยู่ใน repo จึง<b>ไล่ไม่ได้ว่าโค้ดเก่าแต่ละบรรทัดใครเขียน</b></td></tr>
-  <tr><td>บรรทัด <code>Co-Authored-By: Claude</code></td><td><b>มีใน 2 commit ล่าสุด</b> (16 ต.ค. 2026): <code>3dd93b0</code> (ซ่อมไฟล์ raw และทำให้ run_pipeline รันได้) และ <code>cfa9c5f</code> (เปลี่ยนเว็บมาใช้โมเดลที่เทรนเอง ลบ classic.html) — เป็นหลักฐานใน git ตรง ๆ ว่า AI ร่วมเขียน</td></tr>
+  <tr><td>ประวัติ git (<code>git log</code>)</td><td>มี 7 commit จากบัญชีของทีม commit แรก <code>97d6c94</code> (7 ต.ค. 2026) ใส่ไฟล์ทั้งโปรเจกต์เข้ามาในครั้งเดียว ประวัติก่อนหน้านั้นไม่อยู่ใน repo จึง<b>ไล่ไม่ได้ว่าโค้ดเก่าแต่ละบรรทัดใครเขียน</b></td></tr>
+  <tr><td>บรรทัด <code>Co-Authored-By: Claude</code></td><td><b>มีในทั้ง 4 commit ของวันที่ 16 ต.ค. 2026</b>: <code>3dd93b0</code> (ซ่อมไฟล์ raw และทำให้ run_pipeline รันได้), <code>cfa9c5f</code> (เปลี่ยนเว็บมาใช้โมเดลที่เทรนเอง ลบ classic.html), <code>f0fecd2</code> (เพิ่มเอกสารนี้) และ <code>cb6945f</code> (เอกสารเรื่อง repo สาธารณะ) — เป็นหลักฐานใน git ตรง ๆ ว่า AI ร่วมเขียน</td></tr>
   <tr><td>ไฟล์ <code>CLAUDE.md</code> ใน repo</td><td>บรรทัดแรกบอกว่าเป็นไฟล์ตั้งค่า "AI agent" ที่ทำงานใน repo นี้ <span class="ref" data-x="configures the AI agent">CLAUDE.md:3</span> และให้ AI เป็น "CTO" ที่ทั้งวางแผน เขียนโค้ด และออกแบบเว็บ <span class="ref" data-x="CTO of this project">CLAUDE.md:9</span></td></tr>
   <tr><td>ลักษณะโค้ด</td><td>เฉพาะเจาะจงกับข้อมูลชุดนี้มาก (ชื่อคอลัมน์ Zomato, ชื่อร้าน "Biriyani Nights" ในคอมเมนต์ <span class="ref" data-x="restaurant&#x27;s own name">src/dish_extract.py:60</span>) ไม่มีหัวไฟล์ license ของโปรเจกต์อื่น → <b>ไม่ใช่โปรเจกต์ open source ที่นำเข้ามา</b></td></tr>
 </table>
@@ -175,6 +176,7 @@
   <li>เสิร์ฟไฟล์ในโฟลเดอร์ <code>output_project/web/</code> <span class="ref" data-x="send_from_directory(OUT_WEB">src/app.py:26-33</span> — ไม่มีการคำนวณบนเซิร์ฟเวอร์แล้ว</li>
   <li>ปิด cache ทุกคำตอบ เพื่อให้รีเฟรชแล้วเห็นผลที่สร้างใหม่ทันที <span class="ref" data-x="Cache-Control">src/app.py:19-23</span></li>
   <li><code>start.bat</code> เรียกไฟล์นี้ <span class="ref" data-x="src\app.py">start.bat:15</span></li>
+  <li>สำเนาแบบ static บน Vercel: https://resrec.vercel.app — อัปโหลดโฟลเดอร์ <code>output_project/web</code> ด้วย <code>npx vercel deploy --prod</code> <span class="ref" data-x="npx vercel deploy --prod">CLAUDE.md:150-151</span> ตรวจแล้ว (16 ต.ค. 2026) ว่าเสิร์ฟ <code>data.js</code> เนื้อหาเดียวกับใน repo และ <code>/classic.html</code> ไม่มีแล้ว (404)</li>
 </ul>
 
 <!-- ================================================================== 3 -->
@@ -242,6 +244,7 @@
 </table>
 
 <h3>ข้อมูลที่ได้จากการประมวลผล (<code>output_project/data/</code>)</h3>
+<p>ไฟล์ในตารางนี้ <b>อยู่ใน repo สาธารณะ</b> บน GitHub (ต่างจาก <code>zomato.csv</code> ที่ไม่ถูกเก็บ) — ดูคำถามที่ 15</p>
 <table>
   <tr><th style="width:34%">ไฟล์</th><th>สร้างโดย</th><th>ใช้ที่ไหน</th></tr>
   <tr><td><code>reviews_clean.csv</code> (134,612 รีวิว)</td><td><code>src/build_corpus.py</code></td><td>เทรนโมเดล → <code>models/sentiment_tfidf_lr.pkl</code></td></tr>
@@ -303,7 +306,7 @@ git status</pre></li>
 <div class="box">
   <span class="label">ทดสอบอย่างไร และคืนค่าเดิมแล้วหรือยัง</span>
   <ul>
-    <li>ทำใน <b>สำเนาของ commit <code>cfa9c5f</code></b> ในโฟลเดอร์ชั่วคราว ไม่ได้แก้ไฟล์ใน repo จริงเลย (<code>git status</code> สะอาด)</li>
+    <li>ทำใน <b>สำเนาของ commit <code>cfa9c5f</code></b> (โค้ดและข้อมูลเหมือน <code>cb6945f</code>) ในโฟลเดอร์ชั่วคราว ไม่ได้แก้ไฟล์ใน repo จริงเลย (<code>git status</code> สะอาด)</li>
     <li>ก่อนแก้ รัน <code>run_pipeline.py</code> กับข้อมูลเดิมแล้ว <code>data.js</code> ที่ได้ <b>ตรงกับที่ commit ไว้ทุกไบต์</b> (ต่างแค่ตัวขึ้นบรรทัดตัวสุดท้ายของไฟล์ ซึ่ง Windows เขียนเป็น CRLF)</li>
     <li>session หลักทดสอบรีวิวเดียวกันแยกต่างหากและได้ 8/11 → 7/11 เหมือนกัน</li>
     <li>รูปทั้ง 2 ถ่ายด้วย Chrome แบบ headless จากหน้าเว็บจริง แล้วครอปตรงแถวเมนู</li>
@@ -365,7 +368,7 @@ git status</pre></li>
 </ul></div></div>
 
 <div class="qa"><div class="q">15. ใช้ข้อมูลนี้ได้ถูกต้องตามสิทธิ์ไหม?</div>
-<div class="a">ข้อมูลอยู่บน Kaggle สิทธิ์ "Data files © Original Authors" ซึ่ง<b>ไม่ใช่ open licence</b> เราใช้เพื่อการศึกษา ไม่แจกจ่ายไฟล์ข้อมูลดิบ (repo บน GitHub เป็น private, <code>data_raw/</code> ไม่ถูกเก็บใน git) และอ้างอิงแหล่งที่มาไว้ใน <code>sources.md</code> ข้อควรรู้: เว็บบน Vercel ที่เปิดสาธารณะมี <code>data.js</code> ซึ่งมีข้อความรีวิวราว 1,300 รีวิวอยู่ข้างใน ถ้าอาจารย์ถามควรตอบตรง ๆ</div></div>
+<div class="a">ต้องตอบตามจริง: ข้อมูลอยู่บน Kaggle สิทธิ์ "Data files © Original Authors" ซึ่ง<b>ไม่ใช่ open licence</b> repo บน GitHub (<code>deesampan/nlp_project</code>) <b>เป็นสาธารณะ</b> ตั้งแต่ 16 ต.ค. 2026 ตามการตัดสินใจของทีม ใน repo <b>ไม่มีไฟล์ดิบ</b> <code>zomato.csv</code> (<code>data_raw/</code> ไม่ถูกเก็บใน git) แต่<b>มีไฟล์ที่ได้จากการประมวลผลซึ่งมีข้อความรีวิวอยู่</b>: <code>reviews_clean.csv</code> (134,612 รีวิว), รีวิวของ 3 ร้าน และ <code>data.js</code> ของเว็บ (ซึ่ง Vercel ก็เสิร์ฟแบบสาธารณะ ~1,300 รีวิว) การเผยแพร่แบบนี้เกินกว่าที่สิทธิ์อนุญาตชัดเจน <b>ทีมรู้และยอมรับความเสี่ยงนี้เอง</b> และเขียนไว้ใน <code>sources.md</code> <span class="ref" data-x="The repository is public.">output_project/reports/sources.md:52-56</span> เราอ้างอิงแหล่งที่มาครบและใช้เพื่อการศึกษา ถ้าอาจารย์เห็นว่าไม่ควร ทีมทำ repo กลับเป็น private ได้</div></div>
 
 <div class="qa"><div class="q">16. ทำไมไม่ scrape รีวิวเอง?</div>
 <div class="a">เป็นการเปลี่ยนขอบเขตที่ตกลงไว้: scrape ผิดเงื่อนไขของแพลตฟอร์ม ทำซ้ำไม่ได้ (ข้อมูลเปลี่ยนตลอด) และเสียเวลาไปกับงานที่ไม่ใช่ NLP ชุดข้อมูลสาธารณะทำให้คนอื่นตรวจผลซ้ำได้</div></div>
@@ -380,22 +383,22 @@ git status</pre></li>
 <div class="a">ตอบตามจริง (ดูข้อ 1): ใช้ AI coding assistant (Claude Code) ช่วยเขียนโค้ด มี <code>CLAUDE.md</code> และบรรทัด Co-Authored-By ใน commit เป็นหลักฐาน ทีมเป็นคนกำหนดโจทย์และขอบเขต (เช่น ตัด ABSA, ไม่ scrape, ใช้โมเดลเดียว) และต้องอธิบายได้ทุกขั้น — <b>เอกสารนี้มีไว้ให้ทีมเข้าใจโค้ดจนอธิบายได้เอง</b> (ทีมปรับประโยคนี้ให้ตรงกับความจริง)</div></div>
 
 <div class="qa"><div class="q">20. รันซ้ำแล้วได้ผลเดิมไหม?</div>
-<div class="a">ได้ รัน <code>run_pipeline.py</code> จาก commit <code>cfa9c5f</code> ได้ <code>data.js</code> ตรงกับที่ commit ไว้ทุกไบต์ (ตรวจแล้ว) ตั้ง seed ไว้ทั้งการแบ่งข้อมูล (42) และ langdetect (0) ครั้งแรกบนเครื่องใหม่ต้องต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล NLTK ส่วนการเทรนโมเดลใหม่ต้องมี <code>zomato.csv</code> จาก Kaggle</div></div>
+<div class="a">ได้ รัน <code>run_pipeline.py</code> จาก commit <code>cfa9c5f</code> ได้ <code>data.js</code> ตรงกับที่ commit ไว้ทุกไบต์ (ตรวจแล้ว; <code>cb6945f</code> ใช้โค้ดและ <code>data.js</code> ชุดเดียวกัน) ตั้ง seed ไว้ทั้งการแบ่งข้อมูล (42) และ langdetect (0) ครั้งแรกบนเครื่องใหม่ต้องต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล NLTK ส่วนการเทรนโมเดลใหม่ต้องมี <code>zomato.csv</code> จาก Kaggle</div></div>
 
 <!-- ================================================================== 7 -->
 <h2>7. เรื่องที่ยังค้างอยู่</h2>
-<p>ปัญหาที่ฉบับแรกเจอ <b>แก้แล้ว</b>ใน <code>3dd93b0</code> และ <code>cfa9c5f</code>: ไฟล์ raw เสีย, ข้อมูล NLTK, เครื่องวิเคราะห์ 2 ชุด, เอกสารไม่ตรงกับโค้ด ที่ยังเหลือ (ตรวจกับ <code>cfa9c5f</code> แล้ว):</p>
+<p>ปัญหาที่ฉบับแรกเจอ <b>แก้แล้ว</b>ใน <code>3dd93b0</code> และ <code>cfa9c5f</code>: ไฟล์ raw เสีย, ข้อมูล NLTK, เครื่องวิเคราะห์ 2 ชุด, เอกสารไม่ตรงกับโค้ด ที่ยังเหลือ (ตรวจกับ <code>cb6945f</code> แล้ว):</p>
 <table>
   <tr><th style="width:4%">#</th><th style="width:32%">เรื่อง</th><th>รายละเอียด / ผลกระทบ</th></tr>
   <tr><td>1</td><td><code>make_subset.py</code> ยังอ้างถึงไฟล์ที่ถูกลบ</td><td>บอกให้รัน <code>build_slice.py</code> ต่อ <span class="ref" data-x="build_slice.py">src/make_subset.py:10</span> <span class="ref" data-x="build_slice.py">src/make_subset.py:145</span> และเขียน <code>selected_restaurants_reviews.csv</code> แต่เว็บอ่าน <code>top3_restaurants_reviews.csv</code> → ถ้าจะเปลี่ยนร้าน ต้องคัดลอกไฟล์เอง</td></tr>
   <tr><td>2</td><td>ไฟล์ที่เว็บไม่ได้ใช้แล้ว</td><td><code>dish_gazetteer.csv</code>, <code>build_gazetteer.py</code>, <code>selected_restaurants_reviews.csv</code>, <code>dropped_duplicates.csv</code>, <code>sample_reviews.csv</code> — ถ้าอาจารย์เปิดดู ควรบอกได้ว่าเป็นของเวอร์ชันก่อน</td></tr>
   <tr><td>3</td><td>ความแม่นระดับอนุประโยคยังไม่ได้วัด</td><td>มีแค่การเช็กคร่าวด้วยดาว (21 จาก 747) — ดูคำถามที่ 9, 11</td></tr>
-  <tr><td>4</td><td>เว็บบน Vercel มีข้อความรีวิว</td><td><code>data.js</code> มีข้อความรีวิว ~1,300 รีวิว ขณะที่สิทธิ์ข้อมูลไม่ใช่ open licence — ดูคำถามที่ 15</td></tr>
+  <tr><td>4</td><td>Repo สาธารณะและเว็บ Vercel มีข้อความรีวิว</td><td>repo บน GitHub เปิดสาธารณะ มี <code>reviews_clean.csv</code> (134,612 รีวิว), รีวิวของ 3 ร้าน และ <code>data.js</code>; เว็บ Vercel ก็เสิร์ฟ <code>data.js</code> (~1,300 รีวิว) ขณะที่สิทธิ์ข้อมูลไม่ใช่ open licence — <b>ทีมตัดสินใจยอมรับความเสี่ยงนี้เอง</b> <span class="ref" data-x="is **public**">CLAUDE.md:152-155</span> ต้องตอบตรง ๆ ถ้าถูกถาม (คำถามที่ 15)</td></tr>
   <tr><td>5</td><td>ไอคอนบางเมนูเป็นกล่องว่างบน Windows 10</td><td>emoji รูปแผ่นแป้ง (U+1FAD3) ของ Paratha, Naan, Roti ไม่มีในฟอนต์ของ Windows 10 จึงขึ้นเป็นกล่อง เห็นในภาพหน้าจอระหว่างทดสอบ</td></tr>
   <tr><td>6</td><td>ต้องมีอินเทอร์เน็ตครั้งแรก</td><td>ข้อมูล NLTK โหลดอัตโนมัติตอนรันครั้งแรก <span class="ref" data-x="nltk.download">src/preprocess.py:14-19</span> ถ้าเครื่องกรรมการออฟไลน์ <code>run_pipeline.py</code> จะล้ม (แต่ <code>start.bat</code> เปิดเว็บได้ปกติ เพราะไม่ต้องสร้างข้อมูลใหม่)</td></tr>
 </table>
 
-<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จากโค้ด commit cfa9c5f และการรันทดสอบจริงวันที่ 16 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
+<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จาก commit cb6945f และการรันทดสอบจริงวันที่ 16 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
 
 </body>
 </html>
