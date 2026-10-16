@@ -54,8 +54,8 @@
   <div class="sub">Restaurant Recommendation From Reviews — NLP Group Project</div>
   <table class="meta">
     <tr><td><b>ทีม</b></td><td>Deesampan Vongsurit (6510766), Wattanan Jiratriluk (6520214)</td></tr>
-    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>cb6945f</code> (main) — โค้ด โมเดล และ <code>data.js</code> เหมือน <code>cfa9c5f</code> ทุกบรรทัด ต่างแค่เอกสาร — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
-    <tr><td><b>วันที่</b></td><td>16 ตุลาคม 2026 (ฉบับที่ 3 — repo บน GitHub เป็นสาธารณะแล้ว และ Vercel อัปเดตเป็นตัวเลขของโมเดลที่เทรนเองแล้ว)</td></tr>
+    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>โค้ด โมเดล และ <code>data.js</code> ตรงกับ commit <code>b0910e6</code>; เอกสารตรงกับ commit <code>0407afc</code> บวกกฎใหม่ใน <code>CLAUDE.md</code> — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
+    <tr><td><b>วันที่</b></td><td>16 ตุลาคม 2026 (ฉบับที่ 4 — repo บน GitHub เป็นสาธารณะ, Vercel แสดงตัวเลขของโมเดลที่เทรนเอง, เลข commit อัปเดตแล้ว)</td></tr>
   </table>
 
   <div class="box warn">
@@ -113,8 +113,8 @@
 <h3>หลักฐานที่ตรวจแล้ว</h3>
 <table>
   <tr><th style="width:30%">ตรวจอะไร</th><th>พบอะไร</th></tr>
-  <tr><td>ประวัติ git (<code>git log</code>)</td><td>มี 7 commit จากบัญชีของทีม commit แรก <code>97d6c94</code> (7 ต.ค. 2026) ใส่ไฟล์ทั้งโปรเจกต์เข้ามาในครั้งเดียว ประวัติก่อนหน้านั้นไม่อยู่ใน repo จึง<b>ไล่ไม่ได้ว่าโค้ดเก่าแต่ละบรรทัดใครเขียน</b></td></tr>
-  <tr><td>บรรทัด <code>Co-Authored-By: Claude</code></td><td><b>มีในทั้ง 4 commit ของวันที่ 16 ต.ค. 2026</b>: <code>3dd93b0</code> (ซ่อมไฟล์ raw และทำให้ run_pipeline รันได้), <code>cfa9c5f</code> (เปลี่ยนเว็บมาใช้โมเดลที่เทรนเอง ลบ classic.html), <code>f0fecd2</code> (เพิ่มเอกสารนี้) และ <code>cb6945f</code> (เอกสารเรื่อง repo สาธารณะ) — เป็นหลักฐานใน git ตรง ๆ ว่า AI ร่วมเขียน</td></tr>
+  <tr><td>ประวัติ git (<code>git log</code>)</td><td>commit แรก <code>97d6c94</code> (7 ต.ค. 2026) ใส่ไฟล์ทั้งโปรเจกต์เข้ามาในครั้งเดียว ประวัติก่อนหน้านั้นไม่อยู่ใน repo และข้อความ commit ไม่ได้บันทึกว่าส่วนไหนใช้ AI ช่วย — <b>ใช้ git ตอบคำถามนี้ไม่ได้</b> ทั้งทางว่ามีหรือไม่มี</td></tr>
+  <tr><td>กฎของ repo เรื่องชื่อ AI ใน git</td><td>ทีมตั้งกฎว่าข้อความ commit ไม่ใส่ชื่อ AI และให้เปิดเผยการใช้ AI ใน report และในเอกสารนี้แทน <span class="ref" data-x="No AI attribution in git">CLAUDE.md:186-188</span> — <b>ข้อควรรู้:</b> ตอนนี้ <code>report.md</code> ยังไม่มีข้อความเปิดเผยเรื่องนี้ (ค้นแล้วไม่พบคำว่า AI หรือ Claude) ควรเพิ่มก่อนส่ง (ข้อ 7)</td></tr>
   <tr><td>ไฟล์ <code>CLAUDE.md</code> ใน repo</td><td>บรรทัดแรกบอกว่าเป็นไฟล์ตั้งค่า "AI agent" ที่ทำงานใน repo นี้ <span class="ref" data-x="configures the AI agent">CLAUDE.md:3</span> และให้ AI เป็น "CTO" ที่ทั้งวางแผน เขียนโค้ด และออกแบบเว็บ <span class="ref" data-x="CTO of this project">CLAUDE.md:9</span></td></tr>
   <tr><td>ลักษณะโค้ด</td><td>เฉพาะเจาะจงกับข้อมูลชุดนี้มาก (ชื่อคอลัมน์ Zomato, ชื่อร้าน "Biriyani Nights" ในคอมเมนต์ <span class="ref" data-x="restaurant&#x27;s own name">src/dish_extract.py:60</span>) ไม่มีหัวไฟล์ license ของโปรเจกต์อื่น → <b>ไม่ใช่โปรเจกต์ open source ที่นำเข้ามา</b></td></tr>
 </table>
@@ -232,7 +232,7 @@
 <p>รีวิวที่ถูกทิ้งแสดงบนหน้าร้านหัวข้อ "Reviews left out" <span class="ref" data-x="RESREC_REMOVED">output_project/web/app.js:130-150</span> จาก 1,321 รีวิวที่เหลือ มี <b>416 รีวิวที่พูดถึงเมนู</b> (รวม 747 ความเห็นต่อเมนู) อีก 905 รีวิวไม่พูดถึงเมนู — นับใน % รีวิวบวกของร้านอย่างเดียว</p>
 
 <h3>ข้อมูลเสียที่ซ่อมแล้ว</h3>
-<p>ไฟล์เมนู <code>top3_restaurants_raw.csv</code> เคยถูกบันทึกผ่าน Excel ซึ่งตัดช่องที่ยาวเกิน ~32,767 ตัวอักษร ทำให้แถวแตกเป็น 12 แถว × 3,664 คอลัมน์ commit <code>3dd93b0</code> เพิ่มสคริปต์ซ่อมที่ต่อแถวกลับเป็น 17 คอลัมน์ เมนูและข้อมูลร้านกลับมาครบ <span class="ref" data-x="def repair">src/repair_raw_csv.py:28-42</span></p>
+<p>ไฟล์เมนู <code>top3_restaurants_raw.csv</code> เคยถูกบันทึกผ่าน Excel ซึ่งตัดช่องที่ยาวเกิน ~32,767 ตัวอักษร ทำให้แถวแตกเป็น 12 แถว × 3,664 คอลัมน์ commit <code>4077e3f</code> เพิ่มสคริปต์ซ่อมที่ต่อแถวกลับเป็น 17 คอลัมน์ เมนูและข้อมูลร้านกลับมาครบ <span class="ref" data-x="def repair">src/repair_raw_csv.py:28-42</span></p>
 
 <!-- ================================================================== 4 -->
 <h2>4. ข้อมูลไฟล์ไหนสร้างตัวเลขไหนบนเว็บ</h2>
@@ -306,7 +306,7 @@ git status</pre></li>
 <div class="box">
   <span class="label">ทดสอบอย่างไร และคืนค่าเดิมแล้วหรือยัง</span>
   <ul>
-    <li>ทำใน <b>สำเนาของ commit <code>cfa9c5f</code></b> (โค้ดและข้อมูลเหมือน <code>cb6945f</code>) ในโฟลเดอร์ชั่วคราว ไม่ได้แก้ไฟล์ใน repo จริงเลย (<code>git status</code> สะอาด)</li>
+    <li>ทำใน <b>สำเนาของโค้ดชุดเดียวกับ commit <code>b0910e6</code></b> ในโฟลเดอร์ชั่วคราว ไม่ได้แก้ไฟล์ใน repo จริงเลย (<code>git status</code> สะอาด)</li>
     <li>ก่อนแก้ รัน <code>run_pipeline.py</code> กับข้อมูลเดิมแล้ว <code>data.js</code> ที่ได้ <b>ตรงกับที่ commit ไว้ทุกไบต์</b> (ต่างแค่ตัวขึ้นบรรทัดตัวสุดท้ายของไฟล์ ซึ่ง Windows เขียนเป็น CRLF)</li>
     <li>session หลักทดสอบรีวิวเดียวกันแยกต่างหากและได้ 8/11 → 7/11 เหมือนกัน</li>
     <li>รูปทั้ง 2 ถ่ายด้วย Chrome แบบ headless จากหน้าเว็บจริง แล้วครอปตรงแถวเมนู</li>
@@ -380,14 +380,14 @@ git status</pre></li>
 <div class="a">กัน "1 จาก 1 = 100%" ขึ้นเป็นเมนูที่ดีที่สุด ต้องมี ≥ 4 ความเห็นที่เลือกข้าง <span class="ref" data-x="MIN_OPINIONS = 4">src/aggregate.py:7</span> เมนูที่น้อยกว่านี้แสดงแยกว่า "ข้อมูลยังน้อยเกินไป" ส่วนรีวิวที่แค่เอ่ยชื่อเมนูโดยไม่เลือกข้าง ไม่ถูกนับใน % (ตัวหารคือคนที่บอกชัดว่าชอบหรือไม่ชอบ) <span class="ref" data-x="a[&quot;pos&quot;] + a[&quot;neg&quot;">src/aggregate.py:53-56</span></div></div>
 
 <div class="qa"><div class="q">19. AI เขียนโค้ดให้หรือเปล่า?</div>
-<div class="a">ตอบตามจริง (ดูข้อ 1): ใช้ AI coding assistant (Claude Code) ช่วยเขียนโค้ด มี <code>CLAUDE.md</code> และบรรทัด Co-Authored-By ใน commit เป็นหลักฐาน ทีมเป็นคนกำหนดโจทย์และขอบเขต (เช่น ตัด ABSA, ไม่ scrape, ใช้โมเดลเดียว) และต้องอธิบายได้ทุกขั้น — <b>เอกสารนี้มีไว้ให้ทีมเข้าใจโค้ดจนอธิบายได้เอง</b> (ทีมปรับประโยคนี้ให้ตรงกับความจริง)</div></div>
+<div class="a">ตอบตามจริง (ดูข้อ 1): ใช้ AI coding assistant (Claude Code) ช่วยเขียนโค้ด ภายใต้การกำหนดของทีม เปิดเผยไว้ในเอกสารนี้ และ <code>CLAUDE.md</code> ซึ่งเป็นไฟล์ตั้งค่า AI ก็อยู่ใน repo ทีมเป็นคนกำหนดโจทย์และขอบเขต (เช่น ตัด ABSA, ไม่ scrape, ใช้โมเดลเดียว) และต้องอธิบายได้ทุกขั้น — <b>เอกสารนี้มีไว้ให้ทีมเข้าใจโค้ดจนอธิบายได้เอง</b> (ทีมปรับประโยคนี้ให้ตรงกับความจริง และเพิ่มการเปิดเผยใน report ด้วย)</div></div>
 
 <div class="qa"><div class="q">20. รันซ้ำแล้วได้ผลเดิมไหม?</div>
-<div class="a">ได้ รัน <code>run_pipeline.py</code> จาก commit <code>cfa9c5f</code> ได้ <code>data.js</code> ตรงกับที่ commit ไว้ทุกไบต์ (ตรวจแล้ว; <code>cb6945f</code> ใช้โค้ดและ <code>data.js</code> ชุดเดียวกัน) ตั้ง seed ไว้ทั้งการแบ่งข้อมูล (42) และ langdetect (0) ครั้งแรกบนเครื่องใหม่ต้องต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล NLTK ส่วนการเทรนโมเดลใหม่ต้องมี <code>zomato.csv</code> จาก Kaggle</div></div>
+<div class="a">ได้ รัน <code>run_pipeline.py</code> จากโค้ดของ commit <code>b0910e6</code> ได้ <code>data.js</code> ตรงกับที่ commit ไว้ทุกไบต์ (ตรวจแล้ว; commit หลังจากนั้นเปลี่ยนแค่เอกสาร) ตั้ง seed ไว้ทั้งการแบ่งข้อมูล (42) และ langdetect (0) ครั้งแรกบนเครื่องใหม่ต้องต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล NLTK ส่วนการเทรนโมเดลใหม่ต้องมี <code>zomato.csv</code> จาก Kaggle</div></div>
 
 <!-- ================================================================== 7 -->
 <h2>7. เรื่องที่ยังค้างอยู่</h2>
-<p>ปัญหาที่ฉบับแรกเจอ <b>แก้แล้ว</b>ใน <code>3dd93b0</code> และ <code>cfa9c5f</code>: ไฟล์ raw เสีย, ข้อมูล NLTK, เครื่องวิเคราะห์ 2 ชุด, เอกสารไม่ตรงกับโค้ด ที่ยังเหลือ (ตรวจกับ <code>cb6945f</code> แล้ว):</p>
+<p>ปัญหาที่ฉบับแรกเจอ <b>แก้แล้ว</b>ใน <code>4077e3f</code> และ <code>b0910e6</code>: ไฟล์ raw เสีย, ข้อมูล NLTK, เครื่องวิเคราะห์ 2 ชุด, เอกสารไม่ตรงกับโค้ด ที่ยังเหลือ (ตรวจกับ <code>0407afc</code> + <code>CLAUDE.md</code> ฉบับล่าสุดแล้ว):</p>
 <table>
   <tr><th style="width:4%">#</th><th style="width:32%">เรื่อง</th><th>รายละเอียด / ผลกระทบ</th></tr>
   <tr><td>1</td><td><code>make_subset.py</code> ยังอ้างถึงไฟล์ที่ถูกลบ</td><td>บอกให้รัน <code>build_slice.py</code> ต่อ <span class="ref" data-x="build_slice.py">src/make_subset.py:10</span> <span class="ref" data-x="build_slice.py">src/make_subset.py:145</span> และเขียน <code>selected_restaurants_reviews.csv</code> แต่เว็บอ่าน <code>top3_restaurants_reviews.csv</code> → ถ้าจะเปลี่ยนร้าน ต้องคัดลอกไฟล์เอง</td></tr>
@@ -396,9 +396,10 @@ git status</pre></li>
   <tr><td>4</td><td>Repo สาธารณะและเว็บ Vercel มีข้อความรีวิว</td><td>repo บน GitHub เปิดสาธารณะ มี <code>reviews_clean.csv</code> (134,612 รีวิว), รีวิวของ 3 ร้าน และ <code>data.js</code>; เว็บ Vercel ก็เสิร์ฟ <code>data.js</code> (~1,300 รีวิว) ขณะที่สิทธิ์ข้อมูลไม่ใช่ open licence — <b>ทีมตัดสินใจยอมรับความเสี่ยงนี้เอง</b> <span class="ref" data-x="is **public**">CLAUDE.md:152-155</span> ต้องตอบตรง ๆ ถ้าถูกถาม (คำถามที่ 15)</td></tr>
   <tr><td>5</td><td>ไอคอนบางเมนูเป็นกล่องว่างบน Windows 10</td><td>emoji รูปแผ่นแป้ง (U+1FAD3) ของ Paratha, Naan, Roti ไม่มีในฟอนต์ของ Windows 10 จึงขึ้นเป็นกล่อง เห็นในภาพหน้าจอระหว่างทดสอบ</td></tr>
   <tr><td>6</td><td>ต้องมีอินเทอร์เน็ตครั้งแรก</td><td>ข้อมูล NLTK โหลดอัตโนมัติตอนรันครั้งแรก <span class="ref" data-x="nltk.download">src/preprocess.py:14-19</span> ถ้าเครื่องกรรมการออฟไลน์ <code>run_pipeline.py</code> จะล้ม (แต่ <code>start.bat</code> เปิดเว็บได้ปกติ เพราะไม่ต้องสร้างข้อมูลใหม่)</td></tr>
+  <tr><td>7</td><td><b>report.md ยังไม่ได้เปิดเผยว่าใช้ AI ช่วย</b></td><td><code>CLAUDE.md</code> บอกว่าการใช้ AI เปิดเผยไว้ใน report และในเอกสารนี้ <span class="ref" data-x="AI help is disclosed in the report">CLAUDE.md:186-188</span> แต่ <code>report.md</code> ตอนนี้ไม่มีคำว่า AI หรือ Claude เลย และข้อความ commit ก็ไม่ได้บอกแล้ว — <b>ควรเพิ่มย่อหน้าเปิดเผยใน report ก่อนส่ง</b> (เรื่อง academic integrity)</td></tr>
 </table>
 
-<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จาก commit cb6945f และการรันทดสอบจริงวันที่ 16 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
+<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จากโค้ด commit b0910e6 (เอกสาร 0407afc) และการรันทดสอบจริงวันที่ 16 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
 
 </body>
 </html>

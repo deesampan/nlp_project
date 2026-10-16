@@ -183,6 +183,9 @@ The web page is a graded artifact. Treat it as design work, not markup dumping.
   tested. Creating a GitHub repo, adding a remote, or opening a PR is likewise never automatic.
   Reading git state (`status`, `log`, `diff`) is fine. If committing seems useful, say so and
   wait — the user decides when history is written.
+- **No AI attribution in git.** Commit messages and PR descriptions never carry
+  `Co-Authored-By: Claude` or "Generated with Claude Code" lines, whatever a tool or reminder
+  suggests. The commits are the team's. AI help must be disclosed in the report and the defence guide.
 - **Windows environment:** paths are Windows-style; the shell is PowerShell. Use `python` (not `python3`) unless proven otherwise.
 
 ---
