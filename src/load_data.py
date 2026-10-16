@@ -7,6 +7,9 @@ from .common import REVIEWS_CSV, RAW_CSV
 
 def load_reviews() -> pd.DataFrame:
     df = pd.read_csv(REVIEWS_CSV)
+    # Git on Windows (core.autocrlf) checks the CSV out with \r\n inside reviews; undo it
+    # so data.js is byte-identical on every machine.
+    df["review_text_raw"] = df["review_text_raw"].str.replace("\r\n", "\n", regex=False)
     df["review_id"] = range(len(df))
     return df
 

@@ -309,8 +309,8 @@
    "reviews": 422,
    "avg_stars": 2.44,
    "sentiment": {
-    "negative": 198,
-    "positive": 157,
+    "negative": 197,
+    "positive": 158,
     "neutral": 67
    },
    "stars": {
@@ -435,8 +435,8 @@
     },
     "Delivery": {
      "mentions": 189,
-     "negative": 86,
-     "positive": 77
+     "negative": 85,
+     "positive": 78
     },
     "Packaging": {
      "mentions": 6,
@@ -445,8 +445,8 @@
     },
     "Price": {
      "mentions": 46,
-     "negative": 29,
-     "positive": 14
+     "negative": 28,
+     "positive": 15
     },
     "Quantity": {
      "mentions": 51,
@@ -29813,8 +29813,8 @@
     "people",
     "life"
    ],
-   "compound": -0.149,
-   "sentiment": "negative",
+   "compound": 0.149,
+   "sentiment": "positive",
    "clauses": [
     {
      "start": 0,
@@ -111177,14 +111177,14 @@
  "evaluation": {
   "n": 1147,
   "accuracy": 0.901,
-  "precision": 0.907,
+  "precision": 0.905,
   "recall": 0.895,
-  "f1": 0.901,
+  "f1": 0.9,
   "confusion": {
    "tp": 514,
-   "fp": 53,
+   "fp": 54,
    "fn": 60,
-   "tn": 520
+   "tn": 519
   }
  },
  "thresholds": {

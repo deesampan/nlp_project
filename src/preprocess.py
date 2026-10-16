@@ -6,9 +6,17 @@ each filter removes.
 """
 import re
 import unicodedata
+import nltk
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
+# pip installs NLTK without its data files; fetch them once on first run (needs internet).
+for _res, _pkg in [("corpora/stopwords", "stopwords"), ("tokenizers/punkt_tab", "punkt_tab")]:
+    try:
+        nltk.data.find(_res)
+    except LookupError:
+        nltk.download(_pkg, quiet=True)
 
 NEGATIONS = {"no", "not", "nor", "don't", "didn't", "wasn't", "isn't", "aren't", "weren't",
              "won't", "wouldn't", "couldn't", "shouldn't", "never", "hadn't", "hasn't", "haven't"}
