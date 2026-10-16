@@ -129,24 +129,27 @@ Rules:
 
 **NLP / Modeling — Python**
 
-- `transformers` (HuggingFace), `datasets`, `spaCy`, `scikit-learn`, `pandas`, `numpy`
+- `scikit-learn`, `nltk`, `rapidfuzz`, `pandas`, `numpy` (no `transformers`/`spaCy` — not used)
 - `matplotlib` / `seaborn` for figures
 - Jupyter notebooks for exploration; production logic moves into `src/` as importable modules
 - Pin dependencies in `requirements.txt`; use a virtualenv (`.venv/`)
 
-**Web Deliverable — localhost dashboard + small Flask backend**
+**Web Deliverable — one static site, served by a tiny Flask app**
 
-- Plain HTML + CSS + vanilla JS + Chart.js from CDN. No build step, no framework.
-- **Run with `python src/app.py`** (Flask). It serves `output_project/web/` *and* exposes `POST /api/analyze`. Never open `index.html` via `file://` — the page loads data with `fetch()`, which browsers block on `file://` (CORS).
-- Two data paths:
-  1. **Batch** — the pipeline writes `output_project/web/data/dashboard.json`; the page reads it on load. This covers the built-in restaurants.
-  2. **Live upload** — the user posts a CSV plus a restaurant name; Flask runs the real model and returns the same JSON shape. Analysed in memory, never written to disk, forgotten on refresh.
-- **One analysis implementation only.** `src/analyze.py` holds the engine; both `build_slice.py` and `app.py` call it. Never fork the logic — the batch and live paths must not drift.
-- Caching is disabled server-side. Without that, browsers serve a stale `dashboard.json` after a rebuild and the page silently shows the previous run's numbers.
-- Graders run it locally (`start.bat`). A static copy of the 3-restaurant site is also on Vercel
-  (project `resrec`, uploaded from `output_project/web/` with the Vercel CLI; `.vercelignore` keeps
-  `classic.html` out because its CSV upload needs Flask). The GitHub repo stays private: the review
-  data's licence ("Data files © Original Authors") does not allow redistributing the dataset.
+- Plain HTML + CSS + vanilla JS. No build step, no framework. Two pages: `index.html` (restaurant
+  cards) and `restaurant.html` (one restaurant's menu, ranked by how many people liked each dish).
+- **One pipeline, one model.** `python run_pipeline.py` runs all six stages and writes
+  `output_project/web/data.js` (+ `removed.js`); the pages read those files. Sentiment comes only
+  from our trained TF-IDF + logistic regression model (`output_project/models/sentiment_tfidf_lr.pkl`,
+  loaded in `src/sentiment.py`). VADER is a baseline in `train_sentiment.py` and nothing else.
+- The website's three restaurants are held out of model training (`train_sentiment.py`), so the
+  model never scores a review it trained on.
+- **Run with `start.bat`** (or `python src/app.py`). Flask serves `output_project/web/` with caching
+  disabled; without that, browsers serve a stale `data.js` after a rebuild and the page silently
+  shows the previous run's numbers.
+- A static copy of the site is also on Vercel (project `resrec`, uploaded from `output_project/web/`
+  with the Vercel CLI). The GitHub repo stays private: the review data's licence ("Data files ©
+  Original Authors") does not allow redistributing the dataset.
 
 ---
 

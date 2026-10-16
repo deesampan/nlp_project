@@ -33,6 +33,9 @@ from config import OUT_DATA, OUT_RESULTS, OUT_FIGURES, OUT, ensure_dirs
 csv.field_size_limit(min(sys.maxsize, 2**31 - 1))
 
 CORPUS = OUT_DATA / "reviews_clean.csv"
+# The website's restaurants. Their reviews are kept out of training so the model
+# never scores a review it has already seen with its star rating.
+SITE_REVIEWS = OUT_DATA / "top3_restaurants_reviews.csv"
 MODEL_DIR = OUT / "models"
 LABELS = ["negative", "neutral", "positive"]
 
@@ -49,13 +52,19 @@ DEFAULT_STOP = list(ENGLISH_STOP_WORDS)
 
 
 def load():
-    X, y = [], []
+    with open(SITE_REVIEWS, "r", encoding="utf-8", newline="") as f:
+        site = {row["restaurant_name"] for row in csv.DictReader(f)}
+    X, y, held_out = [], [], 0
     with open(CORPUS, "r", encoding="utf-8", newline="") as f:
         for row in csv.DictReader(f):
+            if row["restaurant_name"] in site:
+                held_out += 1
+                continue
             t = row["text_norm"]
             if t:
                 X.append(t)
                 y.append(row["label"])
+    print("held out %d reviews of the website's restaurants: %s" % (held_out, ", ".join(sorted(site))))
     return X, y
 
 

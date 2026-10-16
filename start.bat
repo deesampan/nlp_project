@@ -1,7 +1,5 @@
 @echo off
 rem Double-click to start the website: runs the Flask server and opens the browser.
-rem   /              ResRec website
-rem   /classic.html  original dashboard (with CSV upload)
 cd /d "%~dp0"
 set PORT=8000
 
@@ -16,7 +14,7 @@ if not exist ".venv\Scripts\python.exe" (
 rem Server runs in its own window; close that window to stop it.
 start "ResRec server - close to stop" ".venv\Scripts\python.exe" src\app.py %PORT%
 
-echo Waiting for the server (the model takes a few seconds to load) ...
+echo Waiting for the server ...
 set TRIES=0
 :wait
 curl.exe -s -o nul http://localhost:%PORT%/ && goto ready

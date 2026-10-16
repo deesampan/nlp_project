@@ -18,13 +18,14 @@ def main():
     reviews = []
     for row in df.itertuples():
         text = row.clean_text
-        cls = sentiment.clauses(text)
-        mentions = sentiment.attribute(dish_extract.extract(text, gaz[row.restaurant_name], row.restaurant_name), cls)
-        c = sentiment.review_score(text)
+        mentions = dish_extract.extract(text, gaz[row.restaurant_name], row.restaurant_name)
+        cls = sentiment.clauses(text, mentions)
+        mentions = sentiment.attribute(mentions, cls)
+        label, score = sentiment.review(text)
         reviews.append({
             "id": int(row.review_id), "restaurant": row.restaurant_name, "rating": float(row.review_rating),
             "raw": row.review_text_raw, "clean": text, "tokens": row.tokens, "tokens_nostop": row.tokens_nostop,
-            "compound": round(c, 3), "sentiment": sentiment.label(c), "clauses": cls, "dishes": mentions,
+            "score": score, "sentiment": label, "clauses": cls, "dishes": mentions,
         })
     # 5. aggregate
     dishes = aggregate.dishes(reviews)

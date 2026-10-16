@@ -45,7 +45,7 @@ def dishes(reviews: list[dict]) -> list[dict]:
             a = acc[(r["restaurant"], dish)]
             a["mentions"] += 1
             a[{"positive": "pos", "negative": "neg", "neutral": "neu"}[m["label"]]] += 1
-            a["sum"] += m["compound"]
+            a["sum"] += m["score"]
             a["stars"].append(r["rating"])
             a["review_ids"].append(r["id"])
     out = []
@@ -89,13 +89,14 @@ def restaurant_stats(reviews: list[dict]) -> dict:
 
 
 def weak_label_eval(reviews: list[dict]) -> dict:
-    """VADER review polarity vs star rating (>=4 positive, <=2 negative; 3 dropped)."""
+    """Model's whole-review label vs star rating (>=4 positive, <=2 negative; 3 dropped).
+    Fair because the website's restaurants are held out of the model's training data."""
     tp = fp = fn = tn = 0
     for r in reviews:
         if 2 < r["rating"] < 4:
             continue
         gold = r["rating"] >= 4
-        pred = r["compound"] >= 0.05
+        pred = r["sentiment"] == "positive"
         tp += gold and pred; tn += (not gold) and (not pred)
         fp += (not gold) and pred; fn += gold and (not pred)
     n = tp + tn + fp + fn

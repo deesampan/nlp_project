@@ -11,7 +11,6 @@ OUT_DATA = OUT / "data"
 OUT_RESULTS = OUT / "results"
 OUT_FIGURES = OUT / "figures"
 OUT_WEB = OUT / "web"
-OUT_WEB_DATA = OUT_WEB / "data"
 OUT_REPORTS = OUT / "reports"
 OUT_LOGS = OUT / "logs"
 
@@ -22,18 +21,10 @@ TOP3_REVIEWS = SUBSET_CSV  # backwards-compatible alias
 
 # Duplicate copies discarded at export, kept so the website can show its work.
 DROPPED_DUPES_CSV = OUT_DATA / "dropped_duplicates.csv"
-
-# How many example dropped comments to keep per reason, per restaurant.
-# The true count is always reported; only the displayed sample is capped.
-DROPPED_SAMPLE = 40
 GAZETTEER = OUT_DATA / "dish_gazetteer.csv"
-DASHBOARD_JSON = OUT_WEB_DATA / "dashboard.json"
-
-# A dish needs at least this many mentions before it is ranked.
-MIN_MENTIONS = 5
 
 
 def ensure_dirs():
-    for d in (OUT_DATA, OUT_RESULTS, OUT_FIGURES, OUT_WEB, OUT_WEB_DATA,
+    for d in (OUT_DATA, OUT_RESULTS, OUT_FIGURES, OUT_WEB,
               OUT_REPORTS, OUT_LOGS):
         d.mkdir(parents=True, exist_ok=True)

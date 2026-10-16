@@ -1,9 +1,0 @@
-stage,count
-input_reviews,1400
-after_cleaning,1069
-dish_clauses,605
-with_dish_mention,392
-no_dish_mention,677
-dropped_duplicate,5407
-dropped_too_short,329
-dropped_no_dish,677

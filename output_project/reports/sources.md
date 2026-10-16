@@ -1,23 +1,23 @@
 # Sources and Licences
 
-Where every downloaded component of this project came from. Compiled 2026-09-10.
-Versions are the pinned versions in [`requirements.txt`](../../requirements.txt); licences were
-read from the installed package metadata in `.venv/`, not from memory.
+Where every downloaded component of this project came from. Compiled 2026-09-10, updated
+2026-10-16. Versions are the pinned versions in [`requirements.txt`](../../requirements.txt);
+licences were read from the installed package metadata in `.venv/`, not from memory.
 
 ## The short version
 
-We downloaded **one dataset**, **one pre-trained model**, and **eleven software libraries**.
-We did **not** download a sentiment model — that one we trained ourselves. The distinction
-that matters:
+We downloaded **one dataset**, **NLTK's tokenizer data and stopword list**, and **twelve
+software libraries**. We did **not** download a sentiment model — that one we trained
+ourselves. The distinction that matters:
 
 | | Downloaded | Built by us |
 |---|---|---|
 | Review data | ✔ Kaggle | |
-| Sentence splitting / tokenizing | ✔ spaCy `en_core_web_sm` | |
-| **Sentiment classifier (decides good/bad)** | | **✔ trained on 134,612 reviews** |
-| Dish name dictionary (2,774 terms) | | ✔ built from the dataset |
+| Word tokenizing, stopword list | ✔ NLTK `punkt_tab`, `stopwords` | |
+| **Sentiment classifier (decides good/bad)** | | **✔ trained on 133,389 reviews** |
+| Dish lists (one per restaurant) | | ✔ built from each restaurant's Zomato menu |
 | Clause-splitting rule | | ✔ our own rule |
-| Cleaning pipeline (9 stages) | | ✔ ours |
+| Cleaning pipelines (9 stages for training, 4 for the website) | | ✔ ours |
 
 ---
 
@@ -56,24 +56,20 @@ in 2019, which is a stated limitation of the project, not a hidden one.
 
 ---
 
-## 2. Pre-trained model — downloaded, but not for sentiment
+## 2. NLTK data — downloaded, but not for sentiment
 
 | Field | Value |
 |---|---|
-| Model | **`en_core_web_sm`** |
-| Version | 3.8.0 |
-| Publisher | Explosion AI (https://explosion.ai) |
-| Release page | https://github.com/explosion/spacy-models/releases/tag/en_core_web_sm-3.8.0 |
-| Install command | `python -m spacy download en_core_web_sm` |
-| Licence | MIT |
+| Packages | **`punkt_tab`** (tokenizer data), **`stopwords`** (word lists) |
+| Publisher | NLTK Project (https://www.nltk.org) |
+| Install | downloaded automatically on first run by [`src/preprocess.py`](../../src/preprocess.py) (`nltk.download`) |
+| Licence | Apache-2.0 (NLTK) |
 
-**What we use it for:** splitting reviews into sentences, tokenizing, and finding noun phrases
-(the last one only for dish discovery on uploaded files).
+**What we use it for:** splitting the website's reviews into words and removing common words
+("the", "and") when counting which words people use most. Negation words (`not`, `no`,
+`never`) are taken out of the stopword list so they are kept.
 
-**What we do NOT use it for:** sentiment, and dish recognition. Its built-in named-entity
-recogniser has no food category and mislabels dish names, so dish detection is done by
-dictionary matching against our own gazetteer instead. This correction is documented in
-[report.md](report.md) §4 — the original proposal said "NER".
+**What we do NOT use it for:** sentiment, or finding dishes.
 
 ---
 
@@ -91,13 +87,14 @@ tool" option. We ran it on the same held-out test set as our own model:
 
 | System | Accuracy | Macro-F1 |
 |---|---|---|
-| VADER (downloaded, untrained) | 72.2% | 0.537 |
-| **Ours (trained)** | **82.1%** | **0.773** |
+| VADER (downloaded, untrained) | 72.7% | 0.543 |
+| **Ours (trained)** | **82.2%** | **0.774** |
 
 Full table: [`../results/model_comparison.csv`](../results/model_comparison.csv). It is in
 `requirements.txt` because [`src/train_sentiment.py`](../../src/train_sentiment.py) imports it
-to produce that comparison. It is **not** part of the shipped pipeline —
-[`src/analyze.py`](../../src/analyze.py) never imports it.
+to produce that comparison. It is **not** part of the website pipeline —
+[`run_pipeline.py`](../../run_pipeline.py) and [`src/sentiment.py`](../../src/sentiment.py)
+never import it.
 
 ---
 
@@ -108,16 +105,17 @@ All installed from PyPI with `pip`. Licences read from each package's `METADATA`
 | Package | Version | Licence | Used for |
 |---|---|---|---|
 | [scikit-learn](https://pypi.org/project/scikit-learn/1.5.2/) | 1.5.2 | BSD 3-Clause | TF-IDF + logistic regression, metrics, train/test split |
-| [spaCy](https://pypi.org/project/spacy/3.8.2/) | 3.8.2 | MIT | sentence splitting, tokenizing, `PhraseMatcher` |
+| [NLTK](https://pypi.org/project/nltk/3.10.3/) | 3.10.3 | Apache-2.0 | word tokenizing and stopwords for the website's reviews (§2) |
+| [RapidFuzz](https://pypi.org/project/rapidfuzz/3.14.5/) | 3.14.5 | MIT | matching misspelt dish names ("biriyani") |
 | [pandas](https://pypi.org/project/pandas/2.2.3/) | 2.2.3 | BSD 3-Clause | tabular data handling |
 | [numpy](https://pypi.org/project/numpy/1.26.4/) | 1.26.4 | BSD 3-Clause | arrays, coefficient sorting |
 | [matplotlib](https://pypi.org/project/matplotlib/3.9.2/) | 3.9.2 | PSF-based (matplotlib licence) | confusion matrix and report figures |
+| [Pillow](https://pypi.org/project/pillow/12.3.0/) | 12.3.0 | MIT-CMU | resizing the dish photos for the website |
 | [ftfy](https://pypi.org/project/ftfy/6.3.0/) | 6.3.0 | Apache-2.0 | repairing mojibake / broken Unicode during cleaning |
 | [langdetect](https://pypi.org/project/langdetect/1.0.9/) | 1.0.9 | see note below | dropping non-English reviews |
 | [vaderSentiment](https://pypi.org/project/vaderSentiment/3.3.2/) | 3.3.2 | MIT | baseline comparison only (§3) |
-| [Flask](https://pypi.org/project/flask/3.1.3/) | 3.1.3 | BSD 3-Clause | serving the dashboard on localhost |
+| [Flask](https://pypi.org/project/flask/3.1.3/) | 3.1.3 | BSD 3-Clause | serving the website on localhost |
 | [click](https://pypi.org/project/click/) | ≥8.1 | BSD 3-Clause | command-line arguments |
-| [Chart.js](https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js) | 4.4.1 | MIT | the dashboard's bar chart (loaded from cdnjs CDN) |
 
 **Note on langdetect:** its own package metadata disagrees with itself — the `License:` field
 says `MIT` while the classifier says `Apache Software License`. Upstream, langdetect is a Python
@@ -132,13 +130,14 @@ Nothing in this list was downloaded.
 
 | Component | File | Notes |
 |---|---|---|
-| Cleaning pipeline (9 stages) | [`src/build_corpus.py`](../../src/build_corpus.py) | produces `reviews_clean.csv`, 134,612 rows |
+| Cleaning pipeline for training (9 stages) | [`src/build_corpus.py`](../../src/build_corpus.py) | produces `reviews_clean.csv`, 134,612 rows |
 | Training labels | same file, `label_of()` | derived from each review's own star rating: ≥4.0 positive, ≥3.0 neutral, else negative. No hand-labelling, no external label source. |
-| Dish gazetteer (2,774 terms) | [`src/build_gazetteer.py`](../../src/build_gazetteer.py) | extracted from the dataset's own `dish_liked` column |
 | Negation-preserving stopword list | [`src/train_sentiment.py`](../../src/train_sentiment.py) `KEEP_WORDS` | 23 words removed from scikit-learn's default list so `"not good"` survives |
-| **Sentiment classifier** | [`src/train_sentiment.py`](../../src/train_sentiment.py) | TF-IDF + logistic regression, trained by us. Run log: [`../logs/train_sentiment.log`](../logs/train_sentiment.log) |
-| Clause-splitting rule | [`src/analyze.py`](../../src/analyze.py) `split_clauses()` | sentence split, then split again at contrastive conjunctions |
-| Aggregation + dashboard | `src/build_slice.py`, `src/app.py`, `output_project/web/` | |
+| **Sentiment classifier** | [`src/train_sentiment.py`](../../src/train_sentiment.py) | TF-IDF + logistic regression, trained by us on 133,389 reviews (the website's 3 restaurants held out). Run log: [`../logs/train_sentiment.log`](../logs/train_sentiment.log) |
+| Cleaning filter for the website (4 steps) | [`src/preprocess.py`](../../src/preprocess.py) | empty, duplicate, too short, non-English |
+| Dish lists and matching | [`src/dish_extract.py`](../../src/dish_extract.py) | each restaurant's Zomato menu + `dish_liked` + 20 common dishes |
+| Clause-splitting and attribution rule | [`src/sentiment.py`](../../src/sentiment.py) | sentence split, then split again at contrastive conjunctions |
+| Aggregation + website | [`src/aggregate.py`](../../src/aggregate.py), [`run_pipeline.py`](../../run_pipeline.py), [`src/app.py`](../../src/app.py), `output_project/web/` | |
 
 ---
 
@@ -155,8 +154,8 @@ Nothing in this list was downloaded.
 > Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). Scikit-learn: Machine Learning in
 > Python. *Journal of Machine Learning Research*, 12, 2825–2830.
 
-> Honnibal, M., Montani, I., Van Landeghem, S., & Boyd, A. (2020). *spaCy: Industrial-strength
-> Natural Language Processing in Python.* Zenodo. https://doi.org/10.5281/zenodo.1212303
+> Bird, S., Klein, E., & Loper, E. (2009). *Natural Language Processing with Python.*
+> O'Reilly Media.
 
 **Baseline we compared against**
 
@@ -169,7 +168,6 @@ Nothing in this list was downloaded.
 ## 7. Nothing else was downloaded
 
 No pre-trained sentiment model, no transformer checkpoint, no HuggingFace model, no external
-API, and no borrowed analysis code. `transformers` and `datasets` appear in the tech-stack
-section of `CLAUDE.md` as options that were considered; they are **not** in
-`requirements.txt` and are **not** installed. The project runs entirely on the packages listed
+API, and no borrowed analysis code. `transformers`, `datasets` and spaCy were considered;
+they are **not** in `requirements.txt` and are **not** used. The project runs entirely on the packages listed
 in §4.

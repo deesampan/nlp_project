@@ -20,6 +20,7 @@ import ftfy
 from langdetect import detect, DetectorFactory, LangDetectException
 
 from config import ZOMATO_CSV, OUT_DATA, OUT_RESULTS, ensure_dirs
+from common import normalise   # Stage 7, shared with sentiment.py so the model sees the same text
 
 csv.field_size_limit(min(sys.maxsize, 2**31 - 1))
 DetectorFactory.seed = 0          # deterministic language detection
@@ -36,20 +37,8 @@ _url = re.compile(r"https?://\S+|www\.\S+")
 _email = re.compile(r"\S+@\S+\.\S+")
 _phone = re.compile(r"(?<!\d)(?:\+?\d[\d\s-]{7,}\d)(?!\d)")
 _ws = re.compile(r"\s+")
-_elong = re.compile(r"(.)\1{2,}")
 _rating = re.compile(r"Rated\s+([\d.]+)")
 _token = re.compile(r"[a-z][a-z']+")
-
-CONTRACTIONS = {
-    "don't": "do not", "doesn't": "does not", "didn't": "did not",
-    "isn't": "is not", "wasn't": "was not", "aren't": "are not",
-    "weren't": "were not", "won't": "will not", "wouldn't": "would not",
-    "can't": "cannot", "couldn't": "could not", "shouldn't": "should not",
-    "haven't": "have not", "hasn't": "has not", "hadn't": "had not",
-    "it's": "it is", "that's": "that is", "there's": "there is",
-    "i'm": "i am", "i've": "i have", "we've": "we have", "they're": "they are",
-}
-_contr = re.compile(r"\b(" + "|".join(map(re.escape, CONTRACTIONS)) + r")\b")
 
 
 def label_of(rating):
@@ -74,14 +63,6 @@ def structural_clean(t):
     t = _email.sub(" ", t)
     t = _phone.sub(" ", t)
     return _ws.sub(" ", t).strip()
-
-
-def normalise(t):
-    """Stage 7: collapse elongations and expand contractions. Case preserved."""
-    t = _elong.sub(r"\1\1", t)
-    low = t.lower()
-    low = _contr.sub(lambda m: CONTRACTIONS[m.group(1)], low)
-    return low
 
 
 def main():

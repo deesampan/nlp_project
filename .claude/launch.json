@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "dashboard",
-      "runtimeExecutable": "D:\\nlp_project\\.venv\\Scripts\\python.exe",
-      "runtimeArgs": ["D:\\nlp_project\\src\\app.py", "8010"],
+      "runtimeExecutable": "C:\\nlp_project\\.venv\\Scripts\\python.exe",
+      "runtimeArgs": ["src/app.py", "8010"],
       "port": 8010
     }
   ]
