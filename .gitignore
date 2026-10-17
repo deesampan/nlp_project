@@ -3,3 +3,6 @@ data_raw/
 __pycache__/
 .DS_Store
 .vercel/
+.vercel
+.env*
+~$*
