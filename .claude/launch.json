@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dashboard",
+      "name": "website",
       "runtimeExecutable": "C:\\nlp_project\\.venv\\Scripts\\python.exe",
-      "runtimeArgs": ["src/app.py", "8010"],
+      "runtimeArgs": ["-m", "http.server", "8010", "--directory", "output_project/web"],
       "port": 8010
     }
   ]

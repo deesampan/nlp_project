@@ -1,7 +1,0 @@
-system,accuracy,macro_f1
-majority_class,0.6048,0.2512
-vader,0.7267,0.5428
-tfidf_lr_negation_aware,0.8219,0.774
-tfidf_lr_default_stopwords,0.8005,0.7488
-binary_plus_band,0.7725,0.7171
-binary_task_only,0.9655,0.9553

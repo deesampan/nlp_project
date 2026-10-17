@@ -1,33 +1,96 @@
 {
- "majority_class": {
-  "accuracy": 0.6047679736112153,
-  "macro_f1": 0.2512379706624311
+ "reviews": {
+  "train": 90704,
+  "validation": 16007,
+  "test": 26678
  },
- "vader": {
-  "accuracy": 0.7267411350176175,
-  "macro_f1": 0.5427654537081151
+ "systems": {
+  "always say the most common label": {
+   "accuracy": 0.6048,
+   "macro_f1": 0.2512
+  },
+  "VADER (ready-made, no training)": {
+   "accuracy": 0.7267,
+   "macro_f1": 0.5428
+  },
+  "our model: TF-IDF + logistic regression": {
+   "accuracy": 0.8219,
+   "macro_f1": 0.774
+  },
+  "our model, but stopwords include not/no/never": {
+   "accuracy": 0.8005,
+   "macro_f1": 0.7488
+  }
  },
- "tfidf_lr_negation_aware": {
+ "per_class": {
+  "negative": {
+   "precision": 0.836960336960337,
+   "recall": 0.8565014367816092,
+   "f1-score": 0.8466181430853896,
+   "support": 5568.0
+  },
+  "neutral": {
+   "precision": 0.5517179348803741,
+   "recall": 0.6163585209003215,
+   "f1-score": 0.582249644043664,
+   "support": 4976.0
+  },
+  "positive": {
+   "precision": 0.9136891252188574,
+   "recall": 0.8733110202057767,
+   "f1-score": 0.8930438916178102,
+   "support": 16134.0
+  },
   "accuracy": 0.8218757028262988,
-  "macro_f1": 0.7739705595822879
+  "macro avg": {
+   "precision": 0.7674557990198562,
+   "recall": 0.7820569926292359,
+   "f1-score": 0.7739705595822879,
+   "support": 26678.0
+  },
+  "weighted avg": {
+   "precision": 0.8301598300637583,
+   "recall": 0.8218757028262988,
+   "f1-score": 0.8253847438647001,
+   "support": 26678.0
+  }
  },
- "tfidf_lr_default_stopwords": {
-  "accuracy": 0.800472299272809,
-  "macro_f1": 0.7488210718303528
- },
- "negation_ablation_delta": {
-  "accuracy": 0.021403403553489797,
-  "macro_f1": 0.02514948775193504
- },
- "binary_task_only": {
-  "accuracy": 0.9654870518846189,
-  "macro_f1": 0.9552827966351722
- },
- "binary_plus_band": {
-  "accuracy": 0.7724716995277007,
-  "macro_f1": 0.7171272096470288,
-  "band_low": 0.09999999999999998,
-  "band_high": 0.9
- },
- "shipped": "tfidf_lr_negation_aware"
+ "top_words": {
+  "negative": [
+   "worst +12.99",
+   "pathetic +10.01",
+   "not +8.18",
+   "bad +8.10",
+   "horrible +7.68",
+   "not good +6.15",
+   "terrible +5.81",
+   "no +5.72",
+   "not worth +5.63",
+   "waste +5.52"
+  ],
+  "neutral": [
+   "good +5.32",
+   "decent +4.86",
+   "average +4.85",
+   "okay +3.97",
+   "ok +3.86",
+   "okayish +3.81",
+   "but +3.78",
+   "however +3.66",
+   "not best +3.59",
+   "not bad +3.59"
+  ],
+  "positive": [
+   "awesome +9.94",
+   "best +9.73",
+   "amazing +9.61",
+   "delicious +8.64",
+   "loved +8.49",
+   "excellent +7.40",
+   "good +6.74",
+   "perfect +6.57",
+   "great +6.54",
+   "love +6.33"
+  ]
+ }
 }

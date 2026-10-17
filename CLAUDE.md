@@ -59,13 +59,11 @@ If a command, script, notebook, or build step writes a file, its destination is 
 
 ```
 output_project/
-├── data/        # processed/cleaned datasets, splits, vocab files
-├── models/      # trained models, checkpoints, tokenizers, vectorizers
-├── results/     # metrics, evaluation tables, predictions, CSV/JSON output
-├── figures/     # plots, charts, confusion matrices, images for the report
-├── web/         # the web deliverable (HTML/CSS/JS) — final, servable
-├── reports/     # written report drafts, slides, documentation exports
-└── logs/        # training logs, run logs, error output
+├── data/        # inputs: the cleaned corpus and the website's reviews + menus
+├── models/      # the trained model
+├── results/     # metrics, the cleaning funnel, the confusion-matrix picture
+├── web/         # the website: index.html, data.js, img/
+└── reports/     # report, slides, Thai defence guide
 ```
 
 Rules:
@@ -73,7 +71,7 @@ Rules:
 - Source code lives in `src/` (and `notebooks/`). **Never** in `output_project/`.
 - Raw, untouched source data lives in `data_raw/`. Anything derived from it goes to `output_project/data/`.
 - Scripts must take an output path that resolves under `output_project/` — hardcode the prefix, do not rely on the current working directory.
-- Create subfolders on demand; the seven above are the standard set. Do not invent parallel folders like `outputs/` or `results/` at the root.
+- These five folders are the whole set (`figures/` and `logs/` were removed on 2026-10-17). Do not add folders, and do not invent parallel ones like `outputs/` or `results/` at the root.
 - `output_project/` is treated as reproducible: everything in it must be regenerable by re-running the pipeline.
 
 ---
@@ -115,7 +113,7 @@ Rules:
 
 ### Open Items
 
-- **Dataset:** not yet chosen — must be selected and justified.
+- **Dataset:** chosen — Zomato Bangalore Restaurants (Kaggle); see `report.md` Appendix A.
 - **Deadline:** unknown — ask the user.
 - **Course/instructor requirements:** partially known via instructor questions (see below).
 
@@ -127,26 +125,33 @@ Rules:
 
 ## Tech Stack
 
+**Keep the project this small** (simplified on 2026-10-17; ~30 files). Add a file only with a
+reason the team can say in one sentence.
+
+```
+src/run_pipeline.py      the 6 NLP stages -> output_project/web/data.js   (run any time)
+src/train_model.py       clean corpus, pick 3 restaurants, train + test the model (needs Kaggle file for steps 1-2)
+output_project/web/index.html   the whole website: page, CSS and JS in one file
+README.md                how to run, file map, every tool with file:line
+```
+
 **NLP / Modeling — Python**
 
-- `scikit-learn`, `nltk`, `rapidfuzz`, `pandas`, `numpy` (no `transformers`/`spaCy` — not used)
-- `matplotlib` / `seaborn` for figures
-- Jupyter notebooks for exploration; production logic moves into `src/` as importable modules
-- Pin dependencies in `requirements.txt`; use a virtualenv (`.venv/`)
+- Website pipeline: `scikit-learn` (the model), `rapidfuzz` (dish-name typos). Training only:
+  `vaderSentiment` (baseline), `ftfy`, `langdetect`, `matplotlib`. Everything else is the Python
+  standard library. No pandas, NLTK, spaCy, Flask or transformers — they were removed; don't re-add.
+- Pin dependencies in `requirements.txt`; use a virtualenv (`.venv/`).
+- If code lines move, update the file:line references in `README.md`, `report.md` and the Thai PDF.
 
-**Web Deliverable — one static site, served by a tiny Flask app**
+**Web Deliverable — one static page**
 
-- Plain HTML + CSS + vanilla JS. No build step, no framework. Two pages: `index.html` (restaurant
-  cards) and `restaurant.html` (one restaurant's menu, ranked by how many people liked each dish).
-- **One pipeline, one model.** `python run_pipeline.py` runs all six stages and writes
-  `output_project/web/data.js` (+ `removed.js`); the pages read those files. Sentiment comes only
-  from our trained TF-IDF + logistic regression model (`output_project/models/sentiment_tfidf_lr.pkl`,
-  loaded in `src/sentiment.py`). VADER is a baseline in `train_sentiment.py` and nothing else.
-- The website's three restaurants are held out of model training (`train_sentiment.py`), so the
-  model never scores a review it trained on.
-- **Run with `start.bat`** (or `python src/app.py`). Flask serves `output_project/web/` with caching
-  disabled; without that, browsers serve a stale `data.js` after a rebuild and the page silently
-  shows the previous run's numbers.
+- `output_project/web/index.html` holds the page, styles and script; `index.html#<restaurant-slug>`
+  shows one restaurant. It reads `data.js` through a `<script>` tag, so it opens by double-click
+  (no server). `start.bat` rebuilds `data.js` and opens the page.
+- **One pipeline, one model.** Sentiment comes only from our trained TF-IDF + logistic regression
+  model (`output_project/models/sentiment_tfidf_lr.pkl`). VADER is only a baseline in `train_model.py`.
+- The website's three restaurants are held out of model training, so the model never scores a
+  review it trained on.
 - A static copy of the site is also on Vercel (project `resrec`, uploaded from `output_project/web/`
   with the Vercel CLI: `npx vercel deploy --prod` from that folder).
 - The GitHub repo (`deesampan/nlp_project`) is **public** since 2026-10-16, by team decision. It
@@ -163,7 +168,7 @@ The web page is a graded artifact. Treat it as design work, not markup dumping.
 - **Layout:** max content width 1080px (dashboard needs more room than a reading page), generous whitespace. Landing view = restaurant cards; detail view = header → KPIs → sentiment split → quadrant chart → dish table → context.
 - **Typography:** one serif or one clean sans for body at 16–18px, line-height ~1.6. Headings distinctly larger with real spacing above. No more than two font families.
 - **Color:** restrained palette — a neutral background, one accent color, dark text. Academic, not neon.
-- **Figures:** every chart from `output_project/figures/` embedded with a numbered caption ("Figure 3: Confusion matrix, BERT-base"). Charts must be readable at the size displayed.
+- **Figures:** every chart from `output_project/results/` embedded with a numbered caption ("Figure 3: Confusion matrix, BERT-base"). Charts must be readable at the size displayed.
 - **Tables:** results tables with real borders/zebra striping, aligned numerals, bolded best score.
 - **Responsive:** must not break on a laptop screen or a projector. Test at 1920px, 1440px, and 768px widths.
 - **No lorem ipsum, no placeholder charts** in anything presented as finished.

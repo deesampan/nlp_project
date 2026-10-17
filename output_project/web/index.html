@@ -1,19 +1,214 @@
 <!DOCTYPE html>
+<!--
+  ResRec website: one page, two views.
+    index.html                    the three restaurant cards
+    index.html#biriyani-nights    one restaurant: its menu, ranked by how many people liked each dish
+  All numbers come from data.js, written by: python src/run_pipeline.py
+  Opens by double-click; no server needed.
+-->
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ResRec — Which dishes are worth ordering?</title>
-  <meta name="description" content="ResRec reads restaurant reviews and shows how customers feel about each dish.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
-</head>
-<body data-page="home">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ResRec — Which dishes are worth ordering?</title>
+<meta name="description" content="ResRec reads restaurant reviews and shows how customers feel about each dish.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+<style>
+:root {
+  --ink: #1f2927; --ink-2: #55615e; --ink-3: #8a9491; --dark: #2e3b3a;
+  --panel: #eceeed; --panel-2: #f5f6f5; --line: #dfe3e1; --star: #f2b01e;
+  --pos: #2a78d6; --neu: #b9b7b0; --neg: #e34948;
+  --shadow: 0 18px 40px -22px rgba(31, 41, 39, .35);
+  --shadow-sm: 0 8px 22px -14px rgba(31, 41, 39, .35);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: "Poppins", system-ui, sans-serif;
+  font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body:has(dialog[open]) { overflow: hidden; }
+h1, h2, h3 { margin: 0; line-height: 1.2; color: var(--ink); }
+p { margin: 0; color: var(--ink-2); }
+button { font: inherit; color: inherit; cursor: pointer; }
+[hidden] { display: none !important; }
+.wrap { width: min(1080px, 100% - 32px); margin: 0 auto; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; }
+.empty { padding: 40px; text-align: center; color: var(--ink-2); background: var(--panel-2); border-radius: 20px; }
+.link { border: 0; background: none; padding: 0; color: var(--dark); font-weight: 600; font-size: 15px;
+  text-decoration: underline; text-underline-offset: 3px; }
 
-<main class="wrap">
+/* hero panel: text left, dish on a dark circle right */
+.hero-panel { position: relative; overflow: hidden; background: var(--panel); border-radius: 36px;
+  padding: 56px 380px 56px 56px; min-height: 300px; display: flex; align-items: center; }
+#home .hero-panel { margin-top: 28px; }
+.hero-copy { position: relative; z-index: 1; }
+.hero-panel h1 { font-size: clamp(30px, 4.2vw, 48px); font-weight: 700; letter-spacing: -.01em; margin: 10px 0 14px; }
+.hero-panel p + p { margin-top: 4px; }
+.hero-panel p b { color: var(--ink); }
+.star { color: var(--star); }
+.deco { position: absolute; right: -70px; top: -90px; width: 420px; height: 420px; border-radius: 50%; background: var(--dark); }
+.deco img { position: absolute; left: 10px; bottom: 30px; width: 280px; filter: drop-shadow(0 30px 30px rgba(0,0,0,.45)); }
+.deco .emo { position: absolute; left: 70px; bottom: 80px; font-size: 140px; line-height: 1; }
+
+/* plates: dish photo or emoji */
+.plate { width: 130px; aspect-ratio: 1; border-radius: 50%; margin: 0 auto; flex: none; display: grid; place-items: center;
+  font-size: 54px; line-height: 1; box-shadow: 0 18px 28px -18px rgba(0,0,0,.45);
+  background: radial-gradient(circle, #fbf8f1 0 56%, #e7e2d6 57% 64%, #c9d1cd 65% 100%); }
+.plate img { width: 100%; height: 100%; object-fit: contain; }
+.plate.has-img { background: none; box-shadow: none; }
+.plate.has-img img { filter: drop-shadow(0 14px 14px rgba(0,0,0,.28)); }
+.plate.sm { width: 76px; font-size: 32px; margin: 0; }
+.plate.row { width: 56px; font-size: 26px; margin: 0; box-shadow: 0 8px 14px -10px rgba(0,0,0,.45); }
+.plate.row.has-img { box-shadow: none; }
+.plate.row.has-img img { filter: drop-shadow(0 6px 6px rgba(0,0,0,.25)); }
+
+/* home: restaurant cards */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 28px; }
+.rest-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: #fff;
+  border: 1.5px solid var(--line); border-radius: 28px; padding: 28px 26px 24px; box-shadow: var(--shadow-sm);
+  transition: transform .2s, box-shadow .2s, border-color .2s; }
+.rest-card:hover, .rest-card:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--dark); outline: none; }
+.rest-card .plate { margin-bottom: 20px; }
+.rest-body { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.rest-name { font-size: 20px; font-weight: 600; line-height: 1.3; }
+.rest-meta { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+.rest-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto;
+  padding-top: 20px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.rest-foot b { color: var(--ink); font-size: 16px; }
+.arrow { width: 42px; height: 42px; flex: none; border-radius: 50%; background: var(--dark); color: #fff;
+  display: grid; place-items: center; font-size: 18px; }
+
+/* restaurant view */
+.back { display: inline-block; margin: 24px 0 16px; color: var(--ink-2); text-decoration: none; font-size: 15px; font-weight: 500; }
+.back:hover { color: var(--ink); }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0 64px; }
+.stat { text-align: left; background: #fff; border: 1.5px solid var(--line); border-radius: 22px; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat small { font-size: 13px; color: var(--ink-2); }
+.stat b { font-size: 30px; font-weight: 600; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.stat.dish b { font-size: 20px; padding: 5px 0 3px; overflow-wrap: anywhere; }
+.stat span { font-size: 13px; color: var(--ink-2); margin-top: auto; }
+button.stat { transition: border-color .2s; }
+button.stat:hover { border-color: var(--dark); }
+.menu-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 32px; flex-wrap: wrap; margin-bottom: 24px; }
+.menu-head h2 { font-size: clamp(26px, 3vw, 32px); font-weight: 600; }
+.menu-head p { margin-top: 6px; max-width: 540px; }
+.legend { display: flex; gap: 8px 18px; font-size: 14px; color: var(--ink-2); flex-wrap: wrap; }
+.legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.legend .pos, .bar .pos { background: var(--pos); }
+.legend .neg, .bar .neg { background: var(--neg); }
+
+/* menu: one row per dish */
+.menu-list { list-style: none; margin: 0; padding: 0; background: #fff; border: 1.5px solid var(--line); border-radius: 24px; overflow: hidden; }
+.menu-list li + li { border-top: 1px solid var(--line); }
+.dish-row { width: 100%; display: grid; grid-template-columns: 56px minmax(0, 1fr) minmax(140px, 260px) 130px 14px;
+  grid-template-areas: "pic name bar score chev"; gap: 20px; align-items: center; padding: 12px 22px; border: 0;
+  background: #fff; text-align: left; transition: background .15s; }
+.dish-row:hover, .dish-row:focus-visible { background: var(--panel-2); outline: none; }
+.dish-row .plate { grid-area: pic; }
+.row-name { grid-area: name; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; min-width: 0; }
+.row-name b { font-size: 16px; font-weight: 600; line-height: 1.3; }
+.dish-row .bar { grid-area: bar; }
+.row-score { grid-area: score; text-align: right; line-height: 1.3; }
+.row-score b { display: block; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.row-score small { font-size: 13px; color: var(--ink-2); }
+.chev { grid-area: chev; color: var(--ink-3); font-size: 22px; line-height: 1; }
+.tag { padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.tag.signature { background: var(--dark); color: #fff; }
+.tag.needs-improvement { background: #fde8e7; color: #a42726; }
+.tag.polarising { background: #fdf1d8; color: #7a5200; }
+.bar { display: flex; gap: 2px; height: 9px; border-radius: 99px; overflow: hidden; }
+.bar i { display: block; height: 100%; }
+.bar:not(:has(i)) { background: var(--line); }
+.rare-note { margin: 40px 0 14px; font-size: 15px; }
+
+/* reviews the cleaning step left out */
+.left-out-block { margin-top: 64px; }
+.left-out-block h2 { font-size: clamp(22px, 2.6vw, 26px); font-weight: 600; }
+.left-out-block > p { margin: 6px 0 16px; }
+.left-out-list { list-style: none; margin: 0; padding: 0; border: 1.5px solid var(--line); border-radius: 24px; overflow: hidden; }
+.left-out-list li { display: grid; grid-template-columns: 100px 96px minmax(0, 1fr); gap: 16px; align-items: center; padding: 10px 22px; }
+.left-out-list li + li { border-top: 1px solid var(--line); }
+.left-out-text { font-size: 15px; overflow-wrap: anywhere; }
+.left-out-text em { color: var(--ink-2); }
+.tag.reason { justify-self: start; background: var(--panel); color: var(--ink-2); }
+
+/* dish dialog */
+.chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 14px; font-size: 14px; color: var(--ink); }
+.chip small { color: var(--ink-2); font-size: 12px; margin-left: 4px; }
+.chip:hover { border-color: var(--dark); }
+.chip.active { background: var(--dark); border-color: var(--dark); color: #fff; }
+.chip.active small { color: rgba(255,255,255,.75); }
+.chip:disabled { opacity: .4; cursor: default; border-color: var(--line); }
+dialog { width: min(720px, 100% - 32px); max-height: min(86vh, 900px); overflow: auto; border: 0; border-radius: 28px;
+  padding: 0; color: var(--ink); box-shadow: var(--shadow); }
+dialog::backdrop { background: rgba(31, 41, 39, .5); }
+.dlg-head { position: sticky; top: 0; z-index: 1; background: #fff; display: flex; gap: 18px; align-items: center;
+  padding: 22px 24px 16px; border-bottom: 1px solid var(--line); }
+.dlg-info { flex: 1; min-width: 0; }
+.dlg-info h2 { font-size: 22px; font-weight: 600; }
+.dlg-info p { font-size: 14px; margin: 2px 0 8px; }
+.dlg-info p b { color: var(--ink); }
+.close { width: 38px; height: 38px; flex: none; align-self: flex-start; border-radius: 50%; border: 0; background: var(--panel); font-size: 15px; }
+.close:hover { background: var(--line); }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; padding: 16px 24px 4px; }
+.left-out { flex-basis: 100%; font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+.left-out:empty { display: none; }
+.reviews { padding: 12px 24px 24px; }
+.review { border: 1px solid var(--line); border-radius: 18px; padding: 14px 18px; margin-bottom: 12px; }
+.review-head { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; }
+.review p { font-size: 15px; color: var(--ink); overflow-wrap: anywhere; }
+.stars { color: var(--star); letter-spacing: 2px; font-size: 14px; }
+.vote { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 99px; }
+.vote.positive, mark.positive { background: #d9e7f8; color: #16477f; }
+.vote.negative, mark.negative { background: #fbdcdc; color: #8e1f1e; }
+mark { border-radius: 5px; padding: 0 4px; font-weight: 600; }
+mark.positive { box-shadow: inset 0 -2px 0 var(--pos); }
+mark.negative { box-shadow: inset 0 -2px 0 var(--neg); }
+mark.neutral { background: #ebeae6; color: var(--ink); box-shadow: inset 0 -2px 0 var(--neu); }
+.more { display: block; margin: 8px auto 0; }
+.no-opinion { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+.no-opinion h3 { font-size: 16px; font-weight: 600; }
+.no-opinion h3 small { font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+.no-opinion > p { font-size: 13px; color: var(--ink-2); margin: 2px 0 14px; }
+.no-opinion .review { background: var(--panel-2); }
+
+footer { border-top: 1px solid var(--line); margin-top: 80px; padding: 24px 0 32px; font-size: 13px; color: var(--ink-2); }
+footer a { color: var(--ink); }
+
+@media (max-width: 960px) {
+  .hero-panel { padding: 44px 290px 44px 40px; }
+  .deco { width: 330px; height: 330px; right: -60px; top: -70px; }
+  .deco img { width: 220px; left: 0; bottom: 20px; }
+  .deco .emo { font-size: 110px; left: 50px; bottom: 60px; }
+  .cards { grid-template-columns: 1fr; }
+  .rest-card { flex-direction: row; align-items: center; gap: 24px; padding: 20px 24px; }
+  .rest-card .plate { width: 104px; font-size: 44px; margin: 0; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .hero-panel { padding: 36px 24px; min-height: 0; border-radius: 28px; }
+  .deco { display: none; }
+  .rest-card { gap: 16px; padding: 18px; }
+  .rest-card .plate { width: 76px; font-size: 32px; }
+  .stats { grid-template-columns: 1fr; margin-bottom: 48px; }
+  .dish-row { grid-template-columns: 44px minmax(0, 1fr) auto; grid-template-areas: "pic name score" "pic bar bar"; gap: 6px 14px; padding: 12px 16px; }
+  .plate.row { width: 44px; font-size: 20px; }
+  .chev { display: none; }
+  .left-out-list li { grid-template-columns: auto 1fr; gap: 4px 12px; padding: 10px 16px; }
+  .left-out-text { grid-column: 1 / -1; }
+  .dlg-head { padding: 18px 18px 14px; gap: 14px; }
+  .dlg-head .plate { display: none; }
+  .tabs { padding: 14px 18px 4px; }
+  .reviews { padding: 12px 18px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= view 1: home ======================= -->
+<main class="wrap" id="home">
   <section class="hero-panel">
     <div class="hero-copy">
       <div class="eyebrow">NLP for restaurant reviews</div>
@@ -22,15 +217,248 @@
     </div>
     <div class="deco" aria-hidden="true"><img src="img/biryani.webp" alt=""></div>
   </section>
-
   <div class="cards" id="cards"></div>
 </main>
+
+<!-- ======================= view 2: one restaurant ======================= -->
+<main class="wrap" id="restaurant" hidden>
+  <a class="back" href="#">← All restaurants</a>
+  <section class="hero-panel" id="head"></section>
+  <div class="stats" id="stats"></div>
+  <section>
+    <div class="menu-head">
+      <div>
+        <h2>Menu</h2>
+        <p>Dishes ranked from most liked to least liked. Click a dish to read what people said.</p>
+      </div>
+      <div class="legend"><span><i class="pos"></i>Liked it</span><span><i class="neg"></i>Didn't like it</span></div>
+    </div>
+    <ol class="menu-list" id="menu"></ol>
+    <div id="rareBlock" hidden>
+      <p class="rare-note" id="rareNote"></p>
+      <ol class="menu-list" id="rare"></ol>
+    </div>
+  </section>
+  <section class="left-out-block" id="leftOutBlock" hidden>
+    <h2>Reviews left out</h2>
+    <p id="leftOutNote"></p>
+    <ol class="left-out-list" id="leftOut"></ol>
+  </section>
+</main>
+
+<!-- every review that mentions one dish -->
+<dialog id="dish" aria-labelledby="dishName">
+  <div class="dlg-head">
+    <div id="dishPlate"></div>
+    <div class="dlg-info">
+      <h2 id="dishName"></h2>
+      <p id="dishLiked"></p>
+      <div id="dishBar"></div>
+    </div>
+    <button class="close" id="dishClose" aria-label="Close">✕</button>
+  </div>
+  <div class="tabs" id="dishTabs"></div>
+  <div class="reviews" id="dishReviews"></div>
+</dialog>
 
 <footer>
   <div class="wrap">Data: <a href="https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants" target="_blank" rel="noopener">Zomato Bangalore Restaurants</a> (Kaggle) · NLP course project by Deesampan Vongsurit &amp; Wattanan Jiratriluk</div>
 </footer>
 
 <script src="data.js"></script>
-<script src="app.js"></script>
+<script>
+const D = window.DATA;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = n => n.toLocaleString("en-US");
+const pct = x => Math.round(x * 100) + "%";
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const stars = n => "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n));
+const share = (d, k) => d.opinions ? d[k] / d.opinions : 0;      // share of the reviews that took a side
+const byLiked = (a, b) => share(b, "positive") - share(a, "positive") || b.opinions - a.opinions || a.dish.localeCompare(b.dish);
+const dishesOf = name => D.dishes.filter(d => d.restaurant === name);
+
+/* ---- dish pictures: a photo from img/ when there is one, an emoji otherwise ---- */
+const EMOJI = [["biryani", "🍛"], ["kebab", "🍢"], ["tikka", "🍢"], ["salad", "🥗"], ["wrap", "🌯"], ["sandwich", "🥪"],
+  ["brownie", "🍫"], ["cake", "🍰"], ["jamun", "🍡"], ["jamoon", "🍡"], ["halwa", "🍮"], ["lemonade", "🍋"], ["tea", "🧋"], ["noodles", "🍜"],
+  ["rice", "🍚"], ["pulao", "🍚"], ["paratha", "🫓"], ["naan", "🫓"], ["roti", "🫓"], ["kulcha", "🫓"], ["chapati", "🫓"],
+  ["fries", "🍟"], ["wedges", "🍟"], ["potato", "🥔"], ["paneer", "🧀"], ["dal", "🥣"], ["rajma", "🥣"], ["chole", "🥣"],
+  ["raita", "🥛"], ["lollypop", "🍗"], ["wings", "🍗"], ["popcorn", "🍗"], ["chicken", "🍗"], ["egg", "🥚"],
+  ["gobi", "🥦"], ["mushroom", "🍄"], ["fish", "🐟"], ["manchurian", "🥘"], ["masala", "🥘"]];
+const emoji = d => (EMOJI.find(([k]) => d.toLowerCase().includes(k)) || [0, "🍽️"])[1];
+const pic = d => D.photos[d] ? `<img src="${D.photos[d]}" alt="">` : `<span class="emo">${emoji(d)}</span>`;
+const plate = (d, size = "") => `<span class="plate ${size}${D.photos[d] ? " has-img" : ""}" aria-hidden="true">${pic(d)}</span>`;
+
+// each restaurant's picture: its most discussed dish with a photo not used by an earlier restaurant
+const COVER = {}, usedPhotos = new Set();
+for (const r of D.restaurants) {
+  const ds = dishesOf(r.name).sort((a, b) => b.opinions - a.opinions || b.positive - a.positive);
+  const d = ds.find(x => D.photos[x.dish] && !usedPhotos.has(D.photos[x.dish])) || ds.find(x => D.photos[x.dish]) || ds[0];
+  usedPhotos.add(D.photos[d.dish]);
+  COVER[r.name] = d.dish;
+}
+
+// plain-language labels ("steady" dishes get none)
+const TAG = { "signature": "★ Customers love it", "needs-improvement": "! Needs work", "polarising": "⇅ Mixed opinions" };
+const tag = d => TAG[d.category] ? `<span class="tag ${d.category}">${TAG[d.category]}</span>` : "";
+const bar = d => {
+  const tip = d.opinions ? `${d.positive} liked it · ${d.negative} didn't like it` : "No opinions yet";
+  return `<span class="bar" role="img" aria-label="${tip}" title="${tip}">${d.positive ? `<i class="pos" style="flex:${d.positive}"></i>` : ""}${d.negative ? `<i class="neg" style="flex:${d.negative}"></i>` : ""}</span>`;
+};
+
+/* ======================= view 1: home ======================= */
+function showHome() {
+  document.title = "ResRec — Which dishes are worth ordering?";
+  $("#total").textContent = fmt(D.restaurants.reduce((a, r) => a + r.reviews, 0));
+  $("#cards").innerHTML = D.restaurants.map(r => `<a class="rest-card" href="#${slug(r.name)}">
+      ${plate(COVER[r.name])}
+      <span class="rest-body">
+        <span class="rest-name">${esc(r.name)}</span>
+        <span class="rest-meta">${esc(r.location)} · ${esc(r.cuisines)}</span>
+        <span class="rest-foot">
+          <span><b>${pct(r.positive_reviews / r.reviews)}</b> positive reviews<br>${fmt(r.reviews)} reviews read</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </span>
+      </span>
+    </a>`).join("");
+}
+
+/* ======================= view 2: one restaurant ======================= */
+let current = null;                                   // the restaurant on screen
+
+function showRestaurant(r) {
+  current = r;
+  document.title = `${r.name} · ResRec`;
+  const all = dishesOf(r.name);
+  const rated = all.filter(d => d.opinions >= D.min_opinions);   // enough opinions to judge
+  const rare = all.filter(d => d.opinions < D.min_opinions);
+  const best = [...rated].sort((a, b) => share(b, "positive") - share(a, "positive") || b.opinions - a.opinions)[0];
+  const worst = [...rated].sort((a, b) => share(b, "negative") - share(a, "negative") || b.opinions - a.opinions)[0];
+
+  $("#head").innerHTML = `
+    <div class="hero-copy">
+      <h1>${esc(r.name)}</h1>
+      <p>${esc(r.location)} · ${esc(r.type)}</p>
+      <p>${esc(r.cuisines)} · ₹${esc(r.cost_for_two)} for two · <span class="star">★</span> ${esc(r.zomato_rate)} on Zomato</p>
+    </div>
+    <div class="deco" aria-hidden="true">${pic(COVER[r.name])}</div>`;
+
+  const tiles = [
+    { k: "Reviews read", v: fmt(r.reviews), s: "customer reviews on Zomato" },
+    { k: "Positive reviews", v: pct(r.positive_reviews / r.reviews), s: `${fmt(r.positive_reviews)} of ${fmt(r.reviews)} reviews` },
+  ];
+  if (best) tiles.push({ k: "Most loved dish", v: best.dish, s: `${best.positive} of ${best.opinions} liked it`, d: best });
+  if (worst && worst.negative) tiles.push({ k: "Most criticised dish", v: worst.dish, s: `${worst.negative} of ${worst.opinions} didn't like it`, d: worst });
+  $("#stats").innerHTML = tiles.map(t => t.d
+    ? `<button class="stat dish" data-dish="${esc(t.d.dish)}"><small>${t.k}</small><b>${esc(t.v)}</b><span>${t.s}</span></button>`
+    : `<div class="stat"><small>${t.k}</small><b>${esc(t.v)}</b><span>${t.s}</span></div>`).join("");
+
+  const row = d => `<li><button class="dish-row" data-dish="${esc(d.dish)}">
+      ${plate(d.dish, "row")}
+      <span class="row-name"><b>${esc(d.dish)}</b>${tag(d)}</span>
+      ${bar(d)}
+      <span class="row-score">${d.opinions ? `<b>${pct(share(d, "positive"))}</b><small>${d.positive} of ${d.opinions} liked it</small>` : `<b>–</b><small>no opinions yet</small>`}</span>
+      <span class="chev" aria-hidden="true">›</span>
+    </button></li>`;
+  $("#menu").innerHTML = rated.sort(byLiked).map(row).join("") || `<li class="empty">No dish has ${D.min_opinions} or more opinions.</li>`;
+  $("#rareNote").textContent = `These dishes have fewer than ${D.min_opinions} opinions, so there is too little to judge them yet.`;
+  $("#rare").innerHTML = rare.sort(byLiked).map(row).join("");
+  $("#rareBlock").hidden = !rare.length;
+
+  // reviews the cleaning step removed, most common reason first
+  const gone = D.removed.filter(x => x.restaurant === r.name);
+  const counts = {};
+  gone.forEach(x => counts[x.reason] = (counts[x.reason] || 0) + 1);
+  const reasons = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+  $("#leftOutNote").textContent = `These ${gone.length} reviews were not analysed: ${reasons.map(k => `${counts[k]} ${k.toLowerCase()}`).join(", ")}.`;
+  $("#leftOut").innerHTML = [...gone].sort((a, b) => reasons.indexOf(a.reason) - reasons.indexOf(b.reason)).map(x => `<li>
+      <span class="tag reason">${x.reason}</span>
+      <span class="stars" aria-label="${x.rating} out of 5 stars">${stars(x.rating)}</span>
+      <span class="left-out-text">${x.note ? `<em>${esc(x.text)}</em>` : esc(x.text)}</span></li>`).join("");
+  $("#leftOutBlock").hidden = !gone.length;
+}
+
+/* ---- dish dialog: every review that mentions the dish ---- */
+const REVIEW = new Map(D.reviews.map(x => [x.id, x]));
+const VOTE = { positive: "Liked it", negative: "Didn't like it" };
+const PER = 10, PER_UNCLEAR = 3;
+let open = null;                                      // { d, rows, filter, shown, shownUnclear }
+
+// the review text with every mention of the dish highlighted by its opinion
+function highlight(rv, name) {
+  let out = "", pos = 0;
+  for (const m of rv.dishes.filter(x => x.dish === name)) {
+    if (m.start < pos) continue;
+    out += esc(rv.text.slice(pos, m.start)) + `<mark class="${m.label}">${esc(rv.text.slice(m.start, m.end))}</mark>`;
+    pos = m.end;
+  }
+  return out + esc(rv.text.slice(pos));
+}
+
+function openDish(name) {
+  const d = dishesOf(current.name).find(x => x.dish === name);
+  // a review's vote is its last mention of the dish that takes a side (same rule as run_pipeline.py vote)
+  const rows = d.review_ids.map(id => REVIEW.get(id)).map(rv => {
+    const ms = rv.dishes.filter(x => x.dish === name).reverse();
+    return { rv, vote: (ms.find(x => x.label !== "neutral") || ms[0]).label };
+  });
+  open = { d, rows, filter: "all", shown: PER, shownUnclear: PER_UNCLEAR };
+  $("#dishPlate").innerHTML = plate(d.dish, "sm");
+  $("#dishName").textContent = d.dish;
+  $("#dishLiked").innerHTML = d.opinions ? `<b>${d.positive} of ${d.opinions}</b> liked it` : "No opinions yet";
+  $("#dishBar").innerHTML = bar(d);
+  renderReviews();
+  if (!$("#dish").open) $("#dish").showModal();
+  $("#dish").scrollTop = 0;
+}
+
+function renderReviews() {
+  const { d, rows, filter, shown, shownUnclear } = open;
+  const gone = D.removed.filter(x => x.restaurant === current.name).length;
+  $("#dishTabs").innerHTML = [["all", "All", d.opinions], ["positive", "Liked it", d.positive], ["negative", "Didn't like it", d.negative]]
+    .map(([k, l, n]) => `<button class="chip ${filter === k ? "active" : ""}" data-filter="${k}" ${n ? "" : "disabled"}>${l} <small>${n}</small></button>`).join("")
+    + `<p class="left-out">${gone ? `${gone} reviews were left out before analysis, so they are not counted here. They are listed at the bottom of the page.` : ""}</p>`;
+  const card = ({ rv, vote }) => `<article class="review">
+      <div class="review-head">${VOTE[vote] ? `<span class="vote ${vote}">${VOTE[vote]}</span>` : ""}<span class="stars" aria-label="${rv.rating} out of 5 stars">${stars(rv.rating)}</span></div>
+      <p>${highlight(rv, d.dish)}</p>
+    </article>`;
+  const more = (left, key) => left > 0 ? `<button class="link more" data-more="${key}">Show more (${left} left)</button>` : "";
+  const list = rows.filter(x => x.vote !== "neutral" && (filter === "all" || x.vote === filter));
+  const unclear = rows.filter(x => x.vote === "neutral");   // name the dish without taking a side: never counted
+  $("#dishReviews").innerHTML = list.slice(0, shown).map(card).join("") + more(list.length - shown, "shown")
+    + (unclear.length ? `<section class="no-opinion">
+        <h3>Mentioned, no opinion given <small>${unclear.length}</small></h3>
+        <p>These reviews name the dish without saying whether it was good or bad, so they are not counted above.</p>
+        ${unclear.slice(0, shownUnclear).map(card).join("")}${more(unclear.length - shownUnclear, "shownUnclear")}
+      </section>` : "");
+}
+
+$("#dishTabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-filter]");
+  if (b) { Object.assign(open, { filter: b.dataset.filter, shown: PER, shownUnclear: PER_UNCLEAR }); renderReviews(); }
+});
+$("#dishReviews").addEventListener("click", e => {
+  const b = e.target.closest("[data-more]");
+  if (b) { open[b.dataset.more] += PER; renderReviews(); }
+});
+$("#dishClose").onclick = () => $("#dish").close();
+$("#dish").addEventListener("click", e => { if (e.target === $("#dish")) $("#dish").close(); });   // backdrop
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-dish]");
+  if (b) openDish(b.dataset.dish);
+});
+
+/* ---- which view: index.html#<restaurant> shows that restaurant, plain index.html the cards ---- */
+function route() {
+  const r = D.restaurants.find(x => slug(x.name) === location.hash.slice(1));
+  if ($("#dish").open) $("#dish").close();
+  $("#home").hidden = !!r;
+  $("#restaurant").hidden = !r;
+  r ? showRestaurant(r) : showHome();
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
 </body>
 </html>
