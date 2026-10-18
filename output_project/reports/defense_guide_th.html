@@ -65,7 +65,7 @@
   <table class="meta">
     <tr><td><b>ทีม</b></td><td>Deesampan Vongsurit (6510766), Wattanan Jiratriluk (6520214)</td></tr>
     <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>70a8859</code> บน main (โครงสร้างใหม่ + คะแนนร้านนับเฉพาะความเห็นต่ออาหาร): <code>src/run_pipeline.py</code> + <code>src/train_model.py</code> + หน้าเว็บไฟล์เดียว <code>output_project/web/index.html</code> — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
-    <tr><td><b>วันที่</b></td><td>18 ตุลาคม 2026 (ฉบับที่ 8 — คะแนนร้านและจำนวนรีวิวนับเฉพาะเรื่องอาหาร)</td></tr>
+    <tr><td><b>วันที่</b></td><td>18 ตุลาคม 2026 (ฉบับที่ 9 — คะแนนร้านนับเฉพาะความเห็นต่ออาหาร)</td></tr>
   </table>
 
   <div class="box warn">
@@ -149,7 +149,7 @@
   <tr><td>B4 อ่านความรู้สึก</td><td>รีวิว + ตำแหน่งเมนู + โมเดล</td><td>แต่ละ<b>อนุประโยค</b>ได้ป้าย ชอบ/ไม่ชอบ/ไม่เลือกข้าง → แต่ละเมนูได้ป้ายของอนุประโยคที่มันอยู่</td><td><code>re</code> ตัดอนุประโยค + ซ่อนคำ; <b>scikit-learn</b> (โมเดลที่เทรนไว้: <code>transform</code> + <code>predict_proba</code>); <code>pickle</code> โหลดโมเดล; เกณฑ์ ±0.4</td><td><span class="ref" data-x="def clauses">src/run_pipeline.py:229-245</span> <span class="ref" data-x="SPLIT = re.compile">src/run_pipeline.py:199-202</span> <span class="ref" data-x="vec.transform">src/run_pipeline.py:220</span> <span class="ref" data-x="clf.predict_proba">src/run_pipeline.py:223</span> <span class="ref" data-x="CLAUSE_MARGIN = 0.4">src/run_pipeline.py:34</span> <span class="ref" data-x="def attribute">src/run_pipeline.py:248-264</span></td></tr>
   <tr><td>B5 นับ</td><td>ป้ายของแต่ละเมนูในแต่ละรีวิว</td><td>ต่อเมนู: กี่คนชอบ / ไม่ชอบ + ป้าย "Customers love it" ฯลฯ (122 เมนู, จัดอันดับได้ 34)</td><td>Python ล้วน</td><td><span class="ref" data-x="def count_dishes">src/run_pipeline.py:286-304</span></td></tr>
   <tr><td>B6 ส่งออก</td><td>ผลทั้งหมด</td><td><code>web/data.js</code> (202 KB)</td><td><code>json</code></td><td><span class="ref" data-x="def export">src/run_pipeline.py:325-347</span></td></tr>
-  <tr><td>B7 แสดงผล</td><td><code>data.js</code></td><td>หน้าเว็บ: การ์ดร้าน, รายการเมนูพร้อม<b>แถบสีชอบ/ไม่ชอบ</b></td><td>HTML + CSS + JavaScript ล้วน — แถบคือ <code>&lt;span&gt;</code> ที่ความกว้างตามจำนวนคน <b>ไม่มีไลบรารีกราฟ</b></td><td><span class="ref" data-x="const bar = d =&gt;">output_project/web/index.html:304-307</span> <span class="ref" data-x=".bar {">output_project/web/index.html:121-122</span></td></tr>
+  <tr><td>B7 แสดงผล</td><td><code>data.js</code></td><td>หน้าเว็บ: การ์ดร้าน, รายการเมนูพร้อม<b>แถบสีชอบ/ไม่ชอบ</b></td><td>HTML + CSS + JavaScript ล้วน — แถบคือ <code>&lt;span&gt;</code> ที่ความกว้างตามจำนวนคน <b>ไม่มีไลบรารีกราฟ</b></td><td><span class="ref" data-x="const bar = d =&gt;">output_project/web/index.html:303-306</span> <span class="ref" data-x=".bar {">output_project/web/index.html:121-122</span></td></tr>
 </table>
 
 <h3>สรุปเครื่องมือ</h3>
@@ -258,7 +258,7 @@
   <tr><td>N3 สั้นเกิน</td><td>น้อยกว่า 2 คำ</td><td class="num">70</td><td class="num">1,321</td></tr>
   <tr><td>N4 ไม่ใช่อังกฤษ</td><td>อักษรละตินน้อยกว่า 70% <span class="ref" data-x="def latin_share">src/run_pipeline.py:72-74</span></td><td class="num">0</td><td class="num">1,321</td></tr>
 </table>
-<p>ทั้ง 79 รีวิวที่ถูกทิ้งแสดงบนหน้าร้านหัวข้อ "Reviews left out" พร้อมเหตุผล <span class="ref" data-x="D.removed">output_project/web/index.html:369</span> จาก 1,321 รีวิว มี <b>416 รีวิวที่พูดถึงเมนู</b> (747 ความเห็นต่อเมนู)</p>
+<p>ทั้ง 79 รีวิวที่ถูกทิ้งแสดงบนหน้าร้านหัวข้อ "Reviews left out" พร้อมเหตุผล <span class="ref" data-x="D.removed">output_project/web/index.html:367</span> จาก 1,321 รีวิว มี <b>416 รีวิวที่พูดถึงเมนู</b> (747 ความเห็นต่อเมนู)</p>
 
 <!-- ================================================================== 5 -->
 <h2>5. หัวใจของ NLP: หาเมนู → อ่านความรู้สึกรายอนุประโยค</h2>
@@ -279,7 +279,7 @@
   <li><b>เลือกข้างเมื่อมั่นใจ</b>: ≥ +0.4 = ชอบ, ≤ −0.4 = ไม่ชอบ, ระหว่างนั้น = ไม่เลือกข้าง <span class="ref" data-x="CLAUSE_MARGIN">src/run_pipeline.py:242-244</span></li>
   <li><b>ผูกกับเมนู</b>: เมนูได้ป้ายของอนุประโยคที่มันอยู่ ถ้าอนุประโยคไม่ได้บอกอะไรเลย ("I ordered biryani.") ให้ยืมอนุประโยคถัดไป ("It was cold.") ถ้าอันนั้นไม่มีเมนูอื่นและพูดถึงอาหาร — เกิด 21 จาก 915 ครั้ง <span class="ref" data-x="def attribute">src/run_pipeline.py:248-264</span></li>
   <li><b>นับ</b>: 1 รีวิว = 1 เสียงต่อเมนู (ครั้งสุดท้ายที่เลือกข้าง) <span class="ref" data-x="def vote">src/run_pipeline.py:270-272</span>; % คิดจากคนที่เลือกข้างเท่านั้น <span class="ref" data-x="&quot;opinions&quot;: a[&quot;positive&quot;] + a[&quot;negative&quot;">src/run_pipeline.py:301</span>; ต้องมี ≥ 4 ความเห็นถึงจะจัดอันดับ; ชอบ ≥ 80% = "Customers love it", ≤ 40% = "Needs work", 40–60% = "Mixed opinions" <span class="ref" data-x="MIN_OPINIONS = 4">src/run_pipeline.py:31-33</span> <span class="ref" data-x="def tag">src/run_pipeline.py:275-283</span></li>
-  <li><b>% ที่ชอบอาหารของร้าน</b> = โหวตของทุกเมนูในร้านรวมกัน (ชอบ ÷ ความเห็นต่อเมนูทั้งหมด) นับเฉพาะความเห็นต่ออาหาร คอมเมนต์เรื่องบริการ เช่น "ส่งช้า" ไม่นับ <span class="ref" data-x="food only">src/run_pipeline.py:334-335</span> — โมเดลยังอ่านทั้งรีวิวด้วย แต่ใช้แค่เช็กกับดาว (90.1%) ไม่ได้แสดงบนเว็บ <span class="ref" data-x="r[&quot;sentiment&quot;] = classify(model">src/run_pipeline.py:359</span>. ช่อง <b>"Reviews about food"</b> ก็นับเฉพาะรีวิวที่พูดถึงเมนู: Biriyani Nights 169 จาก 501 รีวิวที่อ่าน (อีก 332 รีวิวพูดเรื่องบริการ การส่ง หรือร้านโดยรวม) และรีวิวที่พูดถึง 2 เมนูจะโผล่ในหน้าต่างของทั้ง 2 เมนู นับรวมจากทุกหน้าต่างจึงได้มากกว่า 169 <span class="ref" data-x="Reviews about food">output_project/web/index.html:347</span></li>
+  <li><b>% ที่ชอบอาหารของร้าน</b> = โหวตของทุกเมนูในร้านรวมกัน (ชอบ ÷ ความเห็นต่อเมนูทั้งหมด) นับเฉพาะความเห็นต่ออาหาร คอมเมนต์เรื่องบริการ เช่น "ส่งช้า" ไม่นับ <span class="ref" data-x="food only">src/run_pipeline.py:334-335</span> — โมเดลยังอ่านทั้งรีวิวด้วย แต่ใช้แค่เช็กกับดาว (90.1%) ไม่ได้แสดงบนเว็บ <span class="ref" data-x="r[&quot;sentiment&quot;] = classify(model">src/run_pipeline.py:359</span></li>
 </ol>
 
 <!-- ================================================================== 6 -->
@@ -348,7 +348,7 @@ git status</pre></li>
 <div class="a">เพราะ "not good" จะกลายเป็น "good" ทดลองแล้ว: เก็บคำปฏิเสธไว้ดีกว่า <b>+2.1 จุด accuracy</b> (80.0% → 82.2%) และ +2.5 จุด macro-F1 <span class="ref" data-x="KEEP_WORDS = {">src/train_model.py:190-191</span> <span class="ref" data-x="same, but &quot;not&quot; removed">src/train_model.py:236</span></div></div>
 
 <div class="qa"><div class="q">11. หาเมนูด้วย NER ไหม? "plot" ขึ้นเว็บใช้อะไร?</div>
-<div class="a">ไม่ใช้ NER: โมเดล NER สำเร็จรูป (เช่นของ spaCy) ไม่มีประเภท "อาหาร" และเทรนเองต้องมีข้อมูลติดป้ายที่เราไม่มี จึงใช้พจนานุกรมเมนูของร้าน + RapidFuzz <span class="ref" data-x="def find_dishes">src/run_pipeline.py:155-176</span> ส่วนหน้าเว็บไม่มีไลบรารีกราฟ — แถบชอบ/ไม่ชอบคือ <code>&lt;span&gt;</code> สองสีที่ความกว้างตามจำนวนคน <span class="ref" data-x="const bar = d =&gt;">output_project/web/index.html:304-307</span></div></div>
+<div class="a">ไม่ใช้ NER: โมเดล NER สำเร็จรูป (เช่นของ spaCy) ไม่มีประเภท "อาหาร" และเทรนเองต้องมีข้อมูลติดป้ายที่เราไม่มี จึงใช้พจนานุกรมเมนูของร้าน + RapidFuzz <span class="ref" data-x="def find_dishes">src/run_pipeline.py:155-176</span> ส่วนหน้าเว็บไม่มีไลบรารีกราฟ — แถบชอบ/ไม่ชอบคือ <code>&lt;span&gt;</code> สองสีที่ความกว้างตามจำนวนคน <span class="ref" data-x="const bar = d =&gt;">output_project/web/index.html:303-306</span></div></div>
 
 <div class="qa"><div class="q">12. มีกรณีที่ระบบผิดไหม?</div>
 <div class="a">มี ตัวอย่างจริงจากข้อมูล:

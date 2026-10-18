@@ -82,7 +82,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* restaurant view */
 .back { display: inline-block; margin: 24px 0 16px; color: var(--ink-2); text-decoration: none; font-size: 15px; font-weight: 500; }
 .back:hover { color: var(--ink); }
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0 64px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0 64px; }
 .stat { text-align: left; background: #fff; border: 1.5px solid var(--line); border-radius: 22px; padding: 18px 20px;
   display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .stat small { font-size: 13px; color: var(--ink-2); }
@@ -185,7 +185,6 @@ footer a { color: var(--ink); }
   .cards { grid-template-columns: 1fr; }
   .rest-card { flex-direction: row; align-items: center; gap: 24px; padding: 20px 24px; }
   .rest-card .plate { width: 104px; font-size: 44px; margin: 0; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .hero-panel { padding: 36px 24px; min-height: 0; border-radius: 28px; }
@@ -344,7 +343,6 @@ function showRestaurant(r) {
     <div class="deco" aria-hidden="true">${pic(COVER[r.name])}</div>`;
 
   const tiles = [
-    { k: "Reviews about food", v: fmt(new Set(all.flatMap(d => d.review_ids)).size), s: `of ${fmt(r.reviews)} reviews read` },
     { k: "Liked the food", v: pct(r.positive / r.opinions), s: `${fmt(r.positive)} of ${fmt(r.opinions)} opinions on dishes` },
   ];
   if (best) tiles.push({ k: "Most loved dish", v: best.dish, s: `${best.positive} of ${best.opinions} liked it`, d: best });
