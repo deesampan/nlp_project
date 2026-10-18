@@ -344,7 +344,7 @@ function showRestaurant(r) {
     <div class="deco" aria-hidden="true">${pic(COVER[r.name])}</div>`;
 
   const tiles = [
-    { k: "Reviews read", v: fmt(r.reviews), s: "customer reviews on Zomato" },
+    { k: "Reviews about food", v: fmt(new Set(all.flatMap(d => d.review_ids)).size), s: `of ${fmt(r.reviews)} reviews read` },
     { k: "Liked the food", v: pct(r.positive / r.opinions), s: `${fmt(r.positive)} of ${fmt(r.opinions)} opinions on dishes` },
   ];
   if (best) tiles.push({ k: "Most loved dish", v: best.dish, s: `${best.positive} of ${best.opinions} liked it`, d: best });

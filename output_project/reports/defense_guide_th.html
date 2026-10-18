@@ -64,8 +64,8 @@
   <div class="sub">Restaurant Recommendation From Reviews — NLP Group Project</div>
   <table class="meta">
     <tr><td><b>ทีม</b></td><td>Deesampan Vongsurit (6510766), Wattanan Jiratriluk (6520214)</td></tr>
-    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>75aedaa</code> บน main (โครงสร้างใหม่ + คะแนนร้านนับเฉพาะความเห็นต่ออาหาร): <code>src/run_pipeline.py</code> + <code>src/train_model.py</code> + หน้าเว็บไฟล์เดียว <code>output_project/web/index.html</code> — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
-    <tr><td><b>วันที่</b></td><td>18 ตุลาคม 2026 (ฉบับที่ 7 — คะแนนร้านนับเฉพาะความเห็นต่ออาหาร)</td></tr>
+    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>70a8859</code> บน main (โครงสร้างใหม่ + คะแนนร้านนับเฉพาะความเห็นต่ออาหาร): <code>src/run_pipeline.py</code> + <code>src/train_model.py</code> + หน้าเว็บไฟล์เดียว <code>output_project/web/index.html</code> — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
+    <tr><td><b>วันที่</b></td><td>18 ตุลาคม 2026 (ฉบับที่ 8 — คะแนนร้านและจำนวนรีวิวนับเฉพาะเรื่องอาหาร)</td></tr>
   </table>
 
   <div class="box warn">
@@ -279,7 +279,7 @@
   <li><b>เลือกข้างเมื่อมั่นใจ</b>: ≥ +0.4 = ชอบ, ≤ −0.4 = ไม่ชอบ, ระหว่างนั้น = ไม่เลือกข้าง <span class="ref" data-x="CLAUSE_MARGIN">src/run_pipeline.py:242-244</span></li>
   <li><b>ผูกกับเมนู</b>: เมนูได้ป้ายของอนุประโยคที่มันอยู่ ถ้าอนุประโยคไม่ได้บอกอะไรเลย ("I ordered biryani.") ให้ยืมอนุประโยคถัดไป ("It was cold.") ถ้าอันนั้นไม่มีเมนูอื่นและพูดถึงอาหาร — เกิด 21 จาก 915 ครั้ง <span class="ref" data-x="def attribute">src/run_pipeline.py:248-264</span></li>
   <li><b>นับ</b>: 1 รีวิว = 1 เสียงต่อเมนู (ครั้งสุดท้ายที่เลือกข้าง) <span class="ref" data-x="def vote">src/run_pipeline.py:270-272</span>; % คิดจากคนที่เลือกข้างเท่านั้น <span class="ref" data-x="&quot;opinions&quot;: a[&quot;positive&quot;] + a[&quot;negative&quot;">src/run_pipeline.py:301</span>; ต้องมี ≥ 4 ความเห็นถึงจะจัดอันดับ; ชอบ ≥ 80% = "Customers love it", ≤ 40% = "Needs work", 40–60% = "Mixed opinions" <span class="ref" data-x="MIN_OPINIONS = 4">src/run_pipeline.py:31-33</span> <span class="ref" data-x="def tag">src/run_pipeline.py:275-283</span></li>
-  <li><b>% ที่ชอบอาหารของร้าน</b> = โหวตของทุกเมนูในร้านรวมกัน (ชอบ ÷ ความเห็นต่อเมนูทั้งหมด) นับเฉพาะความเห็นต่ออาหาร คอมเมนต์เรื่องบริการ เช่น "ส่งช้า" ไม่นับ <span class="ref" data-x="food only">src/run_pipeline.py:334-335</span> — โมเดลยังอ่านทั้งรีวิวด้วย แต่ใช้แค่เช็กกับดาว (90.1%) ไม่ได้แสดงบนเว็บ <span class="ref" data-x="r[&quot;sentiment&quot;] = classify(model">src/run_pipeline.py:359</span></li>
+  <li><b>% ที่ชอบอาหารของร้าน</b> = โหวตของทุกเมนูในร้านรวมกัน (ชอบ ÷ ความเห็นต่อเมนูทั้งหมด) นับเฉพาะความเห็นต่ออาหาร คอมเมนต์เรื่องบริการ เช่น "ส่งช้า" ไม่นับ <span class="ref" data-x="food only">src/run_pipeline.py:334-335</span> — โมเดลยังอ่านทั้งรีวิวด้วย แต่ใช้แค่เช็กกับดาว (90.1%) ไม่ได้แสดงบนเว็บ <span class="ref" data-x="r[&quot;sentiment&quot;] = classify(model">src/run_pipeline.py:359</span>. ช่อง <b>"Reviews about food"</b> ก็นับเฉพาะรีวิวที่พูดถึงเมนู: Biriyani Nights 169 จาก 501 รีวิวที่อ่าน (อีก 332 รีวิวพูดเรื่องบริการ การส่ง หรือร้านโดยรวม) และรีวิวที่พูดถึง 2 เมนูจะโผล่ในหน้าต่างของทั้ง 2 เมนู นับรวมจากทุกหน้าต่างจึงได้มากกว่า 169 <span class="ref" data-x="Reviews about food">output_project/web/index.html:347</span></li>
 </ol>
 
 <!-- ================================================================== 6 -->
@@ -379,14 +379,13 @@ git status</pre></li>
 <h2>8. เรื่องที่ยังค้างอยู่</h2>
 <table>
   <tr><th style="width:4%">#</th><th style="width:32%">เรื่อง</th><th>รายละเอียด / ผลกระทบ</th></tr>
-  <tr><td>1</td><td><b><code>presentation.pptx</code> แก้แล้วแต่ยังไม่ commit</b></td><td>สไลด์ 14 หน้า (มี workflow 5 หน้า) อยู่ในโฟลเดอร์ <code>C:\nlp_project</code> แต่ยังไม่ได้ commit — ต้อง commit ก่อนส่ง</td></tr>
-  <tr><td>2</td><td>ความแม่นระดับอนุประโยคยังไม่ได้วัด</td><td>มีแค่การเช็กคร่าวด้วยดาว (21 จาก 747) — คำถามที่ 8, 9</td></tr>
-  <tr><td>3</td><td>Repo สาธารณะและ Vercel มีข้อความรีวิว</td><td>สิทธิ์ข้อมูลไม่ใช่ open licence — <b>ทีมตัดสินใจยอมรับความเสี่ยงนี้เอง</b> <span class="ref" data-x="is **public**">CLAUDE.md:155-160</span> (คำถามที่ 15)</td></tr>
-  <tr><td>4</td><td>ไอคอนบางเมนูเป็นกล่องว่างบน Windows 10</td><td>emoji รูปแผ่นแป้ง (U+1FAD3) ของ Paratha, Naan, Roti ไม่มีในฟอนต์ของ Windows 10</td></tr>
-  <tr><td>5</td><td>ยังไม่ได้ตรวจด้วยมือ</td><td>ยังไม่ได้สุ่มรีวิวที่ถูกทิ้งมาดู และเกณฑ์ 15 ตัวอักษร / 2 คำยังไม่ได้ลองค่าอื่น (ระบุใน Limitations ของ report)</td></tr>
+  <tr><td>1</td><td>ความแม่นระดับอนุประโยคยังไม่ได้วัด</td><td>มีแค่การเช็กคร่าวด้วยดาว (21 จาก 747) — คำถามที่ 8, 9</td></tr>
+  <tr><td>2</td><td>Repo สาธารณะและ Vercel มีข้อความรีวิว</td><td>สิทธิ์ข้อมูลไม่ใช่ open licence — <b>ทีมตัดสินใจยอมรับความเสี่ยงนี้เอง</b> <span class="ref" data-x="is **public**">CLAUDE.md:155-160</span> (คำถามที่ 15)</td></tr>
+  <tr><td>3</td><td>ไอคอนบางเมนูเป็นกล่องว่างบน Windows 10</td><td>emoji รูปแผ่นแป้ง (U+1FAD3) ของ Paratha, Naan, Roti ไม่มีในฟอนต์ของ Windows 10</td></tr>
+  <tr><td>4</td><td>ยังไม่ได้ตรวจด้วยมือ</td><td>ยังไม่ได้สุ่มรีวิวที่ถูกทิ้งมาดู และเกณฑ์ 15 ตัวอักษร / 2 คำยังไม่ได้ลองค่าอื่น (ระบุใน Limitations ของ report)</td></tr>
 </table>
 
-<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จากโค้ด commit 75aedaa และการรันทดสอบจริงวันที่ 17–18 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
+<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จากโค้ด commit 70a8859 และการรันทดสอบจริงวันที่ 17–18 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
 
 </body>
 </html>
