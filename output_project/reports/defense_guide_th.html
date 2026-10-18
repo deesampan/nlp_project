@@ -140,6 +140,22 @@
 </table>
 <p class="small">รันครบทั้ง 3 ขั้นแล้วเมื่อ 17 ต.ค. 2026 กับไฟล์ Kaggle ตัวจริง (ใช้เวลา 9 นาที 54 วินาที) — <code>reviews_clean.csv</code>, <code>cleaning_funnel.csv</code>, <code>site_reviews.csv</code>, <code>site_restaurants.json</code>, <code>model_metrics.json</code> ออกมา<b>เหมือนไฟล์ใน repo ทุกไบต์</b>; โมเดลมีคำศัพท์และค่าน้ำหนัก<b>เหมือนเดิมทุกตัว</b> (ไฟล์ <code>.pkl</code> ต่างกันแค่ตัวเลขภายในหนึ่งตัวที่ scikit-learn จดไว้ คือตำแหน่งในหน่วยความจำของรายการ stopword ซึ่งเปลี่ยนทุกครั้งที่รัน) และ <code>data.js</code> ไม่เปลี่ยน</p>
 
+<div class="box">
+  <span class="label">train_model.py เลือก 3 ร้านด้วยไหม? และเทรนกับไฟล์ zomato.csv ทั้งไฟล์หรือเปล่า?</span>
+  <p><b>เลือก 3 ร้านด้วย</b> — ขั้น A2 <span class="ref" data-x="def pick_restaurants">src/train_model.py:146</span> นับ<b>รีวิวไม่ซ้ำ</b>ของแต่ละร้านใน <code>zomato.csv</code> แล้วเอา 3 ร้านที่<b>มีรีวิวมากที่สุด</b> (ไม่ใช่คะแนนสูงสุด): Biriyani Nights 524, Night Food Joint 446, BOX8- Desi Meals 430 รีวิว เขียนรีวิวดิบลง <code>site_reviews.csv</code> และเมนูลง <code>site_restaurants.json</code> รีวิวของเว็บจึงเป็นรีวิว<b>ดิบ</b> แล้ว <code>run_pipeline.py</code> ทำความสะอาดเองด้วยกฎ N1–N4</p>
+  <p><b>ไม่ได้เทรนกับไฟล์ดิบ</b> — เทรนกับรีวิวที่ทำความสะอาดแล้ว และใช้แค่บางส่วน:</p>
+  <table>
+    <tr><th>ขั้น</th><th class="num" style="width:16%">จำนวนรีวิว</th><th style="width:28%">โค้ด</th></tr>
+    <tr><td><code>zomato.csv</code> ไฟล์ดิบ</td><td class="num">1,317,782</td><td>—</td></tr>
+    <tr><td>A1 ทำความสะอาด: ลบรีวิวซ้ำ, ลบสแปม, ซ่อมข้อความ, เก็บแค่ภาษาอังกฤษ, ติดป้ายจากดาว</td><td class="num">134,612</td><td><span class="ref" data-x="def clean_corpus">src/train_model.py:101</span></td></tr>
+    <tr><td>A3 ลบรีวิวของ 3 ร้านบนเว็บออก โมเดลจะได้ไม่เคยเห็นรีวิวที่จะใช้บนเว็บ</td><td class="num">133,389</td><td><span class="ref" data-x="def load_corpus">src/train_model.py:194</span></td></tr>
+    <tr><td>แบ่ง: <b>ใช้เรียน</b></td><td class="num"><b>90,704</b></td><td rowspan="3"><span class="ref" data-x="train_test_split">src/train_model.py:226-227</span></td></tr>
+    <tr><td>แบ่ง: validation (เก็บไว้ ไม่ได้ใช้เรียน)</td><td class="num">16,007</td></tr>
+    <tr><td>แบ่ง: ทดสอบ (ได้ผลถูก 82.2%)</td><td class="num">26,678</td></tr>
+  </table>
+  <p>สรุป: โมเดลเรียนจาก <b>90,704 รีวิวที่ทำความสะอาดแล้ว</b> ประมาณ 7% ของข้อมูลดิบ ส่วนต่างส่วนใหญ่คือรีวิวซ้ำ (89% ของไฟล์ดิบซ้ำกัน) ข้อความที่โมเดลอ่านผ่านการ normalise แล้ว (ตัวพิมพ์เล็ก, "soooo" → "soo", "wasn't" → "was not") และป้ายมาจากดาวของรีวิวเอง: 4–5 ดาว = บวก, 3–3.5 = กลาง, 1–2.5 = ลบ <span class="ref" data-x="def label_of">src/train_model.py:75</span></p>
+</div>
+
 <h3>B. เว็บ — <code>src/run_pipeline.py</code></h3>
 <table>
   <tr><th style="width:11%">ขั้น</th><th style="width:19%">เข้า</th><th style="width:22%">ออก</th><th>เครื่องมือ</th><th style="width:22%">โค้ด</th></tr>
@@ -374,6 +390,13 @@ git status</pre></li>
 
 <div class="qa"><div class="q">17. รันซ้ำแล้วได้ผลเดิมไหม?</div>
 <div class="a">ได้ทั้งหมด: วันที่ 17 ต.ค. 2026 โหลดไฟล์ Kaggle ตัวจริงแล้วรัน <code>train_model.py</code> ครบทุกขั้น (9 นาที 54 วินาที) — ข้อมูลที่ทำความสะอาด, 3 ร้านที่เลือก และตัวเลขผลทดสอบ <b>ออกมาเหมือนเดิมทุกไบต์</b> โมเดลได้ค่าน้ำหนักเหมือนเดิมทุกตัว (ไฟล์ <code>.pkl</code> ต่างแค่ตัวเลขภายในหนึ่งตัวที่ scikit-learn จดไว้ ซึ่งเปลี่ยนทุกครั้งที่รัน) และ <code>run_pipeline.py</code> สร้าง <code>data.js</code> ได้เหมือนเดิม เพราะตั้ง seed ไว้ (แบ่งข้อมูล 42, langdetect 0) <span class="ref" data-x="random_state=42">src/train_model.py:226-228</span></div></div>
+
+
+<div class="qa"><div class="q">18. train_model.py เลือก 3 ร้านด้วยใช่ไหม? เลือกยังไง?</div>
+<div class="a">ใช่ ขั้น A2 <span class="ref" data-x="def pick_restaurants">src/train_model.py:146</span> เลือกจาก<b>จำนวนรีวิวไม่ซ้ำมากที่สุด</b> ไม่ใช่คะแนนสูงสุด เพราะต้องมีรีวิวมากพอให้แต่ละเมนูมีความเห็นพอจะตัดสิน (ร้านส่วนใหญ่มีรีวิวแค่ 3 รีวิว) ได้ Biriyani Nights 524, Night Food Joint 446, BOX8- Desi Meals 430 รีวิว แล้วลำดับ % ที่ชอบอาหารบนเว็บก็ออกมาตรงกับคะแนน Zomato ทั้งที่เราไม่ได้ใช้คะแนนนั้นในการเลือก (ดูกล่องในข้อ 1)</div></div>
+
+<div class="qa"><div class="q">19. โมเดลเทรนกับ zomato.csv ทั้งไฟล์เลยไหม?</div>
+<div class="a">ไม่ เทรนกับ<b>รีวิวที่ทำความสะอาดแล้ว</b>: 1,317,782 รีวิวดิบ → ทำความสะอาดเหลือ 134,612 <span class="ref" data-x="def clean_corpus">src/train_model.py:101</span> → ลบ 3 ร้านของเว็บออกเหลือ 133,389 <span class="ref" data-x="def load_corpus">src/train_model.py:194</span> → แบ่งเป็น <b>ใช้เรียน 90,704</b>, validation 16,007 และทดสอบ 26,678 <span class="ref" data-x="train_test_split">src/train_model.py:226-227</span> โมเดลจึงเรียนจากประมาณ 7% ของข้อมูลดิบ เพราะ 89% ของไฟล์ดิบเป็นรีวิวซ้ำ (ดูกล่องในข้อ 1)</div></div>
 
 <!-- ================================================================== 8 -->
 <h2>8. เรื่องที่ยังค้างอยู่</h2>
