@@ -64,8 +64,8 @@
   <div class="sub">Restaurant Recommendation From Reviews — NLP Group Project</div>
   <table class="meta">
     <tr><td><b>ทีม</b></td><td>Deesampan Vongsurit (6510766), Wattanan Jiratriluk (6520214)</td></tr>
-    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>โครงสร้างใหม่ (ต่อจาก commit <code>bf89ea6</code>, ยังไม่ commit): <code>src/run_pipeline.py</code> + <code>src/train_model.py</code> + หน้าเว็บไฟล์เดียว <code>output_project/web/index.html</code> — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
-    <tr><td><b>วันที่</b></td><td>17 ตุลาคม 2026 (ฉบับที่ 6 — เรียงใหม่ให้ workflow มาก่อน)</td></tr>
+    <tr><td><b>โค้ดที่อ้างอิง</b></td><td>commit <code>75aedaa</code> บน main (โครงสร้างใหม่ + คะแนนร้านนับเฉพาะความเห็นต่ออาหาร): <code>src/run_pipeline.py</code> + <code>src/train_model.py</code> + หน้าเว็บไฟล์เดียว <code>output_project/web/index.html</code> — เลขบรรทัด (ไฟล์:บรรทัด) ทุกจุดตรวจกับเวอร์ชันนี้แล้วด้วยสคริปต์</td></tr>
+    <tr><td><b>วันที่</b></td><td>18 ตุลาคม 2026 (ฉบับที่ 7 — คะแนนร้านนับเฉพาะความเห็นต่ออาหาร)</td></tr>
   </table>
 
   <div class="box warn">
@@ -73,10 +73,6 @@
     <p>เอกสารนี้ Claude (AI) เขียนขึ้นจากการอ่านโค้ดจริงและรันทดสอบจริงในเครื่องนี้ ตัวเลขทุกตัวมาจากไฟล์ผลลัพธ์ใน repo หรือจากการรันจริง แต่ <b>นี่เป็นงานในรายวิชา</b> ทีมต้องอ่านทวน ตรวจว่าถูก และเรียบเรียงคำตอบเป็นภาษาของตัวเอง อย่านำข้อความนี้ไปส่งเป็นงานเขียนของตัวเองโดยไม่บอกอาจารย์</p>
   </div>
 
-  <div class="box">
-    <span class="label">ถ้าเปิดโฟลเดอร์ C:\nlp_project ตอนนี้ จะยังเห็นโครงสร้างเก่า</span>
-    <p>เช่น <code>src/</code> ที่มี 20 ไฟล์, <code>run_pipeline.py</code> ที่รากโปรเจกต์, <code>references/</code>, <code>test_review.csv</code> — เพราะงานจัดโครงสร้างใหม่ยังไม่ได้ commit และ pull เข้ามา เอกสารนี้อธิบาย<b>โครงสร้างใหม่</b> ซึ่งจะเห็นหลังจาก commit แล้ว pull</p>
-  </div>
 
   <h3>สารบัญ</h3>
   <ol class="toc">
@@ -105,7 +101,7 @@
   <tr><th style="width:4%">#</th><th style="width:30%">ที่เข้าใจ</th><th>ที่ถูกต้อง</th></tr>
   <tr><td>1</td><td><span class="wrong">Zomato → ทำความสะอาด → <code>top3_restaurants_reviews.csv</code> ไฟล์เดียว</span></td><td><span class="right">ข้อมูล Zomato ใช้ทำ 2 อย่างแยกกัน:</span> (ก) <b>ข้อมูลเทรน</b> 134,612 รีวิวที่ทำความสะอาดแล้ว (<code>reviews_clean.csv</code>) ใช้สอนโมเดล และ (ข) <b>รีวิวของเว็บ</b> 1,400 รีวิวของ 3 ร้าน (<code>site_reviews.csv</code> — ไฟล์นี้คือ <code>top3_restaurants_reviews.csv</code> เดิม เปลี่ยนชื่อแล้ว) โมเดลไม่เคยเห็นรีวิวของ 3 ร้านนี้ตอนเทรน</td></tr>
   <tr><td>2</td><td><span class="wrong">ใช้ NLTK ลบ noise</span></td><td><span class="right">ไม่ได้ใช้ NLTK แล้ว</span> (เคยใช้ในรุ่นก่อน แต่ถูกเอาออก) การลบ noise ใช้: <b>ฝั่งเว็บ</b> — <code>re</code> (regular expression) + <code>unicodedata</code> ซึ่งเป็นโมดูลมาตรฐานของ Python กับกฎ N1–N4 / <b>ฝั่งข้อมูลเทรน</b> — <code>hashlib</code> (หาข้อความซ้ำ), <code>ftfy</code> (ซ่อมตัวอักษรเพี้ยน), <code>re</code> (ลบลิงก์ อีเมล เบอร์โทร), <code>langdetect</code> (เก็บแต่ภาษาอังกฤษ)</td></tr>
-  <tr><td>3</td><td><span class="wrong">ให้คะแนนแต่ละคอมเมนต์ แล้ว plot ขึ้นเว็บ</span></td><td><span class="right">ให้คะแนนแต่ละ "อนุประโยค" ไม่ใช่ทั้งคอมเมนต์</span> และต้อง <b>หาชื่อเมนูก่อน</b> (ใช้ RapidFuzz ช่วยจับคำสะกดผิด) เพราะคอมเมนต์เดียวชมเมนูหนึ่งแต่ติอีกเมนูได้ (คะแนนทั้งคอมเมนต์ใช้แค่ตัวเลข "% รีวิวบวก" ของร้าน) ส่วน "plot" คือ <b>แถบสีที่สร้างด้วย HTML/CSS ใน <code>index.html</code></b> ไม่มีไลบรารีกราฟ</td></tr>
+  <tr><td>3</td><td><span class="wrong">ให้คะแนนแต่ละคอมเมนต์ แล้ว plot ขึ้นเว็บ</span></td><td><span class="right">ให้คะแนนแต่ละ "อนุประโยค" ไม่ใช่ทั้งคอมเมนต์</span> และต้อง <b>หาชื่อเมนูก่อน</b> (ใช้ RapidFuzz ช่วยจับคำสะกดผิด) เพราะคอมเมนต์เดียวชมเมนูหนึ่งแต่ติอีกเมนูได้ (คะแนนทั้งคอมเมนต์ไม่ได้แสดงบนเว็บ ใช้แค่เช็กความแม่นกับดาวในรายงาน) ส่วน "plot" คือ <b>แถบสีที่สร้างด้วย HTML/CSS ใน <code>index.html</code></b> ไม่มีไลบรารีกราฟ</td></tr>
 </table>
 
 <h3>ภาพรวม: 2 สคริปต์</h3>
@@ -174,7 +170,7 @@
   <li><b>ข้อมูล:</b> "Zomato Bangalore Restaurants" บน Kaggle (Himanshu Poddar) — ไม่ได้ scrape เอง</li>
   <li><b>Noise:</b> 1,317,782 → 134,612 รีวิว (ซ้ำ 89%); เว็บ 1,400 → 1,321 รีวิว</li>
   <li><b>โมเดล:</b> ถูก <b>82.2%</b> บน 26,678 รีวิวทดสอบ (VADER สำเร็จรูป 72.7%, เดาคำตอบที่พบบ่อยสุด 60.5%) และบนรีวิวของเว็บที่โมเดลไม่เคยเห็น ตรงกับดาว 90.1%</li>
-  <li><b>ผลบนเว็บ:</b> รีวิวเชิงบวก Biriyani Nights 36%, Night Food Joint 26%, BOX8- Desi Meals 57%; เมนูที่จัดอันดับได้ 8 / 9 / 17</li>
+  <li><b>ผลบนเว็บ:</b> ความเห็นต่ออาหารที่ชอบ Biriyani Nights 52% (106 จาก 202), Night Food Joint 38% (42 จาก 111), BOX8- Desi Meals 81% (196 จาก 241); เมนูที่จัดอันดับได้ 8 / 9 / 17</li>
   <li><b>เปิดเว็บ:</b> ดับเบิลคลิก <code>output_project/web/index.html</code> หรือ <code>start.bat</code> (สร้างตัวเลขใหม่แล้วเปิดหน้า) <span class="ref" data-x="src\run_pipeline.py">start.bat:5-6</span> หรือ https://resrec.vercel.app</li>
 </ul>
 
@@ -239,7 +235,7 @@
   <tr><td>emoji, ลิงก์, อีเมล, เบอร์โทร</td><td>—</td><td>แก้ข้อความ</td><td><code>unicodedata</code>, <code>re</code></td></tr>
   <tr><td>ตัวอักษรยืด, คำย่อ</td><td><code>gooood</code>, <code>didn't</code></td><td>แก้ข้อความ</td><td><code>re</code></td></tr>
   <tr><td>สะกดหลายแบบ</td><td>biriyani / briyani / biryani</td><td>รวมเป็นคำเดียว</td><td>พจนานุกรม + RapidFuzz</td></tr>
-  <tr><td>ไม่พูดถึงเมนู</td><td>"delivery was late" (905 จาก 1,321 รีวิวของเว็บ)</td><td><b>ไม่ลบ</b> — นับใน % รีวิวบวกของร้าน แต่ไม่นับคะแนนเมนู</td><td>—</td></tr>
+  <tr><td>ไม่พูดถึงเมนู</td><td>"delivery was late" (905 จาก 1,321 รีวิวของเว็บ)</td><td><b>ไม่ลบ</b> — นับเป็นรีวิวที่อ่านแล้ว แต่ไม่มีผลกับคะแนนเมนูและคะแนนร้าน</td><td>—</td></tr>
 </table>
 
 <h3>A1 — ทำความสะอาดข้อมูลเทรน (ตัวเลขจาก <code>results/cleaning_funnel.csv</code>)</h3>
@@ -283,7 +279,7 @@
   <li><b>เลือกข้างเมื่อมั่นใจ</b>: ≥ +0.4 = ชอบ, ≤ −0.4 = ไม่ชอบ, ระหว่างนั้น = ไม่เลือกข้าง <span class="ref" data-x="CLAUSE_MARGIN">src/run_pipeline.py:242-244</span></li>
   <li><b>ผูกกับเมนู</b>: เมนูได้ป้ายของอนุประโยคที่มันอยู่ ถ้าอนุประโยคไม่ได้บอกอะไรเลย ("I ordered biryani.") ให้ยืมอนุประโยคถัดไป ("It was cold.") ถ้าอันนั้นไม่มีเมนูอื่นและพูดถึงอาหาร — เกิด 21 จาก 915 ครั้ง <span class="ref" data-x="def attribute">src/run_pipeline.py:248-264</span></li>
   <li><b>นับ</b>: 1 รีวิว = 1 เสียงต่อเมนู (ครั้งสุดท้ายที่เลือกข้าง) <span class="ref" data-x="def vote">src/run_pipeline.py:270-272</span>; % คิดจากคนที่เลือกข้างเท่านั้น <span class="ref" data-x="&quot;opinions&quot;: a[&quot;positive&quot;] + a[&quot;negative&quot;">src/run_pipeline.py:301</span>; ต้องมี ≥ 4 ความเห็นถึงจะจัดอันดับ; ชอบ ≥ 80% = "Customers love it", ≤ 40% = "Needs work", 40–60% = "Mixed opinions" <span class="ref" data-x="MIN_OPINIONS = 4">src/run_pipeline.py:31-33</span> <span class="ref" data-x="def tag">src/run_pipeline.py:275-283</span></li>
-  <li><b>% รีวิวบวกของร้าน</b> = โมเดลอ่านทั้งรีวิว (จุดเดียวที่ให้คะแนนทั้งคอมเมนต์) — <b>ไม่ได้มาจากดาว</b> <span class="ref" data-x="r[&quot;sentiment&quot;] = classify(model">src/run_pipeline.py:359</span></li>
+  <li><b>% ที่ชอบอาหารของร้าน</b> = โหวตของทุกเมนูในร้านรวมกัน (ชอบ ÷ ความเห็นต่อเมนูทั้งหมด) นับเฉพาะความเห็นต่ออาหาร คอมเมนต์เรื่องบริการ เช่น "ส่งช้า" ไม่นับ <span class="ref" data-x="food only">src/run_pipeline.py:334-335</span> — โมเดลยังอ่านทั้งรีวิวด้วย แต่ใช้แค่เช็กกับดาว (90.1%) ไม่ได้แสดงบนเว็บ <span class="ref" data-x="r[&quot;sentiment&quot;] = classify(model">src/run_pipeline.py:359</span></li>
 </ol>
 
 <!-- ================================================================== 6 -->
@@ -308,7 +304,7 @@ git status</pre></li>
   <tr><th>สิ่งที่ดู</th><th class="num">ก่อน</th><th class="num">หลัง</th></tr>
   <tr><td>Gulab Jamun (Biriyani Nights)</td><td class="num"><b>73%</b> — 8 of 11 liked it</td><td class="num"><b>64%</b> — 7 of 11 liked it</td></tr>
   <tr><td>ลำดับในรายการเมนู</td><td class="num">อยู่เหนือ Chicken Kebab</td><td class="num">ตกลงไปอยู่ใต้ Chicken Kebab</td></tr>
-  <tr><td>% รีวิวบวกของร้าน</td><td class="num">36%</td><td class="num">36% (ไม่เปลี่ยน — ทั้งรีวิวยังชมบริยานีเป็นหลัก)</td></tr>
+  <tr><td>% ที่ชอบอาหารของร้าน</td><td class="num">52% (106 จาก 202)</td><td class="num">52% (105 จาก 202 — ลด 1 โหวต)</td></tr>
   <tr><td>ดาวของรีวิวนี้</td><td class="num">4.5</td><td class="num">4.5 (ไม่ได้แตะ)</td></tr>
 </table>
 <p>เปรียบเทียบผล 127 รายการ (3 ร้าน, 122 เมนู, จำนวนรีวิวที่ถูกตัดและที่มีเมนู) <b>เปลี่ยนแค่รายการเดียว</b> — <b>ดาวไม่เปลี่ยน แปลว่าการเปลี่ยนมาจากข้อความล้วน ๆ</b> คะแนนของอนุประโยคนั้นเปลี่ยนจาก <span class="pos">+0.984</span> เป็น <span class="neg">−0.928</span></p>
@@ -331,7 +327,7 @@ git status</pre></li>
 <div class="a">ใหญ่ที่สุดคือ <b>รีวิวซ้ำ 89%</b> (1,317,782 → 143,789) เพราะ Zomato ลงร้านเดียวกันหลายหมวด ตามด้วยสแปมที่ซ้ำเกิน 5 ร้าน (3,734), สั้น/ยาวผิดปกติ (2,765), ไม่ใช่ภาษาอังกฤษ (2,671) และไม่มีดาว (7) — เหลือ 134,612 รีวิวที่ไม่พูดถึงเมนูไม่ได้ลบ แต่ไม่นับคะแนนเมนู ทุกขั้นนับไว้ใน <code>cleaning_funnel.csv</code></div></div>
 
 <div class="qa"><div class="q">4. โมเดลให้คะแนนทั้งคอมเมนต์หรือเปล่า?</div>
-<div class="a">ไม่ คะแนนของเมนูมาจาก<b>อนุประโยค</b>ที่ชื่อเมนูอยู่ เพราะคอมเมนต์เดียวชมเมนูหนึ่งแต่ติอีกเมนูได้ (ตัวอย่าง Kebab / Biryani ในข้อ 5) คะแนนทั้งคอมเมนต์ใช้แค่ตัวเลข "% รีวิวบวก" ของร้าน</div></div>
+<div class="a">ไม่ คะแนนของเมนูมาจาก<b>อนุประโยค</b>ที่ชื่อเมนูอยู่ เพราะคอมเมนต์เดียวชมเมนูหนึ่งแต่ติอีกเมนูได้ (ตัวอย่าง Kebab / Biryani ในข้อ 5) คะแนนทั้งคอมเมนต์ไม่ได้แสดงบนเว็บ (ใช้แค่เช็กกับดาวในรายงาน) และคะแนนร้านก็รวมจากโหวตของเมนู</div></div>
 
 <div class="qa"><div class="q">5. ทำไมไม่ใช้ ABSA (Aspect-Based Sentiment Analysis)?</div>
 <div class="a">ABSA ต้องมีข้อมูลที่คนติดป้ายระดับ "เมนู + ความรู้สึก" ซึ่งไม่มี (มีแต่ดาวระดับรีวิว) และซับซ้อนเกินกว่าจะอธิบายได้ในงานวิชานี้ เราใช้วิธีที่ง่ายกว่าแต่ได้ผลระดับเมนูเหมือนกัน ข้อแลกคือถ้าสองเมนูอยู่ในอนุประโยคเดียวกันจะได้ผลเดียวกัน</div></div>
@@ -365,7 +361,7 @@ git status</pre></li>
 </ul></div></div>
 
 <div class="qa"><div class="q">13. ทำไมไม่ scrape เอง? เลือก 3 ร้านนี้เพราะอะไร?</div>
-<div class="a">Scrape ผิดเงื่อนไขของแพลตฟอร์ม ทำซ้ำไม่ได้ และไม่ใช่งาน NLP ชุดข้อมูลสาธารณะให้คนอื่นตรวจซ้ำได้ ส่วน 3 ร้านนี้คือร้านที่มี<b>รีวิวไม่ซ้ำมากที่สุด</b> <span class="ref" data-x="def pick_restaurants">src/train_model.py:146-151</span> ลำดับ % รีวิวบวก (57% &gt; 36% &gt; 26%) ตรงกับคะแนนบน Zomato (4.1 &gt; 3.2 &gt; 2.9) ทั้งที่เราไม่ได้ใช้คะแนนนั้น</div></div>
+<div class="a">Scrape ผิดเงื่อนไขของแพลตฟอร์ม ทำซ้ำไม่ได้ และไม่ใช่งาน NLP ชุดข้อมูลสาธารณะให้คนอื่นตรวจซ้ำได้ ส่วน 3 ร้านนี้คือร้านที่มี<b>รีวิวไม่ซ้ำมากที่สุด</b> <span class="ref" data-x="def pick_restaurants">src/train_model.py:146-151</span> ลำดับ % ที่ชอบอาหาร (81% &gt; 52% &gt; 38%) ตรงกับคะแนนบน Zomato (4.1 &gt; 3.2 &gt; 2.9) ทั้งที่เราไม่ได้ใช้คะแนนนั้น</div></div>
 
 <div class="qa"><div class="q">14. ทำไมเมนูต้องมีความเห็นขั้นต่ำ? ความเห็น "กลาง" ไปไหน?</div>
 <div class="a">กัน "1 จาก 1 = 100%" ขึ้นเป็นเมนูที่ดีที่สุด ต้องมี ≥ 4 ความเห็นที่เลือกข้าง <span class="ref" data-x="MIN_OPINIONS = 4">src/run_pipeline.py:31</span> ส่วนรีวิวที่แค่เอ่ยชื่อเมนูโดยไม่เลือกข้าง ไม่ถูกนับใน %</div></div>
@@ -383,15 +379,14 @@ git status</pre></li>
 <h2>8. เรื่องที่ยังค้างอยู่</h2>
 <table>
   <tr><th style="width:4%">#</th><th style="width:32%">เรื่อง</th><th>รายละเอียด / ผลกระทบ</th></tr>
-  <tr><td>1</td><td><b>ยังไม่ได้ commit</b></td><td>โครงสร้างใหม่ทั้งหมด (รวมเอกสารนี้) ยังไม่ได้ commit — โฟลเดอร์ <code>C:\nlp_project</code> จะยังเห็นของเก่าจนกว่าจะ commit แล้ว pull</td></tr>
-  <tr><td>2</td><td><b><code>presentation.pptx</code> ยังเป็นตัวเลขเก่า</b></td><td>ในสไลด์ยังมี 82.1%, 1,069 รีวิว และ spaCy ขณะที่ตอนนี้เป็น 82.2%, 1,321 รีวิว และไม่มี spaCy — <b>ต้องแก้ก่อนพรีเซนต์</b></td></tr>
-  <tr><td>3</td><td>ความแม่นระดับอนุประโยคยังไม่ได้วัด</td><td>มีแค่การเช็กคร่าวด้วยดาว (21 จาก 747) — คำถามที่ 8, 9</td></tr>
-  <tr><td>4</td><td>Repo สาธารณะและ Vercel มีข้อความรีวิว</td><td>สิทธิ์ข้อมูลไม่ใช่ open licence — <b>ทีมตัดสินใจยอมรับความเสี่ยงนี้เอง</b> <span class="ref" data-x="is **public**">CLAUDE.md:155-160</span> (คำถามที่ 15)</td></tr>
-  <tr><td>5</td><td>ไอคอนบางเมนูเป็นกล่องว่างบน Windows 10</td><td>emoji รูปแผ่นแป้ง (U+1FAD3) ของ Paratha, Naan, Roti ไม่มีในฟอนต์ของ Windows 10</td></tr>
-  <tr><td>6</td><td>ยังไม่ได้ตรวจด้วยมือ</td><td>ยังไม่ได้สุ่มรีวิวที่ถูกทิ้งมาดู และเกณฑ์ 15 ตัวอักษร / 2 คำยังไม่ได้ลองค่าอื่น (ระบุใน Limitations ของ report)</td></tr>
+  <tr><td>1</td><td><b><code>presentation.pptx</code> แก้แล้วแต่ยังไม่ commit</b></td><td>สไลด์ 14 หน้า (มี workflow 5 หน้า) อยู่ในโฟลเดอร์ <code>C:\nlp_project</code> แต่ยังไม่ได้ commit — ต้อง commit ก่อนส่ง</td></tr>
+  <tr><td>2</td><td>ความแม่นระดับอนุประโยคยังไม่ได้วัด</td><td>มีแค่การเช็กคร่าวด้วยดาว (21 จาก 747) — คำถามที่ 8, 9</td></tr>
+  <tr><td>3</td><td>Repo สาธารณะและ Vercel มีข้อความรีวิว</td><td>สิทธิ์ข้อมูลไม่ใช่ open licence — <b>ทีมตัดสินใจยอมรับความเสี่ยงนี้เอง</b> <span class="ref" data-x="is **public**">CLAUDE.md:155-160</span> (คำถามที่ 15)</td></tr>
+  <tr><td>4</td><td>ไอคอนบางเมนูเป็นกล่องว่างบน Windows 10</td><td>emoji รูปแผ่นแป้ง (U+1FAD3) ของ Paratha, Naan, Roti ไม่มีในฟอนต์ของ Windows 10</td></tr>
+  <tr><td>5</td><td>ยังไม่ได้ตรวจด้วยมือ</td><td>ยังไม่ได้สุ่มรีวิวที่ถูกทิ้งมาดู และเกณฑ์ 15 ตัวอักษร / 2 คำยังไม่ได้ลองค่าอื่น (ระบุใน Limitations ของ report)</td></tr>
 </table>
 
-<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จากโค้ดหลังจัดโครงสร้างใหม่ (ต่อจาก commit bf89ea6) และการรันทดสอบจริงวันที่ 17 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
+<p class="small" style="margin-top:14pt">จบเอกสาร — ร่างโดย AI (Claude) จากโค้ด commit 75aedaa และการรันทดสอบจริงวันที่ 17–18 ต.ค. 2026 ทีมต้องตรวจทานก่อนใช้</p>
 
 </body>
 </html>
