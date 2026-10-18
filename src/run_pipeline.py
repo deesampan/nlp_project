@@ -331,8 +331,8 @@ def export(restaurants, reviews, removed, dishes):
     data = {
         "restaurants": [{**{k: r[k] for k in ("name", "location", "type", "cuisines", "cost_for_two", "zomato_rate")},
                          "reviews": sum(x["restaurant"] == r["name"] for x in reviews),
-                         "positive_reviews": sum(x["restaurant"] == r["name"] and x["sentiment"] == "positive"
-                                                 for x in reviews)}
+                         # food only: the same dish votes the menu counts, so "service was slow" is left out
+                         **{k: sum(d[k] for d in dishes if d["restaurant"] == r["name"]) for k in ("positive", "opinions")}}
                         for r in sorted(restaurants, key=lambda r: r["rank"])],
         "dishes": dishes,
         "reviews": [{"id": r["id"], "rating": r["rating"], "text": r["text"],

@@ -122,9 +122,9 @@ only once **at least 4 reviews take a side on it**. Dishes below that are listed
 
 A review reading *"parking was impossible and the waiter was rude"* is a perfectly good review.
 For **our** task — rating dishes — it says nothing. It is noise *for this task*, not noise in
-general. So we never delete non-food reviews: they still count towards the restaurant's share
-of positive reviews, and simply give no dish a vote. Whether a review is about food is decided
-*after* looking for dishes in it, not before.
+general. So we never delete non-food reviews: they are kept and counted as read, but they give
+no vote: the restaurant's score and every dish's score come only from opinions about dishes.
+Whether a review is about food is decided *after* looking for dishes in it, not before.
 
 ### What the noise is, measured on our data
 
@@ -369,8 +369,8 @@ JavaScript with no framework. Its numbers come from `output_project/web/data.js`
 `src/run_pipeline.py` writes. It opens by double-click, with no server; `start.bat` rebuilds
 `data.js` and opens the page. A static copy is online at <https://resrec.vercel.app>.
 
-**Home view** (`index.html`) — one card per restaurant, with its share of positive reviews and
-how many reviews were read.
+**Home view** (`index.html`) — one card per restaurant: how many of the opinions on its dishes
+liked the food ("52% liked the food"). Service complaints do not count.
 
 **Restaurant view** (`index.html#biriyani-nights`) — the restaurant's details and stats, then its
 menu ranked from most liked to least liked. Each dish shows how many people liked it ("7 of 10
@@ -387,14 +387,14 @@ report, not on the website.
 
 ## 8. Results
 
-| Restaurant | Reviews (after cleaning) | Positive reviews | Dishes ranked |
+| Restaurant | Reviews (after cleaning) | Liked the food (opinions on dishes) | Dishes ranked |
 |---|---|---|---|
-| Biriyani Nights | 501 | 36% | 8 |
-| Night Food Joint | 422 | 26% | 9 |
-| BOX8- Desi Meals | 398 | 57% | 17 |
+| Biriyani Nights | 501 | 52% (106 of 202) | 8 |
+| Night Food Joint | 422 | 38% (42 of 111) | 9 |
+| BOX8- Desi Meals | 398 | 81% (196 of 241) | 17 |
 
-The ordering matches the platform's own `rate` values (3.2 / 2.9 / 4.1) despite never using
-them, which is an independent sanity check.
+The ordering matches the platform's own `rate` values (3.2 / 2.9 / 4.1) despite never using them.
+Counting whole reviews instead, service complaints pulled these down to 36% / 26% / 57%.
 
 **A second check on unseen data.** On the website's reviews — held out of training — the
 model's whole-review label agrees with the star rating on **90.1%** of 1,147 reviews (3-star
@@ -413,8 +413,8 @@ right 97.7% of the time; it finds 82.2% of the positive reviews.
   accuracy is not measured directly; labelling a sample of clauses by hand would fix this.
 - **Emoji are ignored.** TF-IDF only reads words.
 - **Sampling bias.** Text reviewers are ~6% of raters and skew toward strong opinions.
-- **Dish coverage.** 905 of 1,321 cleaned reviews mention no dish; they count towards the
-  restaurant's positive-review share only. Our sample restaurants are delivery-led, so service
+- **Dish coverage.** 905 of 1,321 cleaned reviews mention no dish, so they give no vote to any
+  dish or to the restaurant's score. Our sample restaurants are delivery-led, so service
   complaints dominate.
 - **No manual audit** of removed reviews, so the filters' precision is unmeasured.
 - **The 15-character threshold** (training corpus) and the 2-word threshold (website) **are

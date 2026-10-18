@@ -316,7 +316,7 @@ function showHome() {
         <span class="rest-name">${esc(r.name)}</span>
         <span class="rest-meta">${esc(r.location)} · ${esc(r.cuisines)}</span>
         <span class="rest-foot">
-          <span><b>${pct(r.positive_reviews / r.reviews)}</b> positive reviews<br>${fmt(r.reviews)} reviews read</span>
+          <span><b>${pct(r.positive / r.opinions)}</b> liked the food<br>from ${fmt(r.opinions)} opinions on dishes</span>
           <span class="arrow" aria-hidden="true">→</span>
         </span>
       </span>
@@ -345,7 +345,7 @@ function showRestaurant(r) {
 
   const tiles = [
     { k: "Reviews read", v: fmt(r.reviews), s: "customer reviews on Zomato" },
-    { k: "Positive reviews", v: pct(r.positive_reviews / r.reviews), s: `${fmt(r.positive_reviews)} of ${fmt(r.reviews)} reviews` },
+    { k: "Liked the food", v: pct(r.positive / r.opinions), s: `${fmt(r.positive)} of ${fmt(r.opinions)} opinions on dishes` },
   ];
   if (best) tiles.push({ k: "Most loved dish", v: best.dish, s: `${best.positive} of ${best.opinions} liked it`, d: best });
   if (worst && worst.negative) tiles.push({ k: "Most criticised dish", v: worst.dish, s: `${worst.negative} of ${worst.opinions} didn't like it`, d: worst });
