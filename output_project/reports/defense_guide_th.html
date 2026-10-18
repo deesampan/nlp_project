@@ -156,6 +156,24 @@
   <p>สรุป: โมเดลเรียนจาก <b>90,704 รีวิวที่ทำความสะอาดแล้ว</b> ประมาณ 7% ของข้อมูลดิบ ส่วนต่างส่วนใหญ่คือรีวิวซ้ำ (89% ของไฟล์ดิบซ้ำกัน) ข้อความที่โมเดลอ่านผ่านการ normalise แล้ว (ตัวพิมพ์เล็ก, "soooo" → "soo", "wasn't" → "was not") และป้ายมาจากดาวของรีวิวเอง: 4–5 ดาว = บวก, 3–3.5 = กลาง, 1–2.5 = ลบ <span class="ref" data-x="def label_of">src/train_model.py:75</span></p>
 </div>
 
+<div class="box">
+  <span class="label">site_reviews ใช้เป็นข้อมูล train หรือ test? แล้วผลลัพธ์สุดท้ายอยู่ที่ไหน?</span>
+  <p><b>ไม่ใช่ทั้ง train และ test</b> — ก่อนแบ่งข้อมูล <code>train_model.py</code> ลบรีวิวทุกรีวิวของ 3 ร้านบนเว็บออกก่อน <span class="ref" data-x="def load_corpus">src/train_model.py:194</span> <code>train_test_split</code> จึงเห็นแค่ 133,389 รีวิวของร้านอื่น <span class="ref" data-x="train_test_split">src/train_model.py:226-227</span>:</p>
+  <table>
+    <tr><th>กลุ่ม</th><th class="num" style="width:16%">จำนวนรีวิว</th><th>ใช้ทำอะไร</th></tr>
+    <tr><td><b>เรียน</b></td><td class="num">90,704</td><td>โมเดลเรียนค่าน้ำหนักของแต่ละคำจากกลุ่มนี้</td></tr>
+    <tr><td>validation</td><td class="num">16,007</td><td>เก็บไว้ ไม่ได้ใช้เรียน</td></tr>
+    <tr><td><b>ทดสอบ</b></td><td class="num">26,678</td><td>ตรวจโมเดลกับรีวิวที่ไม่เคยเรียน → ได้ <b>82.2%</b></td></tr>
+    <tr><td>3 ร้านบนเว็บ</td><td class="num">—</td><td>ถูกลบออกก่อนแบ่ง โมเดลไม่เคยเห็นตอนเทรน</td></tr>
+  </table>
+  <p><b>train_test_split ทำงานยังไง:</b> สลับลำดับรีวิวแบบสุ่มด้วย seed คงที่ (42) ทุกครั้งที่รันจึงได้ผลเหมือนเดิม แล้วตัดแบ่งเป็นกลุ่มตามตาราง โมเดลเรียนจากกลุ่ม "เรียน" เท่านั้น กลุ่ม "ทดสอบ" จึงให้คะแนนที่ยุติธรรม เพราะโมเดลไม่เคยเห็นรีวิวเหล่านั้น</p>
+  <p><b>โมเดล "จำ" ได้ยังไง:</b> เมื่อเทรนเสร็จ สิ่งที่เรียนได้ (รายการคำของ TF-IDF + ค่าน้ำหนักของทุกคำจาก Logistic Regression) ถูกบันทึกลง <code>output_project/models/sentiment_tfidf_lr.pkl</code> <span class="ref" data-x="pickle.dump">src/train_model.py:257</span> ต่อมา <code>run_pipeline.py</code> โหลดไฟล์นี้ <span class="ref" data-x="pickle.load">src/run_pipeline.py:210</span> แล้วใช้ให้คะแนนรีวิวของเว็บ การให้คะแนนไม่ได้เปลี่ยนโมเดลเลย — เหมือนนักเรียน: กลุ่ม "เรียน" คือตำรา, กลุ่ม "ทดสอบ" คือข้อสอบ, ส่วน <code>site_reviews</code> คืองานจริงหลังเรียนจบ ที่ไม่เคยเห็นทั้งในตำราและข้อสอบ (การเช็กกับดาว 90.1% บนรีวิวของเว็บจึงเป็นการทดสอบรอบที่สองที่ยุติธรรม)</p>
+  <p><b><code>site_reviews.csv</code> คือข้อมูลเข้า ไม่ใช่ผลลัพธ์</b> — มีแค่รีวิวดิบ (ชื่อร้าน, ดาว, ข้อความ) ไม่มีคะแนน และไม่มีอะไรเขียนคะแนนกลับลงไป <b>ผลลัพธ์สุดท้ายคือ <code>output_project/web/data.js</code></b>:</p>
+  <pre>site_reviews.csv ──► run_pipeline.py (+ โมเดล .pkl) ──► data.js ──► index.html
+  ข้อมูลดิบ            ล้าง, หาเมนู, ให้คะแนนอนุประโยค, นับ    ผลลัพธ์      หน้าเว็บแสดง</pre>
+  <p>ให้คะแนนแต่ละอนุประโยค (−1 ถึง +1 → ชอบ / ไม่ชอบ / ไม่เลือกข้าง) <span class="ref" data-x="def clauses">src/run_pipeline.py:229</span> <span class="ref" data-x="def attribute">src/run_pipeline.py:248</span> → นับต่อเมนูและต่อร้าน <span class="ref" data-x="def count_dishes">src/run_pipeline.py:286</span> → เขียนผลลง <code>data.js</code> <span class="ref" data-x="data.js">src/run_pipeline.py:346</span> ใน <code>data.js</code> มีว่าแต่ละรีวิวพูดถึงเมนูไหนและชอบหรือไม่ชอบ, ยอดของแต่ละเมนู ("8 จาก 11 ชอบ") และ % ที่ชอบอาหารของแต่ละร้าน ส่วนตัวเลข −1 ถึง +1 ไม่ได้เก็บไว้ เก็บแค่ป้ายที่ได้</p>
+</div>
+
 <h3>B. เว็บ — <code>src/run_pipeline.py</code></h3>
 <table>
   <tr><th style="width:11%">ขั้น</th><th style="width:19%">เข้า</th><th style="width:22%">ออก</th><th>เครื่องมือ</th><th style="width:22%">โค้ด</th></tr>
@@ -397,6 +415,13 @@ git status</pre></li>
 
 <div class="qa"><div class="q">19. โมเดลเทรนกับ zomato.csv ทั้งไฟล์เลยไหม?</div>
 <div class="a">ไม่ เทรนกับ<b>รีวิวที่ทำความสะอาดแล้ว</b>: 1,317,782 รีวิวดิบ → ทำความสะอาดเหลือ 134,612 <span class="ref" data-x="def clean_corpus">src/train_model.py:101</span> → ลบ 3 ร้านของเว็บออกเหลือ 133,389 <span class="ref" data-x="def load_corpus">src/train_model.py:194</span> → แบ่งเป็น <b>ใช้เรียน 90,704</b>, validation 16,007 และทดสอบ 26,678 <span class="ref" data-x="train_test_split">src/train_model.py:226-227</span> โมเดลจึงเรียนจากประมาณ 7% ของข้อมูลดิบ เพราะ 89% ของไฟล์ดิบเป็นรีวิวซ้ำ (ดูกล่องในข้อ 1)</div></div>
+
+<div class="qa"><div class="q">20. site_reviews ใช้เป็นข้อมูล train หรือ test?</div>
+<div class="a">ไม่ใช่ทั้งสองอย่าง รีวิวของ 3 ร้านบนเว็บถูกลบออกก่อนแบ่งข้อมูล <span class="ref" data-x="def load_corpus">src/train_model.py:194</span> <code>train_test_split</code> แบ่งเฉพาะ 133,389 รีวิวของร้านอื่นเป็น เรียน 90,704 / validation 16,007 / ทดสอบ 26,678 <span class="ref" data-x="train_test_split">src/train_model.py:226-227</span> เทรนเสร็จโมเดลถูกบันทึกเป็น <code>.pkl</code> <span class="ref" data-x="pickle.dump">src/train_model.py:257</span> แล้ว <code>run_pipeline.py</code> โหลดมาให้คะแนนรีวิวของเว็บ <span class="ref" data-x="pickle.load">src/run_pipeline.py:210</span> โมเดลจึงไม่เคยเห็นรีวิวของเว็บมาก่อน (ดูกล่องในข้อ 1)</div></div>
+
+<div class="qa"><div class="q">21. site_reviews.csv คือผลลัพธ์หลังให้คะแนนแล้วใช่ไหม?</div>
+<div class="a">ไม่ใช่ <code>site_reviews.csv</code> คือ<b>ข้อมูลเข้า</b> มีแค่รีวิวดิบ ไม่มีคะแนน ผลลัพธ์สุดท้ายคือ <b><code>output_project/web/data.js</code></b> ที่ <code>run_pipeline.py</code> เขียน <span class="ref" data-x="data.js">src/run_pipeline.py:346</span> หลังให้คะแนนอนุประโยค <span class="ref" data-x="def clauses">src/run_pipeline.py:229</span> และนับต่อเมนู <span class="ref" data-x="def count_dishes">src/run_pipeline.py:286</span> หน้าเว็บอ่านแค่ <code>data.js</code> ถ้าแก้ <code>site_reviews.csv</code> หน้าเว็บจึงไม่เปลี่ยนจนกว่าจะรัน <code>run_pipeline.py</code> ใหม่ (ซึ่งคือสิ่งที่การทดสอบในข้อ 6 แสดงให้เห็น)</div></div>
+
 
 <!-- ================================================================== 8 -->
 <h2>8. เรื่องที่ยังค้างอยู่</h2>
